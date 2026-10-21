@@ -35,7 +35,7 @@ public class UpdateService : IUpdateService
         "https://api.github.com/repos/RankFTW/RenoDXChecker/releases/tags/RDXC-BETA";
 
     // The asset filenames to look for when updating (checked in order).
-    private static readonly string[] InstallerFileNames = ["RHI-Setup.exe", "RDXC-Setup.exe"];
+    private static readonly string[] InstallerFileNames = ["RHI-v2.8.7-zh-CN.exe", "RHI-Setup.exe", "RDXC-Setup.exe"];
 
     /// <summary>
     /// Returns the current app version from the assembly metadata (set via .csproj AssemblyVersion).
