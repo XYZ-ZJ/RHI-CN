@@ -141,6 +141,13 @@ Steam · Epic Games · GOG · Xbox / Game Pass · EA App · Ubisoft Connect · B
 
 ---
 
+## 项目维护文档
+
+关于本地汉化维护、代码审查流程、源码模块索引及 CI/CD 工作流的完整说明，请参阅：
+- **[RHI 简体中文项目维护文档](docs/maintenance/README.md)**
+
+---
+
 ## 系统要求
 
 - Windows 10 / 11 64位
