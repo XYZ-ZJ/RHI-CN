@@ -132,21 +132,12 @@ Steam · Epic Games · GOG · Xbox / Game Pass · EA App · Ubisoft Connect · B
 
 本项目基于 .NET 8 与 WinUI 3 开发。
 
-### 编译步骤
+### 远程自动编译与发布
 
-在仓库根目录下运行以下命令之一即可完成自包含单文件发布：
+本项目已配置 **GitHub Actions 远程云端自动编译与发布工作流**。
 
-```cmd
-publish.bat
-```
-
-或使用 PowerShell 脚本：
-
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File tools\maintenance\publish-zh.ps1
-```
-
-输出文件将保存在 `artifacts/zh-时间戳/` 目录下，包含完整独立的 `RHI.exe`、`RHI.DropHelper.exe` 及所有必需的游戏配置文件和图标资产。
+- 每次向 `main` 分支提交或推送版本标签（`v*`）时，GitHub Actions 会自动在干净的 Windows 云端虚拟环境中拉取代码、执行自包含单文件发布、自动打包 ZIP 便携包并在 [Releases](https://github.com/XYZ-ZJ/RHI-CN/releases) 中生成最新发布版本。
+- 本地开发者仅需专注于汉化翻译与代码审查，无需在本地配置繁杂的编译产物管理。可在仓库页面的 **Actions** 标签页查看实时构建日志与下载构建工件。
 
 ---
 

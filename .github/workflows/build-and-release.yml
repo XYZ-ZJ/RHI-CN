@@ -1,0 +1,102 @@
+name: 远程编译与自动发布 (Remote Build & Release)
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    name: 远程编译 Windows x64 汉化版并发布
+    runs-on: windows-latest
+
+    steps:
+      - name: 检出远程仓库代码 (Checkout)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 配置 .NET 8 SDK (Setup .NET)
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: 执行远程编译与资源打包 (Build RHI & DropHelper)
+        shell: pwsh
+        run: |
+          Write-Output "正在远程编译 RHI 与所有依赖组件..."
+          & tools/maintenance/publish-zh.ps1 -OutputName 'release'
+          if (-not (Test-Path -LiteralPath "artifacts/release/RHI.exe")) {
+              throw "RHI.exe 编译失败，未生成产物。"
+          }
+          Write-Output "远程编译完成，产物已成功生成在 artifacts/release/"
+
+      - name: 打包便携版 ZIP (Compress Portable Package)
+        shell: pwsh
+        run: |
+          $publishDir = "artifacts/release"
+          $zipPath = "artifacts/RHI-v2.8.7-zh-win-x64.zip"
+          Compress-Archive -Path "$publishDir/*" -DestinationPath $zipPath -CompressionLevel Optimal
+          Write-Output "便携压缩包打包完成: $zipPath ($((Get-Item $zipPath).Length) 字节)"
+
+      - name: 尝试编译安装程序 (Compile Inno Setup Installer)
+        shell: pwsh
+        continue-on-error: true
+        run: |
+          $iscc = "C:\Program Files (x86)\Inno Setup 6\ISCC.exe"
+          if (Test-Path -LiteralPath $iscc) {
+              $fullPublishDir = (Resolve-Path "artifacts/release").Path
+              $fullArtifactsDir = (Resolve-Path "artifacts").Path
+              & $iscc "/DPublishDir=$fullPublishDir" "/DInstallerOutputDir=$fullArtifactsDir" "RHI Setup.iss"
+              if (Test-Path -LiteralPath "artifacts/RHI-Setup.exe") {
+                  Write-Output "安装程序 RHI-Setup.exe 生成成功！"
+              }
+          }
+
+      - name: 上传构建工件到 GitHub Actions (Upload Artifacts)
+        uses: actions/upload-artifact@v4
+        with:
+          name: RHI-v2.8.7-zh-win-x64
+          path: artifacts/release/
+
+      - name: 创建并发布 GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v2.8.7
+          name: RHI v2.8.7 简体中文版
+          body: |
+            ## RHI (ReShade HDR 安装器) 简体中文版 v2.8.7
+
+            本项目源码及此版本由 GitHub Actions 云端虚拟环境直接从远程仓库源码编译构建。
+
+            - **上游原项目**：[RankFTW/RHI](https://github.com/RankFTW/RHI)
+            - **汉化发布仓库**：[XYZ-ZJ/RHI-CN](https://github.com/XYZ-ZJ/RHI-CN)
+
+            ---
+
+            ### 📦 本次发布包含
+            1. **`RHI-v2.8.7-zh-win-x64.zip`**：全量解压即用便携版（推荐），包含主程序、拖放辅助工具及 35 项配套配置文件与着色器运行库。
+            2. **`RHI.exe`**：单文件自包含主程序（解压后可直接运行）。
+            3. **`RHI-Setup.exe`**：自动安装向导（如已编译）。
+
+            ---
+
+            ### ✨ 汉化内容特性
+            - **界面 100% 简体中文**：主窗口、侧边栏、所有设置与详情面板全面汉化。
+            - **悬停提示 (Tooltip) 全覆盖**：205 处功能提示已完成中文本地化。
+            - **内置快速入门指南 (FAQ)**：包含详细的入门步骤、ReShade、RenoDX、Luma、OptiScaler 及驱动设置教程。
+            - **高阶设置与控制**：支持 DLSS 5 神经渲染、多帧生成 (MFG) 解锁、NVIDIA 驱动级配置管理与各游戏独立配置。
+          files: |
+            artifacts/RHI-v2.8.7-zh-win-x64.zip
+            artifacts/release/RHI.exe
+            artifacts/RHI-Setup.exe
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
