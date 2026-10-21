@@ -388,7 +388,7 @@ public partial class DlssPresetService
     /// <summary>Named render scale options for SR and RR. "Custom" is handled separately via a TextBox.</summary>
     public static readonly (string Name, uint Value)[] RenderScaleOptions =
     [
-        ("Off", 0),
+        ("关", 0),
         ("100% DLAA", 100),
         ("99% DLAA Alt", 99),
         ("88% DLAA Lite", 88),
@@ -399,7 +399,7 @@ public partial class DlssPresetService
         ("50% Performance", 50),
         ("45% Performance-", 45),
         ("33% Ultra Perf", 33),
-        ("Custom", 0xFFFFFFFF), // Sentinel — actual value comes from TextBox
+        ("自定义", 0xFFFFFFFF), // Sentinel — actual value comes from TextBox
     ];
 
     // ── State ─────────────────────────────────────────────────────────────────

@@ -1003,14 +1003,3 @@ Format-EnabledFactors -Factors <array>
 ```
 
 ---
-
-## Document History
-
-| Version | Date | Author | Changes |
-|---------|------|--------|---------|
-| 1.0 | 2026-10-08 | Kiro | Initial research report — concluded not feasible |
-| 2.0 | 2026-10-08 | Kiro | **Major revision:** Documented working capture/replay solution from `C:\rhi-dldsr\`; changed conclusion to FEASIBLE; added integration assessment |
-
----
-
-*End of Report*

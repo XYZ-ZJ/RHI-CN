@@ -377,7 +377,7 @@ public static class CrashReporter
 
             // ── Header ──────────────────────────────────────────────────────────
             sb.AppendLine("═══════════════════════════════════════════════════════════════");
-            sb.AppendLine("  RenoDX Mod Manager — Error / Crash Report");
+            sb.AppendLine("  RenoDX 模组管理器 — 错误/崩溃报告");
             sb.AppendLine("═══════════════════════════════════════════════════════════════");
             sb.AppendLine();
 
@@ -400,7 +400,7 @@ public static class CrashReporter
             // ── Exception chain ──────────────────────────────────────────────────
             sb.AppendLine();
             sb.AppendLine("───────────────────────────────────────────────────────────────");
-            sb.AppendLine("  Exception Details");
+            sb.AppendLine("  异常详情");
             sb.AppendLine("───────────────────────────────────────────────────────────────");
 
             if (ex == null)
@@ -476,7 +476,7 @@ public static class CrashReporter
 
         if (ex.StackTrace != null)
         {
-            sb.AppendLine($"{indent}Stack trace:");
+            sb.AppendLine($"{indent}堆栈跟踪：");
             foreach (var line in ex.StackTrace.Split('\n'))
                 sb.AppendLine($"{indent}  {line.TrimEnd()}");
         }

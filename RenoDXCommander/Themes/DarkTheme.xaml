@@ -1,6 +1,4 @@
-<ResourceDictionary
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+﻿<?xml version="1.0" encoding="utf-8"?><ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <!-- ═══════════════════════════════════════════════════════════════════════
          RHI — Refined Dark Theme
@@ -77,65 +75,65 @@
          ═══════════════════════════════════════════════════════════════════════ -->
 
     <!-- Surfaces -->
-    <SolidColorBrush x:Key="SurfaceBaseBrush"           Color="{StaticResource SurfaceBase}"/>
-    <SolidColorBrush x:Key="SurfaceRaisedBrush"         Color="{StaticResource SurfaceRaised}"/>
-    <SolidColorBrush x:Key="SurfaceOverlayBrush"        Color="{StaticResource SurfaceOverlay}"/>
-    <SolidColorBrush x:Key="SurfaceHeaderBrush"         Color="{StaticResource SurfaceHeader}"/>
-    <SolidColorBrush x:Key="SurfaceStatusBarBrush"      Color="{StaticResource SurfaceStatusBar}"/>
-    <SolidColorBrush x:Key="SurfaceSidebarBrush"        Color="{StaticResource SurfaceSidebar}"/>
-    <SolidColorBrush x:Key="SurfaceToolbarBrush"        Color="{StaticResource SurfaceToolbar}"/>
-    <SolidColorBrush x:Key="SurfaceInputBrush"          Color="{StaticResource SurfaceInput}"/>
-    <SolidColorBrush x:Key="SurfaceComponentTableBrush" Color="{StaticResource SurfaceComponentTable}"/>
+    <SolidColorBrush x:Key="SurfaceBaseBrush" Color="{StaticResource SurfaceBase}" />
+    <SolidColorBrush x:Key="SurfaceRaisedBrush" Color="{StaticResource SurfaceRaised}" />
+    <SolidColorBrush x:Key="SurfaceOverlayBrush" Color="{StaticResource SurfaceOverlay}" />
+    <SolidColorBrush x:Key="SurfaceHeaderBrush" Color="{StaticResource SurfaceHeader}" />
+    <SolidColorBrush x:Key="SurfaceStatusBarBrush" Color="{StaticResource SurfaceStatusBar}" />
+    <SolidColorBrush x:Key="SurfaceSidebarBrush" Color="{StaticResource SurfaceSidebar}" />
+    <SolidColorBrush x:Key="SurfaceToolbarBrush" Color="{StaticResource SurfaceToolbar}" />
+    <SolidColorBrush x:Key="SurfaceInputBrush" Color="{StaticResource SurfaceInput}" />
+    <SolidColorBrush x:Key="SurfaceComponentTableBrush" Color="{StaticResource SurfaceComponentTable}" />
 
     <!-- Skeleton shimmer -->
-    <SolidColorBrush x:Key="SkeletonBaseBrush"      Color="{StaticResource SkeletonBase}"/>
-    <SolidColorBrush x:Key="SkeletonHighlightBrush"  Color="{StaticResource SkeletonHighlight}"/>
+    <SolidColorBrush x:Key="SkeletonBaseBrush" Color="{StaticResource SkeletonBase}" />
+    <SolidColorBrush x:Key="SkeletonHighlightBrush" Color="{StaticResource SkeletonHighlight}" />
 
     <!-- Borders -->
-    <SolidColorBrush x:Key="BorderSubtleBrush"  Color="{StaticResource BorderSubtle}"/>
-    <SolidColorBrush x:Key="BorderDefaultBrush"  Color="{StaticResource BorderDefault}"/>
-    <SolidColorBrush x:Key="BorderStrongBrush"  Color="{StaticResource BorderStrong}"/>
+    <SolidColorBrush x:Key="BorderSubtleBrush" Color="{StaticResource BorderSubtle}" />
+    <SolidColorBrush x:Key="BorderDefaultBrush" Color="{StaticResource BorderDefault}" />
+    <SolidColorBrush x:Key="BorderStrongBrush" Color="{StaticResource BorderStrong}" />
 
     <!-- Text -->
-    <SolidColorBrush x:Key="TextPrimaryBrush"   Color="{StaticResource TextPrimary}"/>
-    <SolidColorBrush x:Key="TextSecondaryBrush" Color="{StaticResource TextSecondary}"/>
-    <SolidColorBrush x:Key="TextTertiaryBrush"  Color="{StaticResource TextTertiary}"/>
-    <SolidColorBrush x:Key="TextDisabledBrush"  Color="{StaticResource TextDisabled}"/>
+    <SolidColorBrush x:Key="TextPrimaryBrush" Color="{StaticResource TextPrimary}" />
+    <SolidColorBrush x:Key="TextSecondaryBrush" Color="{StaticResource TextSecondary}" />
+    <SolidColorBrush x:Key="TextTertiaryBrush" Color="{StaticResource TextTertiary}" />
+    <SolidColorBrush x:Key="TextDisabledBrush" Color="{StaticResource TextDisabled}" />
 
     <!-- Accents -->
-    <SolidColorBrush x:Key="AccentTealBrush"       Color="{StaticResource AccentTeal}"/>
-    <SolidColorBrush x:Key="AccentTealDimBrush"    Color="{StaticResource AccentTealDim}"/>
-    <SolidColorBrush x:Key="AccentTealBgBrush"     Color="{StaticResource AccentTealBg}"/>
-    <SolidColorBrush x:Key="AccentTealBorderBrush" Color="{StaticResource AccentTealBorder}"/>
+    <SolidColorBrush x:Key="AccentTealBrush" Color="{StaticResource AccentTeal}" />
+    <SolidColorBrush x:Key="AccentTealDimBrush" Color="{StaticResource AccentTealDim}" />
+    <SolidColorBrush x:Key="AccentTealBgBrush" Color="{StaticResource AccentTealBg}" />
+    <SolidColorBrush x:Key="AccentTealBorderBrush" Color="{StaticResource AccentTealBorder}" />
 
-    <SolidColorBrush x:Key="AccentGreenBrush"       Color="{StaticResource AccentGreen}"/>
-    <SolidColorBrush x:Key="AccentGreenDimBrush"    Color="{StaticResource AccentGreenDim}"/>
-    <SolidColorBrush x:Key="AccentGreenBgBrush"     Color="{StaticResource AccentGreenBg}"/>
-    <SolidColorBrush x:Key="AccentGreenBorderBrush" Color="{StaticResource AccentGreenBorder}"/>
+    <SolidColorBrush x:Key="AccentGreenBrush" Color="{StaticResource AccentGreen}" />
+    <SolidColorBrush x:Key="AccentGreenDimBrush" Color="{StaticResource AccentGreenDim}" />
+    <SolidColorBrush x:Key="AccentGreenBgBrush" Color="{StaticResource AccentGreenBg}" />
+    <SolidColorBrush x:Key="AccentGreenBorderBrush" Color="{StaticResource AccentGreenBorder}" />
 
-    <SolidColorBrush x:Key="AccentPurpleBrush"       Color="{StaticResource AccentPurple}"/>
-    <SolidColorBrush x:Key="AccentPurpleDimBrush"    Color="{StaticResource AccentPurpleDim}"/>
-    <SolidColorBrush x:Key="AccentPurpleBgBrush"     Color="{StaticResource AccentPurpleBg}"/>
-    <SolidColorBrush x:Key="AccentPurpleBorderBrush" Color="{StaticResource AccentPurpleBorder}"/>
+    <SolidColorBrush x:Key="AccentPurpleBrush" Color="{StaticResource AccentPurple}" />
+    <SolidColorBrush x:Key="AccentPurpleDimBrush" Color="{StaticResource AccentPurpleDim}" />
+    <SolidColorBrush x:Key="AccentPurpleBgBrush" Color="{StaticResource AccentPurpleBg}" />
+    <SolidColorBrush x:Key="AccentPurpleBorderBrush" Color="{StaticResource AccentPurpleBorder}" />
 
-    <SolidColorBrush x:Key="AccentAmberBrush"    Color="{StaticResource AccentAmber}"/>
-    <SolidColorBrush x:Key="AccentAmberDimBrush" Color="{StaticResource AccentAmberDim}"/>
-    <SolidColorBrush x:Key="AccentAmberBgBrush"  Color="{StaticResource AccentAmberBg}"/>
+    <SolidColorBrush x:Key="AccentAmberBrush" Color="{StaticResource AccentAmber}" />
+    <SolidColorBrush x:Key="AccentAmberDimBrush" Color="{StaticResource AccentAmberDim}" />
+    <SolidColorBrush x:Key="AccentAmberBgBrush" Color="{StaticResource AccentAmberBg}" />
 
-    <SolidColorBrush x:Key="AccentRedBrush"   Color="{StaticResource AccentRed}"/>
-    <SolidColorBrush x:Key="AccentRedBgBrush" Color="{StaticResource AccentRedBg}"/>
+    <SolidColorBrush x:Key="AccentRedBrush" Color="{StaticResource AccentRed}" />
+    <SolidColorBrush x:Key="AccentRedBgBrush" Color="{StaticResource AccentRedBg}" />
 
-    <SolidColorBrush x:Key="AccentBlueBrush"       Color="{StaticResource AccentBlue}"/>
-    <SolidColorBrush x:Key="AccentBlueBgBrush"     Color="{StaticResource AccentBlueBg}"/>
-    <SolidColorBrush x:Key="AccentBlueBorderBrush" Color="{StaticResource AccentBlueBorder}"/>
+    <SolidColorBrush x:Key="AccentBlueBrush" Color="{StaticResource AccentBlue}" />
+    <SolidColorBrush x:Key="AccentBlueBgBrush" Color="{StaticResource AccentBlueBg}" />
+    <SolidColorBrush x:Key="AccentBlueBorderBrush" Color="{StaticResource AccentBlueBorder}" />
 
     <!-- Chips -->
-    <SolidColorBrush x:Key="ChipDefaultBrush" Color="{StaticResource ChipDefault}"/>
-    <SolidColorBrush x:Key="ChipActiveBrush"  Color="{StaticResource ChipActive}"/>
-    <SolidColorBrush x:Key="ChipTextBrush"    Color="{StaticResource ChipText}"/>
-    <SolidColorBrush x:Key="CustomChipDefaultBrush" Color="{StaticResource CustomChipDefault}"/>
-    <SolidColorBrush x:Key="CustomChipActiveBrush"  Color="{StaticResource CustomChipActive}"/>
-    <SolidColorBrush x:Key="CustomChipTextBrush"    Color="{StaticResource CustomChipText}"/>
+    <SolidColorBrush x:Key="ChipDefaultBrush" Color="{StaticResource ChipDefault}" />
+    <SolidColorBrush x:Key="ChipActiveBrush" Color="{StaticResource ChipActive}" />
+    <SolidColorBrush x:Key="ChipTextBrush" Color="{StaticResource ChipText}" />
+    <SolidColorBrush x:Key="CustomChipDefaultBrush" Color="{StaticResource CustomChipDefault}" />
+    <SolidColorBrush x:Key="CustomChipActiveBrush" Color="{StaticResource CustomChipActive}" />
+    <SolidColorBrush x:Key="CustomChipTextBrush" Color="{StaticResource CustomChipText}" />
 
     <!-- ═══════════════════════════════════════════════════════════════════════
          Sidebar item colors
@@ -148,37 +146,37 @@
     <Color x:Key="SidebarItemText">#FF8090B8</Color>
     <Color x:Key="SidebarUpdateBadge">#FF39FF14</Color>
 
-    <SolidColorBrush x:Key="SidebarItemSelectedBrush"       Color="{StaticResource SidebarItemSelected}"/>
-    <SolidColorBrush x:Key="SidebarItemSelectedBorderBrush" Color="{StaticResource SidebarItemSelectedBorder}"/>
-    <SolidColorBrush x:Key="SidebarItemSelectedTextBrush"   Color="{StaticResource SidebarItemSelectedText}"/>
-    <SolidColorBrush x:Key="SidebarItemHoverBrush"          Color="{StaticResource SidebarItemHover}"/>
-    <SolidColorBrush x:Key="SidebarItemHoverBorderBrush"    Color="{StaticResource SidebarItemHoverBorder}"/>
-    <SolidColorBrush x:Key="SidebarItemTextBrush"           Color="{StaticResource SidebarItemText}"/>
-    <SolidColorBrush x:Key="SidebarUpdateBadgeBrush"        Color="{StaticResource SidebarUpdateBadge}"/>
+    <SolidColorBrush x:Key="SidebarItemSelectedBrush" Color="{StaticResource SidebarItemSelected}" />
+    <SolidColorBrush x:Key="SidebarItemSelectedBorderBrush" Color="{StaticResource SidebarItemSelectedBorder}" />
+    <SolidColorBrush x:Key="SidebarItemSelectedTextBrush" Color="{StaticResource SidebarItemSelectedText}" />
+    <SolidColorBrush x:Key="SidebarItemHoverBrush" Color="{StaticResource SidebarItemHover}" />
+    <SolidColorBrush x:Key="SidebarItemHoverBorderBrush" Color="{StaticResource SidebarItemHoverBorder}" />
+    <SolidColorBrush x:Key="SidebarItemTextBrush" Color="{StaticResource SidebarItemText}" />
+    <SolidColorBrush x:Key="SidebarUpdateBadgeBrush" Color="{StaticResource SidebarUpdateBadge}" />
 
     <!-- ═══════════════════════════════════════════════════════════════════════
          Inline description style (secondary/muted text beneath controls)
          ═══════════════════════════════════════════════════════════════════════ -->
     <Color x:Key="InlineDescriptionText">#FF6B7A8E</Color>
-    <SolidColorBrush x:Key="InlineDescriptionBrush" Color="{StaticResource InlineDescriptionText}"/>
+    <SolidColorBrush x:Key="InlineDescriptionBrush" Color="{StaticResource InlineDescriptionText}" />
 
     <Style x:Key="InlineDescriptionStyle" TargetType="TextBlock">
-        <Setter Property="Foreground" Value="{StaticResource InlineDescriptionBrush}"/>
-        <Setter Property="FontSize" Value="11"/>
-        <Setter Property="TextWrapping" Value="Wrap"/>
-        <Setter Property="LineHeight" Value="18"/>
+        <Setter Property="Foreground" Value="{StaticResource InlineDescriptionBrush}" />
+        <Setter Property="FontSize" Value="11" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="LineHeight" Value="18" />
     </Style>
 
     <!-- ═══════════════════════════════════════════════════════════════════════
          Settings section header style
          ═══════════════════════════════════════════════════════════════════════ -->
     <Color x:Key="SettingsHeaderText">#FFA0B0D8</Color>
-    <SolidColorBrush x:Key="SettingsHeaderBrush" Color="{StaticResource SettingsHeaderText}"/>
+    <SolidColorBrush x:Key="SettingsHeaderBrush" Color="{StaticResource SettingsHeaderText}" />
 
     <Style x:Key="SettingsSectionHeaderStyle" TargetType="TextBlock">
-        <Setter Property="Foreground" Value="{StaticResource SettingsHeaderBrush}"/>
-        <Setter Property="FontSize" Value="13"/>
-        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="Foreground" Value="{StaticResource SettingsHeaderBrush}" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="FontWeight" Value="SemiBold" />
     </Style>
 
     <!-- ═══════════════════════════════════════════════════════════════════════
@@ -189,10 +187,10 @@
     <Color x:Key="CardBorder">#FF1E2430</Color>
     <Color x:Key="CardHighlightBorder">#FF2A4060</Color>
 
-    <SolidColorBrush x:Key="CardBackgroundBrush"          Color="{StaticResource CardBackground}"/>
-    <SolidColorBrush x:Key="CardHighlightBackgroundBrush" Color="{StaticResource CardHighlightBackground}"/>
-    <SolidColorBrush x:Key="CardBorderBrush"              Color="{StaticResource CardBorder}"/>
-    <SolidColorBrush x:Key="CardHighlightBorderBrush"     Color="{StaticResource CardHighlightBorder}"/>
+    <SolidColorBrush x:Key="CardBackgroundBrush" Color="{StaticResource CardBackground}" />
+    <SolidColorBrush x:Key="CardHighlightBackgroundBrush" Color="{StaticResource CardHighlightBackground}" />
+    <SolidColorBrush x:Key="CardBorderBrush" Color="{StaticResource CardBorder}" />
+    <SolidColorBrush x:Key="CardHighlightBorderBrush" Color="{StaticResource CardHighlightBorder}" />
 
     <!-- ═══════════════════════════════════════════════════════════════════════
          Layout constants

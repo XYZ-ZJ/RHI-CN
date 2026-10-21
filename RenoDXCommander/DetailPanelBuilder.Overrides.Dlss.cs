@@ -1,4 +1,4 @@
-﻿// DetailPanelBuilder.Overrides.Dlss.cs — DLSS/Streamline column builder helpers.
+// DetailPanelBuilder.Overrides.Dlss.cs — DLSS/Streamline column builder helpers.
 
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -32,7 +32,7 @@ public partial class DetailPanelBuilder
         });
 
         // Version ComboBox
-        var versionLabel = new TextBlock { Text = "Version", FontSize = 10, Foreground = UIFactory.Brush(ResourceKeys.TextTertiaryBrush), Margin = new Thickness(0, 2, 0, 0) };
+        var versionLabel = new TextBlock { Text = "版本", FontSize = 10, Foreground = UIFactory.Brush(ResourceKeys.TextTertiaryBrush), Margin = new Thickness(0, 2, 0, 0) };
         col.Children.Add(versionLabel);
 
         // Build items list with (Default) marker on the game's original/default version
@@ -41,7 +41,7 @@ public partial class DetailPanelBuilder
         if (!isPresent && installedVersion == null && onDriverOverrideToggled == null)
         {
             // Game truly doesn't have this component — show "None"
-            items.Add("None");
+            items.Add("无");
         }
         else
         {
@@ -51,22 +51,22 @@ public partial class DetailPanelBuilder
 
             foreach (var ver in availableVersions)
                 items.Add(ver);
-            items.Add("Custom");
+            items.Add("自定义");
 
             // Add a "Default (x.x.x)" entry at the top so the user can restore the original
             if (formattedOriginal != null)
             {
-                var defaultLabel = $"Default ({formattedOriginal})";
+                var defaultLabel = $"默认 ({formattedOriginal})";
                 items.Insert(0, defaultLabel);
             }
             else
             {
-                items.Insert(0, "Default");
+                items.Insert(0, "默认");
             }
 
             // "NVIDIA Override" as a selectable option when the caller supports it
             if (onDriverOverrideToggled != null)
-                items.Add("NVIDIA Override");
+                items.Add("NVIDIA 覆盖");
         }
 
         // Find selected index based on installed version (or NVIDIA Override if active)
@@ -78,7 +78,7 @@ public partial class DetailPanelBuilder
         }
         else if (installedVersion != null && (isPresent || onDriverOverrideToggled != null))
         {
-            if (installedVersion.Equals("Custom", StringComparison.OrdinalIgnoreCase))
+            if (installedVersion.Equals("Custom", StringComparison.OrdinalIgnoreCase) || installedVersion.Equals("自定义", StringComparison.OrdinalIgnoreCase))
             {
                 // "Custom" is second-to-last (before "NVIDIA Override" if present)
                 selectedIndex = onDriverOverrideToggled != null ? items.Count - 2 : items.Count - 1;
@@ -88,7 +88,7 @@ public partial class DetailPanelBuilder
                 bool matched = false;
                 for (int i = 0; i < items.Count; i++)
                 {
-                    var itemBase = items[i].Replace(" (Default)", "");
+                    var itemBase = items[i].Replace(" (Default)", "").Replace(" (默认)", "").Replace("默认", "").Trim();
                     if (installedVersion.Equals(itemBase, StringComparison.OrdinalIgnoreCase)
                         || itemBase.StartsWith(installedVersion, StringComparison.OrdinalIgnoreCase)
                         || installedVersion.StartsWith(itemBase, StringComparison.OrdinalIgnoreCase))
@@ -122,11 +122,11 @@ public partial class DetailPanelBuilder
         };
 
         if (driverOverrideActive)
-            ToolTipService.SetToolTip(versionCombo, "NVIDIA Override is active — the driver is injecting its own latest DLL for this game. Select any other version to disable the override and deploy that version instead.");
+            ToolTipService.SetToolTip(versionCombo, "NVIDIA 覆盖已启用 — 驱动正在为此游戏注入最新 DLL。选择其他版本即可停用覆盖并部署所选版本。");
         else if (onDriverOverrideToggled != null)
-            ToolTipService.SetToolTip(versionCombo, "Selects which DLL version is copied into the game folder. Default restores the original game DLL. Custom uses your own file from %LocalAppData%\\RHI\\Custom\\DLSS\\. NVIDIA Override lets the driver inject its own latest version instead of a file on disk — equivalent to enabling DLSS Override in NVIDIA App or Profile Inspector.");
+            ToolTipService.SetToolTip(versionCombo, "选择复制到游戏文件夹中的 DLL 版本。“默认”将还原原始游戏 DLL。“自定义”使用 %LocalAppData%\\RHI\\Custom\\DLSS\\ 中您自己的文件。“NVIDIA 覆盖”允许驱动程序注入其自身的最新版本，而非磁盘上的文件 — 等同于在 NVIDIA App 或 Profile Inspector 中启用 DLSS 覆盖。");
         else
-            ToolTipService.SetToolTip(versionCombo, "Selects which DLL version is copied into the game folder. Default restores the original game DLL. Custom uses your own file from %LocalAppData%\\RHI\\Custom\\DLSS\\.");
+            ToolTipService.SetToolTip(versionCombo, "选择复制到游戏文件夹中的 DLL 版本。“默认”将还原原始游戏 DLL。“自定义”使用 %LocalAppData%\\RHI\\Custom\\DLSS\\ 中您自己的文件。");
 
         col.Children.Add(versionCombo);
 
@@ -137,7 +137,7 @@ public partial class DetailPanelBuilder
             var selected = versionCombo.SelectedItem as string;
             if (string.IsNullOrEmpty(selected)) return;
 
-            if (selected == "NVIDIA Override")
+            if (selected == "NVIDIA 覆盖" || selected == "NVIDIA Override")
             {
                 // Enable driver DLL override — no DLL swap needed
                 onDriverOverrideToggled?.Invoke(true);
@@ -145,14 +145,14 @@ public partial class DetailPanelBuilder
             }
 
             // If we were on NVIDIA Override and switched away, disable it first
-            if (driverOverrideActive || (ev.RemovedItems.Count > 0 && ev.RemovedItems[0] as string == "NVIDIA Override"))
+            if (driverOverrideActive || (ev.RemovedItems.Count > 0 && (ev.RemovedItems[0] as string == "NVIDIA 覆盖" || ev.RemovedItems[0] as string == "NVIDIA Override")))
                 onDriverOverrideToggled?.Invoke(false);
 
             versionCombo.IsEnabled = false;
             try
             {
                 // If it's the (Default) item, treat as "Default" (restore original)
-                if (selected.StartsWith("Default", StringComparison.OrdinalIgnoreCase))
+                if (selected.StartsWith("默认", StringComparison.OrdinalIgnoreCase) || selected.StartsWith("Default", StringComparison.OrdinalIgnoreCase))
                     await onVersionSelected("Default");
                 else
                     await onVersionSelected(selected);
@@ -167,7 +167,7 @@ public partial class DetailPanelBuilder
         // Preset ComboBox (only for SR, RR, FG)
         if (presets != null && isPresent)
         {
-            col.Children.Add(new TextBlock { Text = "Preset", FontSize = 10, Foreground = UIFactory.Brush(ResourceKeys.TextTertiaryBrush), Margin = new Thickness(0, 2, 0, 0) });
+            col.Children.Add(new TextBlock { Text = "预设", FontSize = 10, Foreground = UIFactory.Brush(ResourceKeys.TextTertiaryBrush), Margin = new Thickness(0, 2, 0, 0) });
 
             var presetItems = presets.Select(p => p.Name).ToList();
             int presetIdx = 0;
@@ -212,7 +212,7 @@ public partial class DetailPanelBuilder
         // Render Scale ComboBox (only for SR and RR)
         if (onRenderScaleSelected != null && isPresent)
         {
-            col.Children.Add(new TextBlock { Text = "Render Scale", FontSize = 10, Foreground = UIFactory.Brush(ResourceKeys.TextTertiaryBrush), Margin = new Thickness(0, 2, 0, 0) });
+            col.Children.Add(new TextBlock { Text = "渲染比例", FontSize = 10, Foreground = UIFactory.Brush(ResourceKeys.TextTertiaryBrush), Margin = new Thickness(0, 2, 0, 0) });
             var rsOptions = DlssPresetService.RenderScaleOptions;
             var rsItems = rsOptions.Select(o => o.Name).ToList();
 
@@ -242,7 +242,7 @@ public partial class DetailPanelBuilder
                 MaxDropDownHeight = 300,
             };
             ToolTipService.SetToolTip(rsCombo,
-                "Override the DLSS render resolution scale. Off = game controls the scale.\nNamed presets set a fixed percentage. Custom lets you enter any value from 33-100%.");
+                "覆盖 DLSS 渲染分辨率比例。关 = 由游戏控制缩放比例。\n指定预设将设置固定百分比。自定义允许您输入 33-100% 之间的任意值。");
 
             bool rsInit = true;
             rsCombo.SelectionChanged += (s, ev) =>
@@ -251,7 +251,7 @@ public partial class DetailPanelBuilder
                 var idx = rsCombo.SelectedIndex;
                 if (idx < 0 || idx >= rsOptions.Length) return;
 
-                if (rsOptions[idx].Name == "Custom")
+                if (rsOptions[idx].Name == "Custom" || rsOptions[idx].Name == "自定义")
                 {
                     // Show a TextBox inline — replace the combo temporarily
                     var parent = rsCombo.Parent as StackPanel;

@@ -45,7 +45,7 @@ public partial class GameCardViewModel
             var effectiveStatus = Status;
             var effectiveInstalling = IsInstalling;
 
-            if (effectiveInstalling) return "Installing...";
+            if (effectiveInstalling) return "正在安装...";
             if (IsManaged)
             {
                 // Any component has an update available → show update icon

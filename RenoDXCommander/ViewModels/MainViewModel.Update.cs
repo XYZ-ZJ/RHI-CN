@@ -1,4 +1,4 @@
-﻿// MainViewModel.Update.cs -- Update-all commands, update checking, UL caching, and version management.
+// MainViewModel.Update.cs -- Update-all commands, update checking, UL caching, and version management.
 
 using Microsoft.Extensions.DependencyInjection;
 using RenoDXCommander.Models;
@@ -2778,4 +2778,3 @@ public partial class MainViewModel
         _crashReporter.Log("[MainViewModel.CheckForUpdatesAsync] Update check complete — cooldown timestamp saved");
     }
 }
-

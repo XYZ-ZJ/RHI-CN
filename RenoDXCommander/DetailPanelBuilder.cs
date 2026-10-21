@@ -138,7 +138,7 @@ public partial class DetailPanelBuilder
             _window.DetailEngineText.TextDecorations = isClickable ? Windows.UI.Text.TextDecorations.Underline : Windows.UI.Text.TextDecorations.None;
             _window.DetailEngineBadge.Tag = isClickable ? card : null;
             if (isClickable)
-                ToolTipService.SetToolTip(_window.DetailEngineBadge, "Click to cycle engine version (affects DOF Fix eligibility)");
+                ToolTipService.SetToolTip(_window.DetailEngineBadge, "点击切换引擎版本（会影响景深修复的适用性）");
             else
                 ToolTipService.SetToolTip(_window.DetailEngineBadge, null);
         }
@@ -190,11 +190,11 @@ public partial class DetailPanelBuilder
                     var cursorProp = DetailPanelBuilder.CursorProp;
                     badge.PointerEntered += (s, e) => cursorProp?.SetValue(badge, handCursor);
                     badge.PointerExited += (s, e) => cursorProp?.SetValue(badge, arrowCursor);
-                    ToolTipService.SetToolTip(badge, $"Mod author: {author} — click to open Ko-fi donation page");
+                    ToolTipService.SetToolTip(badge, $"Mod 作者：{author} — 点击打开 Ko-fi 捐赠页面");
                 }
                 else
                 {
-                    ToolTipService.SetToolTip(badge, $"Mod author: {author}");
+                    ToolTipService.SetToolTip(badge, $"Mod 作者：{author}");
                 }
                 _window.DetailAuthorBadgePanel.Children.Add(badge);
             }
@@ -283,14 +283,14 @@ public partial class DetailPanelBuilder
             _window.DetailModStatusIcon.Text = "✓";
             _window.DetailModStatusIcon.Foreground = UIFactory.Brush(ResourceKeys.AccentGreenBrush);
             _window.DetailModStatusIcon.Visibility = Visibility.Visible;
-            ToolTipService.SetToolTip(_window.DetailModStatusIcon, "HDR mod complete");
+            ToolTipService.SetToolTip(_window.DetailModStatusIcon, "HDR 模组已完成");
         }
         else if (string.Equals(modStatusText, "WIP", StringComparison.OrdinalIgnoreCase))
         {
             _window.DetailModStatusIcon.Text = "🔨";
             _window.DetailModStatusIcon.Foreground = UIFactory.Brush(ResourceKeys.TextPrimaryBrush);
             _window.DetailModStatusIcon.Visibility = Visibility.Visible;
-            ToolTipService.SetToolTip(_window.DetailModStatusIcon, "HDR mod in progress");
+            ToolTipService.SetToolTip(_window.DetailModStatusIcon, "HDR 模组进行中");
         }
         else
         {
@@ -299,7 +299,7 @@ public partial class DetailPanelBuilder
 
         // Utility buttons — set Tag for event handlers
         _window.DetailFavBtn.Tag = card;
-        _window.DetailFavIcon.Text = "Favourite";
+        _window.DetailFavIcon.Text = card.IsFavourite ? "已收藏" : "收藏";
         var favColor = card.IsFavourite
             ? ((SolidColorBrush)Application.Current.Resources[ResourceKeys.AccentAmberBrush]).Color
             : ((SolidColorBrush)Application.Current.Resources[ResourceKeys.ChipTextBrush]).Color;
@@ -309,7 +309,7 @@ public partial class DetailPanelBuilder
             : UIFactory.Brush(ResourceKeys.BorderSubtleBrush);
 
         _window.DetailHideBtn.Tag = card;
-        _window.DetailHideIcon.Text = card.IsHidden ? "Show" : "Hide";
+        _window.DetailHideIcon.Text = card.IsHidden ? "取消隐藏" : "隐藏";
         _window.DetailHideBtn.Foreground = UIFactory.Brush(ResourceKeys.ChipTextBrush);
 
         // Folder management buttons
@@ -379,7 +379,7 @@ public partial class DetailPanelBuilder
         if (card.HasUwFixUrl)
         {
             var source = card.UwFixSource ?? "creator";
-            ToolTipService.SetToolTip(_window.DetailUwFixBtn, $"Open {source}'s ultrawide fix page");
+            ToolTipService.SetToolTip(_window.DetailUwFixBtn, $"打开 {source} 的带鱼屏/超宽屏修复页面");
         }
 
         // Ultra+ link button

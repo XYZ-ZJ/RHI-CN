@@ -923,7 +923,7 @@ public partial class MainViewModel
         }
         catch (Exception ex)
         {
-            StatusText = "Error loading";
+            StatusText = "加载失败";
             SubStatusText = ex.Message;
             _crashReporter.WriteCrashReport("InitializeAsync", ex);
         }

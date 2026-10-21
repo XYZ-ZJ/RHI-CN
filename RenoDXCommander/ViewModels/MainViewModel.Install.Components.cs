@@ -427,7 +427,7 @@ public partial class MainViewModel
     {
         if (File.Exists(GetUlCachePath(is32Bit)))
         {
-            progress?.Report(("Installing from cache...", 50));
+            progress?.Report(("正在从缓存安装…", 50));
             return;
         }
 
@@ -641,7 +641,7 @@ public partial class MainViewModel
 
         if (File.Exists(GetDcCachePath(is32Bit)))
         {
-            progress?.Report(("Installing from cache...", 50));
+            progress?.Report(("正在从缓存安装…", 50));
             return;
         }
 

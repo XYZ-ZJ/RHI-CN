@@ -68,7 +68,7 @@ public partial class DetailPanelBuilder
         };
         var ovTitle = new TextBlock
         {
-            Text       = "Game Overrides",
+            Text       = "游戏覆盖项",
             FontSize   = 13,
             FontWeight = Microsoft.UI.Text.FontWeights.SemiBold,
             Foreground = UIFactory.Brush(ResourceKeys.TextPrimaryBrush),
@@ -140,23 +140,23 @@ public partial class DetailPanelBuilder
         // ── Game name + Wiki name ────────────────────────────────────────────────
         var detectedBox = new TextBox
         {
-            Header = "Game name (editable)",
+            Header = "游戏名称（可编辑）",
             Text = gameName,
             FontSize = 12,
             HorizontalAlignment = HorizontalAlignment.Stretch,
         };
         ToolTipService.SetToolTip(detectedBox,
-            "The display name for this game. Edit and press Enter to rename. Reset reverts to the auto-detected store name.");
+            "此游戏的显示名称。编辑并按回车重命名。重置将还原为自动检测的商店名称。");
         var wikiBox = new TextBox
         {
-            Header = "Wiki mod name",
-            PlaceholderText = "Exact wiki name",
+            Header = "Wiki Mod 名称",
+            PlaceholderText = "准确的 Wiki 名称",
             Text = _window.ViewModel.GetUserNameMapping(gameName) ?? "",
             FontSize = 12,
             HorizontalAlignment = HorizontalAlignment.Stretch,
         };
         ToolTipService.SetToolTip(wikiBox,
-            "Override the name used to look up this game on the RenoDX/Luma wiki. Leave blank to use the game name. Press Enter to save.");
+            "覆盖在 RenoDX/Luma wiki 上查询此游戏时使用的名称。留空以使用游戏名称。按回车保存。");
         var originalStoreName = _window.ViewModel.GetOriginalStoreName(gameName);
 
         // Mutable captured name so rename handler can update it for subsequent handlers
@@ -164,7 +164,7 @@ public partial class DetailPanelBuilder
 
         var resetBtn = new Button
         {
-            Content = "Reset",
+            Content = "重置",
             FontSize = 12,
             VerticalAlignment = VerticalAlignment.Bottom,
             Padding = new Thickness(10, 6, 10, 6),
@@ -172,7 +172,7 @@ public partial class DetailPanelBuilder
             Foreground = UIFactory.Brush(ResourceKeys.TextSecondaryBrush),
             BorderBrush = UIFactory.Brush(ResourceKeys.BorderDefaultBrush),
         };
-        ToolTipService.SetToolTip(resetBtn, "Reset game name back to auto-detected and clear wiki name mapping.");
+        ToolTipService.SetToolTip(resetBtn, "将游戏名称重置为自动检测并清除 wiki 名称映射。");
         resetBtn.Click += (s, ev) =>
         {
             var resetName = (originalStoreName ?? gameName).Trim();
@@ -215,7 +215,7 @@ public partial class DetailPanelBuilder
             SelectedItem = DllDefaultSentinel, // default = no override
         };
         ToolTipService.SetToolTip(rsNameBox,
-            "Override the ReShade DLL filename. Select a name to rename the installed DLL immediately. Select -------- to revert to the default name.");
+            "覆盖 ReShade DLL 文件名。选择一个名称以立即重命名已安装的 DLL。选择 -------- 还原为默认名称。");
         if (!string.IsNullOrEmpty(existingRsName))
         {
             if (rsNames.Contains(existingRsName, StringComparer.OrdinalIgnoreCase))
@@ -267,7 +267,7 @@ public partial class DetailPanelBuilder
 
         var osNameBox = new ComboBox
         {
-            PlaceholderText = "Select OptiScaler DLL name",
+            PlaceholderText = "选择 OptiScaler DLL 名称",
             FontSize = 12,
             IsEnabled = true,
             HorizontalAlignment = HorizontalAlignment.Stretch,
@@ -553,7 +553,7 @@ public partial class DetailPanelBuilder
         resetWikiRow.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
 
         // Restyle reset button to blue accent
-        resetBtn.Content = "Reset";
+        resetBtn.Content = "重置";
         resetBtn.FontSize = 12;
         resetBtn.Height = 32;
         resetBtn.HorizontalAlignment = HorizontalAlignment.Stretch;
@@ -568,20 +568,20 @@ public partial class DetailPanelBuilder
         resetWikiRow.Children.Add(resetBtn);
 
         // Wiki lookup ComboBox (replaces ToggleSwitch)
-        var wikiExcludeItems = new[] { "Included", "Excluded" };
+        var wikiExcludeItems = new[] { "包含", "排除" };
         var wikiExcludeCombo = new ComboBox
         {
             ItemsSource = wikiExcludeItems,
-            SelectedItem = _window.ViewModel.IsWikiExcluded(gameName) ? "Excluded" : "Included",
+            SelectedItem = _window.ViewModel.IsWikiExcluded(gameName) ? "排除" : "包含",
             FontSize = 12,
             HorizontalAlignment = HorizontalAlignment.Stretch,
         };
         ToolTipService.SetToolTip(wikiExcludeCombo,
-            "Included = this game is looked up on the RenoDX and Luma wikis. Excluded = skip wiki lookups for this game.");
+            "包含 = 在 RenoDX 和 Luma wiki 上查询此游戏。排除 = 跳过此游戏的 wiki 查询。");
         wikiExcludeCombo.SelectionChanged += (s, ev) =>
         {
             var selected = wikiExcludeCombo.SelectedItem as string;
-            bool shouldExclude = selected == "Excluded";
+            bool shouldExclude = selected == "排除" || selected == "Excluded";
             if (shouldExclude != _window.ViewModel.IsWikiExcluded(capturedName))
                 _window.ViewModel.ToggleWikiExclusion(capturedName);
         };
@@ -613,7 +613,7 @@ public partial class DetailPanelBuilder
 
         var dllOverrideLabel = new TextBlock
         {
-            Text = "DLL naming overrides",
+            Text = "DLL 命名覆盖",
             FontSize = 12,
             Foreground = UIFactory.Brush(ResourceKeys.TextSecondaryBrush),
         };
@@ -649,7 +649,7 @@ public partial class DetailPanelBuilder
         // Reset DLL Names button — reverts all three DLLs to defaults and clears the config
         resetDllBtn = new Button
         {
-            Content = "Reset DLL Names",
+            Content = "重置 DLL 名称",
             FontSize = 12,
             Height = 28,
             HorizontalAlignment = HorizontalAlignment.Right,
@@ -662,7 +662,7 @@ public partial class DetailPanelBuilder
             CornerRadius = new CornerRadius(8),
         };
         ToolTipService.SetToolTip(resetDllBtn,
-            "Revert all DLL names back to defaults and clear saved overrides.");
+            "将所有 DLL 名称还原为默认值并清除保存的覆盖设置。");
         resetDllBtn.Click += async (s, e) =>
         {
             resetDllBtn.IsEnabled = false;
@@ -794,7 +794,7 @@ public partial class DetailPanelBuilder
             HorizontalAlignment = HorizontalAlignment.Stretch,
         };
         ToolTipService.SetToolTip(shaderModeCombo,
-            "Global = use global shader selection. Custom = use custom shader directories. Select = pick per-game packs. Off = no shaders.");
+            "全局 = 使用全局着色器选择。自定义 = 使用自定义着色器目录。选择 = 按游戏选择着色器包。关 = 不使用着色器。");
 
         // Allow re-opening the Select picker when already on Select
         shaderModeCombo.DropDownClosed += (s, ev) =>
@@ -957,19 +957,19 @@ public partial class DetailPanelBuilder
         // ── Bitness Override ComboBox (left column of Bitness & API Row) ─────────
         var bitnessLabel = new TextBlock
         {
-            Text = "Bitness",
+            Text = "位数",
             FontSize = 12,
             Foreground = UIFactory.Brush(ResourceKeys.TextPrimaryBrush),
             Margin = new Thickness(0, 0, 0, 8),
         };
 
-        var bitnessItems = new[] { "Auto", "32-bit", "64-bit" };
+        var bitnessItems = new[] { "自动", "32-bit", "64-bit" };
         var currentBitnessOverride = _window.ViewModel.GetBitnessOverride(gameName, card.Source);
         var defaultBitnessSelection = currentBitnessOverride switch
         {
             "32" => "32-bit",
             "64" => "64-bit",
-            _ => "Auto",
+            _ => "自动",
         };
 
         var bitnessCombo = new ComboBox
@@ -980,7 +980,7 @@ public partial class DetailPanelBuilder
             HorizontalAlignment = HorizontalAlignment.Stretch,
         };
         ToolTipService.SetToolTip(bitnessCombo,
-            "Override the auto-detected bitness for this game. Auto uses PE header detection. 32-bit or 64-bit forces the value.");
+            "覆盖此游戏自动检测到的位数。自动 = 使用 PE 头检测。32位或64位 = 强制指定该值。");
 
         bitnessCombo.SelectionChanged += (s, e) =>
         {
@@ -1063,21 +1063,21 @@ public partial class DetailPanelBuilder
         // ── API Override ComboBox (single selection, placed in left panel below bitness) ──────
         var apiLabel = new TextBlock
         {
-            Text = "Graphics API",
+            Text = "图形 API",
             FontSize = 12,
             Foreground = UIFactory.Brush(ResourceKeys.TextPrimaryBrush),
         };
         ToolTipService.SetToolTip(apiLabel,
-            "Override the detected graphics API for this game.\n\n" +
-            "Auto uses the auto-detected value from PE header scanning.\n" +
-            "User overrides set here take precedence over manifest and auto-detected values.\n" +
-            "Reset Overrides reverts to auto-detection.");
+            "覆盖此游戏检测到的图形 API。\n\n" +
+            "“自动”使用 PE 头扫描自动检测到的值。\n" +
+            "此处设置的用户覆盖优先于清单和自动检测到的值。\n" +
+            "“重置覆盖”将恢复为自动检测。");
 
-        var apiDropdownItems = new[] { "Auto", "DirectX8", "DirectX9", "DirectX10", "DirectX11", "DirectX12", "Vulkan", "OpenGL" };
+        var apiDropdownItems = new[] { "自动", "DirectX8", "DirectX9", "DirectX10", "DirectX11", "DirectX12", "Vulkan", "OpenGL" };
         var existingApiOverride = _window.ViewModel.GetApiOverride(gameName, card.Source);
 
         // Determine current selection
-        string defaultApiSelection = "Auto";
+        string defaultApiSelection = "自动";
         if (existingApiOverride != null && existingApiOverride.Count > 0)
         {
             // Map stored override back to dropdown label
@@ -1105,7 +1105,7 @@ public partial class DetailPanelBuilder
             HorizontalAlignment = HorizontalAlignment.Stretch,
         };
         ToolTipService.SetToolTip(apiCombo,
-            "Override the detected graphics API for this game.\nAuto uses PE header scanning. Reset Overrides reverts to auto-detection.");
+            "覆盖此游戏检测到的图形 API。\n“自动”使用 PE 头扫描。“重置覆盖”将恢复为自动检测。");
 
         apiCombo.SelectionChanged += (s, ev) =>
         {

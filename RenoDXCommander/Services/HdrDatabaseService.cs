@@ -42,7 +42,7 @@ public class HdrDatabaseService : IHdrDatabaseService
         if (CachedData != null)
             return CachedData;
 
-        progress?.Report("Fetching HDR Gaming Database...");
+        progress?.Report("正在获取 HDR 游戏数据库…");
 
         var result = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 

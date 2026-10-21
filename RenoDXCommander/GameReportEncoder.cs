@@ -26,18 +26,18 @@ public static class GameReportEncoder
         // Gatekeep: ask user to correct overrides first
         var gateDlg = new ContentDialog
         {
-            Title = "Before you submit",
+            Title = "提交前须知",
             Content = new TextBlock
             {
-                Text = "Please use the overrides on this panel to correct any wrong values " +
+                Text = "请先使用此面板中的覆盖项修正错误值 " +
                        "(bitness, graphics API, game name, etc.) before generating a report. " +
                        "This helps us update the manifest faster.\n\n" +
                        "Have you corrected everything you can?",
                 TextWrapping = TextWrapping.Wrap,
                 FontSize = 12,
             },
-            PrimaryButtonText = "Yes, continue",
-            CloseButtonText = "Go back",
+            PrimaryButtonText = "是，继续",
+            CloseButtonText = "返回",
             XamlRoot = xamlRoot,
             RequestedTheme = ElementTheme.Dark,
         };
@@ -48,7 +48,7 @@ public static class GameReportEncoder
         // Show dialog with optional note
         var noteBox = new TextBox
         {
-            PlaceholderText = "Describe the issue (optional)",
+            PlaceholderText = "描述问题（可选）",
             AcceptsReturn = true,
             TextWrapping = TextWrapping.Wrap,
             MinHeight = 80,
@@ -57,7 +57,7 @@ public static class GameReportEncoder
 
         var dlg = new ContentDialog
         {
-            Title = "Copy Game Report",
+            Title = "复制游戏报告",
             Content = new StackPanel
             {
                 Spacing = 8,
@@ -65,8 +65,8 @@ public static class GameReportEncoder
                 {
                     new TextBlock
                     {
-                        Text = "This saves a report file and copies it to your clipboard. " +
-                               "Paste it directly into Discord or attach it to a GitHub issue.",
+                        Text = "这将保存诊断报告文件并将其复制到您的剪贴板。 " +
+                               "可直接将其粘贴到 Discord 或附加到 GitHub Issue 中。",
                         TextWrapping = TextWrapping.Wrap,
                         FontSize = 12,
                         Opacity = 0.7,
@@ -74,8 +74,8 @@ public static class GameReportEncoder
                     noteBox,
                 },
             },
-            PrimaryButtonText = "Copy to Clipboard",
-            CloseButtonText = "Cancel",
+            PrimaryButtonText = "复制到剪贴板",
+            CloseButtonText = "取消",
             XamlRoot = xamlRoot,
             RequestedTheme = ElementTheme.Dark,
         };

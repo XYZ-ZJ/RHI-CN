@@ -1,4 +1,4 @@
-﻿// DetailPanelBuilder.Overrides.ShadersAddons.cs — Shaders, Addons, Launch, and Reset Overrides sections.
+// DetailPanelBuilder.Overrides.ShadersAddons.cs — Shaders, Addons, Launch, and Reset Overrides sections.
 
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -28,7 +28,7 @@ public partial class DetailPanelBuilder
         var shadersAddonsLeftColumn = new StackPanel { Spacing = 6 };
         shadersAddonsLeftColumn.Children.Add(new TextBlock
         {
-            Text = "Shaders and Addons",
+            Text = "着色器与插件",
             FontSize = 12,
             Foreground = UIFactory.Brush(ResourceKeys.TextPrimaryBrush),
             Margin = new Thickness(0, 0, 0, 4),
@@ -43,7 +43,7 @@ public partial class DetailPanelBuilder
 
         var shaderLabel = new TextBlock
         {
-            Text = "Shaders",
+            Text = "着色器",
             FontSize = 11,
             Foreground = UIFactory.Brush(ResourceKeys.TextSecondaryBrush),
         };
@@ -66,7 +66,7 @@ public partial class DetailPanelBuilder
             IsEnabled = !card.UseNormalReShade,
         };
         ToolTipService.SetToolTip(addonModeCombo,
-            "Global = use global addon set. Select = pick per-game addons. Off = no addons for this game.");
+            "全局 = 使用全局插件集。选择 = 按游戏挑选插件。关 = 此游戏不使用插件。");
 
         // Allow re-opening the Select picker when already on Select
         addonModeCombo.DropDownClosed += (s, ev) =>
@@ -106,14 +106,14 @@ public partial class DetailPanelBuilder
                 {
                     var infoDlg = new ContentDialog
                     {
-                        Title = "Select Addons",
+                        Title = "选择插件",
                         Content = new TextBlock
                         {
-                            Text = "Addon service is not yet wired. Complete Task 9.1 to enable addon selection.",
+                            Text = "插件服务尚未接入。完成任务 9.1 后即可启用插件选择。",
                             FontSize = 13,
                             Foreground = UIFactory.Brush(ResourceKeys.TextPrimaryBrush),
                         },
-                        CloseButtonText = "OK",
+                        CloseButtonText = "确定",
                         XamlRoot = _window.Content.XamlRoot,
                         Background = UIFactory.Brush(ResourceKeys.SurfaceOverlayBrush),
                         RequestedTheme = ElementTheme.Dark,
@@ -165,7 +165,7 @@ public partial class DetailPanelBuilder
 
         var addonLabel = new TextBlock
         {
-            Text = "Addons",
+            Text = "插件",
             FontSize = 11,
             Foreground = UIFactory.Brush(ResourceKeys.TextSecondaryBrush),
         };
@@ -179,7 +179,7 @@ public partial class DetailPanelBuilder
         // "Select ReShade Preset" button
         var presetBtn = new Button
         {
-            Content = "Select ReShade Preset",
+            Content = "选择 ReShade 预设",
             FontSize = 12,
             Height = 32,
             HorizontalAlignment = HorizontalAlignment.Stretch,
@@ -191,7 +191,7 @@ public partial class DetailPanelBuilder
             Margin = new Thickness(0, 8, 0, 0),
         };
         ToolTipService.SetToolTip(presetBtn,
-            "Pick .ini preset files to copy to this game's folder. Place presets in the reshade-presets folder.");
+            "挑选要复制到此游戏文件夹的 .ini 预设文件。请将预设放入 reshade-presets 文件夹中。");
         presetBtn.Click += async (s, ev) =>
         {
             var selected = await PresetPopupHelper.ShowAsync(_window.Content.XamlRoot);
@@ -208,10 +208,10 @@ public partial class DetailPanelBuilder
                     {
                         var shaderDialog = new ContentDialog
                         {
-                            Title = "🔧 Install Shaders?",
-                            Content = "Also install the required shaders and textures?",
-                            PrimaryButtonText = "Yes",
-                            CloseButtonText = "No",
+                            Title = "🔧 安装着色器？",
+                            Content = "是否同时安装所需的着色器和纹理？",
+                            PrimaryButtonText = "是",
+                            CloseButtonText = "否",
                             XamlRoot = _window.Content.XamlRoot,
                             RequestedTheme = ElementTheme.Dark,
                         };
@@ -306,7 +306,7 @@ public partial class DetailPanelBuilder
                     _window.DispatcherQueue?.TryEnqueue(() =>
                     {
                         if (_window.ViewModel.SelectedGame == card)
-                            exeHeaderText.Text = $"Launch executable  —  {scannedExe}";
+                            exeHeaderText.Text = $"启动可执行文件  —  {scannedExe}";
                     });
             });
         }
@@ -323,12 +323,12 @@ public partial class DetailPanelBuilder
         var launchExeBox = new TextBox
         {
             Text = currentLaunchExe,
-            PlaceholderText = "Auto-detect (or paste path)",
+            PlaceholderText = "自动检测（或粘贴路径）",
             FontSize = 11,
             HorizontalAlignment = HorizontalAlignment.Stretch,
         };
         ToolTipService.SetToolTip(launchExeBox,
-            "Override the executable used when launching this game. Leave blank for auto-detection (largest exe in install folder).");
+            "覆盖启动此游戏时使用的可执行文件。留空则自动检测（安装文件夹中体积最大的 exe）。");
         launchExeBox.LostFocus += (s, ev) =>
         {
             var newPath = launchExeBox.Text.Trim();
@@ -344,7 +344,7 @@ public partial class DetailPanelBuilder
         var launchArgsBox = new TextBox
         {
             Text = currentLaunchArgs,
-            PlaceholderText = "Launch arguments",
+            PlaceholderText = "启动参数",
             FontSize = 11,
             HorizontalAlignment = HorizontalAlignment.Stretch,
         };
@@ -378,7 +378,7 @@ public partial class DetailPanelBuilder
         launchBtnRow.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
         var browseLaunchBtn = new Button
         {
-            Content = "Browse",
+            Content = "浏览",
             FontSize = 12,
             Height = 32,
             HorizontalAlignment = HorizontalAlignment.Stretch,
@@ -399,7 +399,7 @@ public partial class DetailPanelBuilder
                 ofn.filter = "Executables (*.exe)\0*.exe\0All Files (*.*)\0*.*\0";
                 ofn.file = new string(new char[260]);
                 ofn.maxFile = ofn.file.Length;
-                ofn.title = "Select Game Executable";
+                ofn.title = "选择游戏可执行文件";
                 var browseDir = card.InstallPath is { Length: > 0 } bp && System.IO.Directory.Exists(bp) ? bp
                               : card.DetectedGame?.InstallPath is { Length: > 0 } dp && System.IO.Directory.Exists(dp) ? dp
                               : Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
@@ -415,12 +415,12 @@ public partial class DetailPanelBuilder
             }
         };
         Grid.SetColumn(browseLaunchBtn, 0);
-        ToolTipService.SetToolTip(browseLaunchBtn, "Browse for a game executable to use as the launch target.");
+        ToolTipService.SetToolTip(browseLaunchBtn, "浏览用于启动游戏的可执行文件。");
         launchBtnRow.Children.Add(browseLaunchBtn);
 
         var resetLaunchBtn = new Button
         {
-            Content = "Reset",
+            Content = "重置",
             FontSize = 12,
             Height = 32,
             HorizontalAlignment = HorizontalAlignment.Stretch,
@@ -437,7 +437,7 @@ public partial class DetailPanelBuilder
             _window.ViewModel.SaveSettingsPublic();
         };
         Grid.SetColumn(resetLaunchBtn, 1);
-        ToolTipService.SetToolTip(resetLaunchBtn, "Clear the launch executable override and revert to auto-detection.");
+        ToolTipService.SetToolTip(resetLaunchBtn, "清除启动程序覆盖设置，恢复自动检测。");
         launchBtnRow.Children.Add(resetLaunchBtn);
         Grid.SetRow(launchBtnRow, 2);
         shadersAddonsRightColumn.Children.Add(launchBtnRow);
@@ -449,7 +449,7 @@ public partial class DetailPanelBuilder
 
         var resetOverridesBtn = new Button
         {
-            Content = "Reset Overrides",
+            Content = "重置覆盖项",
             FontSize = 12,
             Height = 32,
             HorizontalAlignment = HorizontalAlignment.Stretch,
@@ -485,7 +485,7 @@ public partial class DetailPanelBuilder
             if (_window.ViewModel.IsUpdateAllExcludedOs(ctx.CapturedName, card.Source))
                 _window.ViewModel.ToggleUpdateAllExclusionOs(ctx.CapturedName, card.Source);
             UpdateInclusionHelper.RefreshSummary(ctx.UpdateSummaryText, _window.ViewModel, ctx.CapturedName, card.IsREEngineGame, card.DxvkEnabled, card.Source ?? "");
-            ctx.WikiExcludeCombo.SelectedItem = "Included";
+            ctx.WikiExcludeCombo.SelectedItem = "包含";
 
             // Persist all reset values immediately
             var resetName = (ctx.OriginalStoreName ?? gameName).Trim();

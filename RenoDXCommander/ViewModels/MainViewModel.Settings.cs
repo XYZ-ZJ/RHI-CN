@@ -1,4 +1,4 @@
-﻿// MainViewModel.Settings.cs -- Settings persistence, name mappings, overrides, and per-game configuration.
+// MainViewModel.Settings.cs -- Settings persistence, name mappings, overrides, and per-game configuration.
 
 using Microsoft.Extensions.DependencyInjection;
 using System.Text.Json;

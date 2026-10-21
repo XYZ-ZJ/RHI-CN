@@ -205,10 +205,10 @@ public class InstallEventHandler
             {
                 var warningDialog = new ContentDialog
                 {
-                    Title = "⚠ OptiScaler Setup",
-                    Content = "Before installing OptiScaler, please configure your GPU type and DLSS input (AMD/Intel only) settings in the OptiScaler Settings section on the Settings page.\n\nThis ensures OptiScaler is configured correctly for your hardware.",
-                    PrimaryButtonText = "Continue",
-                    CloseButtonText = "Cancel",
+                    Title = "⚠ OptiScaler 设置",
+                    Content = "安装 OptiScaler 前，请先在设置页的 OptiScaler 设置区域配置 GPU 类型和 DLSS 输入（仅 AMD/Intel 需要）。\n\n这样可确保 OptiScaler 按你的硬件正确配置。",
+                    PrimaryButtonText = "继续",
+                    CloseButtonText = "取消",
                     XamlRoot = xamlRoot,
                     RequestedTheme = ElementTheme.Dark,
                 };
@@ -598,14 +598,14 @@ public class InstallEventHandler
 
         var dontShowCheck = new CheckBox
         {
-            Content = "Don't show this again",
+            Content = "不再显示此提示",
             FontSize = 12,
             Margin = new Thickness(0, 12, 0, 0),
         };
 
         var messageText = new TextBlock
         {
-            Text = "Heads up — you're installing both RenoDX and Luma on this game.\n\n" +
+            Text = "请注意：你正在为此游戏同时安装 RenoDX 和 Luma。\n\n" +
                    "There's no guarantee they'll work well together. If you're using RenoDX for HDR and just want Luma for DLAA, make sure to disable HDR in the Luma mod settings to avoid conflicts.\n\n" +
                    "If something doesn't look right, uninstalling one of them is the first thing to try. We can't offer support for issues that come from running both together.",
             TextWrapping = TextWrapping.Wrap,
@@ -620,10 +620,10 @@ public class InstallEventHandler
 
         var dialog = new ContentDialog
         {
-            Title = "Installing both RenoDX and Luma",
+            Title = "同时安装 RenoDX 和 Luma",
             Content = content,
-            PrimaryButtonText = "Continue",
-            CloseButtonText = "Cancel",
+            PrimaryButtonText = "继续",
+            CloseButtonText = "取消",
             DefaultButton = ContentDialogButton.Primary,
             XamlRoot = xamlRoot,
             RequestedTheme = ElementTheme.Dark,

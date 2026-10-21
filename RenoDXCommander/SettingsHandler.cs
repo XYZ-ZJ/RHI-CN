@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using RenoDXCommander.Models;
@@ -48,7 +48,7 @@ public class SettingsHandler
         _window.LoadingPanel.Visibility = Visibility.Collapsed;
         // Sync toggle state with ViewModel
         _window.CustomShadersCombo.SelectedIndex = ViewModel.Settings.GlobalShadersOff ? 0 : (ViewModel.Settings.UseCustomShaders ? 2 : 1);
-        _window.AboutVersionText.Text = $"v{CrashReporter.AppVersion}  ·  Simplified PC Gaming by RankFTW";
+        _window.AboutVersionText.Text = $"v{CrashReporter.AppVersion}  ·  让 PC 游戏更简单 — RankFTW";
         // Show installed Windows App Runtime version
         // Populate addon watch folder textbox
         _window.AddonWatchFolderBox.Text = ViewModel.Settings.AddonWatchFolder;
@@ -273,7 +273,7 @@ public class SettingsHandler
             });
             inner.Children.Add(new Microsoft.UI.Xaml.Controls.TextBlock
             {
-                Text         = "Test freeze detection. Each button blocks the UI thread differently. Check the session log - IDLE = waiting on lock/native call, PEGGED = layout or compute loop. Native Block tests the walk on a pure-native wait (no managed frames). Idle Baseline captures the stack while the UI is healthy.",
+                Text         = "测试卡顿/冻结检测。每个按钮以不同方式阻塞 UI 线程。请检查会话日志 — IDLE = 等待锁/原生调用，PEGGED = 布局或计算死循环。原生阻塞测试纯原生等待下的堆栈回溯（无托管帧）。空闲基线在 UI 正常时抓取堆栈。",
                 TextWrapping = Microsoft.UI.Xaml.TextWrapping.Wrap,
                 FontSize     = 11,
                 Foreground   = UIFactory.Brush(ResourceKeys.InlineDescriptionBrush),
@@ -666,11 +666,11 @@ public class SettingsHandler
                 // Check if it's due to admin rights
                 if (!VulkanLayerService.IsRunningAsAdmin())
                 {
-                    _window.DldsrCurrentStateText.Text = "Admin required to read DLDSR state";
+                    _window.DldsrCurrentStateText.Text = "读取 DLDSR 状态需要管理员权限";
                 }
                 else
                 {
-                    _window.DldsrCurrentStateText.Text = "No DLDSR-capable monitors detected";
+                    _window.DldsrCurrentStateText.Text = "未检测到支持 DLDSR 的显示器";
                 }
                 return;
             }
@@ -823,13 +823,13 @@ public class SettingsHandler
 
         // Show confirmation dialog
         var appliedSettings = string.IsNullOrEmpty(screenshotPath)
-            ? "ReShade hotkeys and effect list style"
-            : "Screenshot path, ReShade hotkeys, and effect list style";
+            ? "ReShade 快捷键和效果列表样式"
+            : "截图路径、ReShade 快捷键和效果列表样式";
         var dialog = new ContentDialog
         {
-            Title = "Screenshots & Hotkeys",
-            Content = $"{appliedSettings} applied to {updatedCount} game{(updatedCount == 1 ? "" : "s")}.",
-            CloseButtonText = "OK",
+            Title = "截图与快捷键",
+            Content = $"{appliedSettings}已应用至 {updatedCount} 款游戏。",
+            CloseButtonText = "确定",
             XamlRoot = _window.Content.XamlRoot,
             RequestedTheme = ElementTheme.Dark,
         };
@@ -879,9 +879,9 @@ public class SettingsHandler
         {
             var emptyDialog = new ContentDialog
             {
-                Title = "Peak Nits",
-                Content = "Peak nits is not configured or is disabled.",
-                CloseButtonText = "OK",
+                Title = "峰值亮度",
+                Content = "尚未配置峰值亮度，或该功能已禁用。",
+                CloseButtonText = "确定",
                 XamlRoot = _window.Content.XamlRoot,
                 RequestedTheme = ElementTheme.Dark,
             };
@@ -924,9 +924,9 @@ public class SettingsHandler
 
         var dialog = new ContentDialog
         {
-            Title = "Peak Nits",
-            Content = $"Applied peak nits ({peakNits}) to {updatedCount} reshade.ini file{(updatedCount == 1 ? "" : "s")}.",
-            CloseButtonText = "OK",
+            Title = "峰值亮度",
+            Content = $"已将峰值亮度 ({peakNits} 尼特) 应用至 {updatedCount} 个 reshade.ini 文件。",
+            CloseButtonText = "确定",
             XamlRoot = _window.Content.XamlRoot,
             RequestedTheme = ElementTheme.Dark,
         };
@@ -977,9 +977,9 @@ public class SettingsHandler
         {
             await DialogService.ShowSafeAsync(new ContentDialog
             {
-                Title = "Admin Mode",
-                Content = "UAC is disabled on this system — RHI always runs as administrator.",
-                CloseButtonText = "OK",
+                Title = "管理员模式",
+                Content = "此系统已禁用 UAC，RHI 始终以管理员身份运行。",
+                CloseButtonText = "确定",
                 XamlRoot = _window.Content.XamlRoot,
                 RequestedTheme = ElementTheme.Dark,
             });
@@ -1000,11 +1000,11 @@ public class SettingsHandler
             // Show restart notice
             await DialogService.ShowSafeAsync(new ContentDialog
             {
-                Title = "Admin Mode",
+                Title = "管理员模式",
                 Content = enable
                     ? "Admin Mode enabled. Restart RHI for it to take effect."
                     : "Admin Mode disabled. RHI will launch normally on next start.",
-                CloseButtonText = "OK",
+                CloseButtonText = "确定",
                 XamlRoot = _window.Content.XamlRoot,
                 RequestedTheme = ElementTheme.Dark,
             });
@@ -1174,9 +1174,9 @@ public class SettingsHandler
             {
                 await DialogService.ShowSafeAsync(new ContentDialog
                 {
-                    Title = "Game Data Copied",
-                    Content = $"Data for {ViewModel.AllCards.Count} games has been gathered and copied to your clipboard. Paste directly into Discord to share.",
-                    CloseButtonText = "OK",
+                    Title = "游戏数据已复制",
+                    Content = $"已收集 {ViewModel.AllCards.Count} 款游戏的数据并复制到您的剪贴板。可直接粘贴到 Discord 进行分享。",
+                    CloseButtonText = "确定",
                     XamlRoot = fe.XamlRoot,
                     RequestedTheme = Microsoft.UI.Xaml.ElementTheme.Dark,
                 });
@@ -1339,9 +1339,9 @@ public class SettingsHandler
             {
                 await DialogService.ShowSafeAsync(new ContentDialog
                 {
-                    Title = "Logs Copied",
-                    Content = "All session logs have been archived and copied to your clipboard. Paste directly into Discord to share.",
-                    CloseButtonText = "OK",
+                    Title = "日志已复制",
+                    Content = "所有会话日志已归档并复制到剪贴板，可直接粘贴到 Discord 分享。",
+                    CloseButtonText = "确定",
                     XamlRoot = fe.XamlRoot,
                 });
             }
@@ -1357,10 +1357,10 @@ public class SettingsHandler
         // Show warning dialog
         var warningDialog = new ContentDialog
         {
-            Title = "⚠ Purge Staging Files",
-            Content = "This will delete cached DLSS, Streamline, and component staging files to free disk space.\n\nShaders, installed RenoDX addons, and version metadata are preserved.\n\nThese files will be re-downloaded automatically when needed.\n\nContinue?",
-            PrimaryButtonText = "Purge",
-            CloseButtonText = "Cancel",
+            Title = "⚠ 清理暂存文件",
+            Content = "即将删除缓存的 DLSS、Streamline 和组件暂存文件以释放磁盘空间。\n\n着色器、已安装的 RenoDX 插件和版本元数据会保留。\n\n需要时会自动重新下载这些文件。\n\n是否继续？",
+            PrimaryButtonText = "清理",
+            CloseButtonText = "取消",
             XamlRoot = _window.Content.XamlRoot,
             RequestedTheme = ElementTheme.Dark,
         };
@@ -1479,9 +1479,9 @@ public class SettingsHandler
 
             var resultDialog = new ContentDialog
             {
-                Title = "✅ Cache Purged",
-                Content = $"Deleted {filesDeleted} files, freed {sizeStr} of disk space.",
-                CloseButtonText = "OK",
+                Title = "✅ 缓存已清理",
+                Content = $"已删除 {filesDeleted} 个文件，释放了 {sizeStr} 磁盘空间。",
+                CloseButtonText = "确定",
                 XamlRoot = _window.Content.XamlRoot,
                 RequestedTheme = ElementTheme.Dark,
             };
@@ -1492,9 +1492,9 @@ public class SettingsHandler
             CrashReporter.Log($"[SettingsHandler.PurgeCachedFiles_Click] Failed: {ex.Message}");
             var errDialog = new ContentDialog
             {
-                Title = "❌ Purge Failed",
-                Content = $"An error occurred: {ex.Message}",
-                CloseButtonText = "OK",
+                Title = "❌ 清理失败",
+                Content = $"发生错误：{ex.Message}",
+                CloseButtonText = "确定",
                 XamlRoot = _window.Content.XamlRoot,
                 RequestedTheme = ElementTheme.Dark,
             };
@@ -1605,9 +1605,9 @@ public class SettingsHandler
         // Req 4.5: Show confirmation dialog with count of updated files
         var dialog = new ContentDialog
         {
-            Title = "ReShade UI Hotkey",
-            Content = $"Updated {updatedCount} reshade.ini file{(updatedCount == 1 ? "" : "s")}.",
-            CloseButtonText = "OK",
+            Title = "ReShade 界面快捷键",
+            Content = $"已更新 {updatedCount} 个 reshade.ini 文件。",
+            CloseButtonText = "确定",
             XamlRoot = _window.Content.XamlRoot,
             RequestedTheme = ElementTheme.Dark,
         };
@@ -1660,9 +1660,9 @@ public class SettingsHandler
 
         var dialog = new ContentDialog
         {
-            Title = "ReShade Hotkeys",
-            Content = $"Updated {updatedCount} reshade.ini file{(updatedCount == 1 ? "" : "s")}.",
-            CloseButtonText = "OK",
+            Title = "ReShade 快捷键",
+            Content = $"已更新 {updatedCount} 个 reshade.ini 文件。",
+            CloseButtonText = "确定",
             XamlRoot = _window.Content.XamlRoot,
             RequestedTheme = ElementTheme.Dark,
         };
@@ -1753,9 +1753,9 @@ public class SettingsHandler
 
         var dialog = new ContentDialog
         {
-            Title = "ReShade Screenshot Hotkey",
-            Content = $"Updated {updatedCount} reshade.ini file{(updatedCount == 1 ? "" : "s")}.",
-            CloseButtonText = "OK",
+            Title = "ReShade 截图快捷键",
+            Content = $"已更新 {updatedCount} 个 reshade.ini 文件。",
+            CloseButtonText = "确定",
             XamlRoot = _window.Content.XamlRoot,
             RequestedTheme = ElementTheme.Dark,
         };
@@ -1875,9 +1875,9 @@ public class SettingsHandler
 
         var dialog = new ContentDialog
         {
-            Title = "ReLimiter Settings",
-            Content = $"Updated {updatedCount} relimiter.ini file{(updatedCount == 1 ? "" : "s")}.",
-            CloseButtonText = "OK",
+            Title = "ReLimiter 设置",
+            Content = $"已更新 {updatedCount} 个 relimiter.ini 文件。",
+            CloseButtonText = "确定",
             XamlRoot = _window.Content.XamlRoot,
             RequestedTheme = ElementTheme.Dark,
         };
@@ -1976,22 +1976,22 @@ public class SettingsHandler
             var panel = new StackPanel { Spacing = 8 };
             panel.Children.Add(new TextBlock
             {
-                Text = "Enter a custom FPS value (20-1000):",
+                Text = "输入自定义 FPS 值（20–1000）：",
                 FontSize = 12,
             });
             var inputBox = new TextBox
             {
-                PlaceholderText = "e.g. 165",
+                PlaceholderText = "例如 165",
                 FontSize = 12,
             };
             panel.Children.Add(inputBox);
 
             var dialog = new ContentDialog
             {
-                Title = "Custom Target FPS",
+                Title = "自定义目标 FPS",
                 Content = panel,
-                PrimaryButtonText = "Set",
-                CloseButtonText = "Cancel",
+                PrimaryButtonText = "设置",
+                CloseButtonText = "取消",
                 XamlRoot = _window.Content.XamlRoot,
                 RequestedTheme = ElementTheme.Dark,
             };
@@ -2064,7 +2064,7 @@ public class SettingsHandler
         var refCheck = new CheckBox { Content = "RE Framework", IsChecked = !settings.GlobalSkipRefUpdates, FontSize = 12, Foreground = UIFactory.Brush(ResourceKeys.TextSecondaryBrush), Margin = new Thickness(0, 4, 0, 4) };
 
         var checkPanel = new StackPanel { Spacing = 0 };
-        checkPanel.Children.Add(new TextBlock { Text = "Include components in Update All globally:", FontSize = 12, Foreground = UIFactory.Brush(ResourceKeys.TextPrimaryBrush), Margin = new Thickness(0, 0, 0, 8) });
+        checkPanel.Children.Add(new TextBlock { Text = "全局选择要纳入“全部更新”的组件：", FontSize = 12, Foreground = UIFactory.Brush(ResourceKeys.TextPrimaryBrush), Margin = new Thickness(0, 0, 0, 8) });
         checkPanel.Children.Add(rsCheck);
         checkPanel.Children.Add(rdxCheck);
         checkPanel.Children.Add(ulCheck);
@@ -2074,10 +2074,10 @@ public class SettingsHandler
 
         var dialog = new ContentDialog
         {
-            Title = "Global Update Inclusion",
+            Title = "全局更新组件",
             Content = checkPanel,
-            PrimaryButtonText = "Save",
-            CloseButtonText = "Cancel",
+            PrimaryButtonText = "保存",
+            CloseButtonText = "取消",
             XamlRoot = xamlRoot,
             RequestedTheme = ElementTheme.Dark,
         };
@@ -2206,9 +2206,9 @@ public class SettingsHandler
 
         var dialog = new ContentDialog
         {
-            Title = "OptiScaler Hotkey",
-            Content = $"Updated {updatedCount} OptiScaler.ini file{(updatedCount == 1 ? "" : "s")}.",
-            CloseButtonText = "OK",
+            Title = "OptiScaler 快捷键",
+            Content = $"已更新 {updatedCount} 个 OptiScaler.ini 文件。",
+            CloseButtonText = "确定",
             XamlRoot = _window.Content.XamlRoot,
             RequestedTheme = ElementTheme.Dark,
         };
@@ -2278,12 +2278,12 @@ public class SettingsHandler
 
         var dialog = new ContentDialog
         {
-            Title = "DXVK Variant Changed",
-            Content = $"DXVK variant changed to {variantLabel}."
+            Title = "DXVK 变体已更改",
+            Content = $"DXVK 变体已更改为 {variantLabel}。"
                 + (gamesWithDxvk.Count > 0
                     ? $"\n\nSwitching {gamesWithDxvk.Count} game(s) to the {variantLabel} build."
                     : "\n\nNo games currently have DXVK installed."),
-            CloseButtonText = "OK",
+            CloseButtonText = "确定",
             XamlRoot = _window.Content.XamlRoot,
             RequestedTheme = ElementTheme.Dark,
         };
@@ -2432,13 +2432,13 @@ public class SettingsHandler
 
         var dialog = new ContentDialog
         {
-            Title = "ReShade Build Channel Changed",
-            Content = $"ReShade build channel changed to {channelLabel}.\n\n"
+            Title = "ReShade 构建渠道已更改",
+            Content = $"ReShade 构建通道已更改为 {channelLabel}。\n\n"
                 + (totalCount > 0
                     ? $"Switching {totalCount} game(s) to the {channelLabel} build."
                       + (vulkanCount > 0 ? $"\n{vulkanCount} Vulkan game(s) updated via global layer." : "")
                     : "No games currently have ReShade installed."),
-            CloseButtonText = "OK",
+            CloseButtonText = "确定",
             XamlRoot = _window.Content.XamlRoot,
             RequestedTheme = ElementTheme.Dark,
         };
@@ -2493,23 +2493,23 @@ public class SettingsHandler
         if (connected)
         {
             var tier = isPremium ? "Premium" : "Free";
-            _window.NexusStatusText.Text = $"Connected as {username} ({tier})";
+            _window.NexusStatusText.Text = $"已连接为 {username} ({tier})";
             _window.NexusStatusText.Foreground = UIFactory.Brush(
                 isPremium ? ResourceKeys.AccentGreenBrush : ResourceKeys.TextSecondaryBrush);
             _window.NexusDisconnectRow.Visibility = Microsoft.UI.Xaml.Visibility.Visible;
-            _window.NexusConnectBtn.Content = "Re-connect";
+            _window.NexusConnectBtn.Content = "重新连接";
         }
         else
         {
-            _window.NexusStatusText.Text = "Not connected";
+            _window.NexusStatusText.Text = "未连接";
             _window.NexusStatusText.Foreground = UIFactory.Brush(ResourceKeys.TextTertiaryBrush);
             _window.NexusDisconnectRow.Visibility = Microsoft.UI.Xaml.Visibility.Collapsed;
-            _window.NexusConnectBtn.Content = "Connect";
+            _window.NexusConnectBtn.Content = "连接";
         }
 
         // NXM handler status
         bool nxmRegistered = NxmProtocolHandler.IsRegistered();
-        _window.NxmStatusText.Text = nxmRegistered ? "RHI is the active nxm:// handler" : "Not registered";
+        _window.NxmStatusText.Text = nxmRegistered ? "RHI 是当前活跃的 nxm:// 协议处理程序" : "未注册";
         _window.NxmStatusText.Foreground = UIFactory.Brush(
             nxmRegistered ? ResourceKeys.AccentGreenBrush : ResourceKeys.TextSecondaryBrush);
         _window.NxmRegisterBtn.Content = nxmRegistered ? "Unregister" : "Register";
@@ -2521,7 +2521,7 @@ public class SettingsHandler
         var nexusSso = App.Services.GetRequiredService<NexusSsoService>();
 
         _window.NexusConnectBtn.IsEnabled = false;
-        _window.NexusStatusText.Text = "Opening browser for authorisation...";
+        _window.NexusStatusText.Text = "正在打开浏览器进行授权...";
         _window.NexusStatusText.Foreground = UIFactory.Brush(ResourceKeys.TextTertiaryBrush);
 
         using var cts = new System.Threading.CancellationTokenSource(TimeSpan.FromSeconds(120));
@@ -2534,7 +2534,7 @@ public class SettingsHandler
             catch (Exception ex) { CrashReporter.Log($"[SettingsHandler.NexusConnectBtn_Click] Failed to open browser — {ex.Message}"); }
 
             _window.DispatcherQueue?.TryEnqueue(() =>
-                _window.NexusStatusText.Text = "Waiting for authorisation in browser...");
+                _window.NexusStatusText.Text = "正在等待浏览器完成授权...");
         };
 
         try
@@ -2559,14 +2559,14 @@ public class SettingsHandler
 
                 if (string.IsNullOrEmpty(receivedKey))
                 {
-                    _window.NexusStatusText.Text = "Authorisation timed out or was cancelled.";
+                    _window.NexusStatusText.Text = "授权已超时或取消。";
                     _window.NexusStatusText.Foreground = UIFactory.Brush(ResourceKeys.AccentRedBrush);
                     return;
                 }
 
                 if (info == null)
                 {
-                    _window.NexusStatusText.Text = "Received key was invalid. Please try again.";
+                    _window.NexusStatusText.Text = "收到的密钥无效，请重试。";
                     _window.NexusStatusText.Foreground = UIFactory.Brush(ResourceKeys.AccentRedBrush);
                     return;
                 }
@@ -2608,10 +2608,10 @@ public class SettingsHandler
             {
                 var result = await DialogService.ShowSafeAsync(new ContentDialog
                 {
-                    Title = "NXM Protocol Handler",
-                    Content = "Another application (e.g. Vortex or MO2) is already registered as the nxm:// handler. Registering RHI will replace it. Continue?",
-                    PrimaryButtonText = "Register RHI",
-                    CloseButtonText = "Cancel",
+                    Title = "NXM 协议处理程序",
+                    Content = "另一个应用（如 Vortex 或 MO2）已注册为 nxm:// 协议处理程序。注册 RHI 将替换现有程序。是否继续？",
+                    PrimaryButtonText = "注册 RHI",
+                    CloseButtonText = "取消",
                     XamlRoot = _window.Content.XamlRoot,
                     RequestedTheme = Microsoft.UI.Xaml.ElementTheme.Dark,
                 });
@@ -2627,9 +2627,9 @@ public class SettingsHandler
             {
                 await DialogService.ShowSafeAsync(new ContentDialog
                 {
-                    Title = "NXM Registration Failed",
-                    Content = $"Could not register the nxm:// handler: {ex.Message}",
-                    CloseButtonText = "OK",
+                    Title = "NXM 注册失败",
+                    Content = $"无法注册 nxm:// 协议处理程序：{ex.Message}",
+                    CloseButtonText = "确定",
                     XamlRoot = _window.Content.XamlRoot,
                     RequestedTheme = Microsoft.UI.Xaml.ElementTheme.Dark,
                 });
@@ -2664,7 +2664,7 @@ public class SettingsHandler
         // Update the PAT status text to show file state
         if (hasPat)
         {
-            _window.GitHubPatStatusText.Text = "PAT file active — 5,000 req/hr (persists across restarts)";
+            _window.GitHubPatStatusText.Text = "PAT 文件已启用，每小时 5,000 次请求（重启后仍有效）";
             _window.GitHubPatStatusText.Foreground = UIFactory.Brush(ResourceKeys.AccentGreenBrush);
             _window.GitHubPatStatusText.Visibility = Microsoft.UI.Xaml.Visibility.Visible;
         }
@@ -2676,24 +2676,24 @@ public class SettingsHandler
 
         if (App._gitHubTokenExpiredOnStartup)
         {
-            _window.GitHubStatusText.Text       = "GitHub session expired — please re-connect to restore the 5,000 req/hr limit";
+            _window.GitHubStatusText.Text       = "GitHub 会话已过期 — 请重新连接以恢复每小时 5,000 次请求限制";
             _window.GitHubStatusText.Foreground = UIFactory.Brush(ResourceKeys.AccentAmberDimBrush);
-            _window.GitHubConnectBtn.Content    = "Re-connect";
+            _window.GitHubConnectBtn.Content    = "重新连接";
             _window.GitHubDisconnectRow.Visibility = Microsoft.UI.Xaml.Visibility.Collapsed;
         }
         else if (connected)
         {
             var display = string.IsNullOrEmpty(username) ? "GitHub" : $"@{username}";
-            _window.GitHubStatusText.Text       = $"Connected as {display} · 5,000 req/hr";
+            _window.GitHubStatusText.Text       = $"已连接为 {display} · 5,000 请求/小时";
             _window.GitHubStatusText.Foreground = UIFactory.Brush(ResourceKeys.AccentGreenBrush);
-            _window.GitHubConnectBtn.Content    = "Re-connect";
+            _window.GitHubConnectBtn.Content    = "重新连接";
             _window.GitHubDisconnectRow.Visibility = Microsoft.UI.Xaml.Visibility.Visible;
         }
         else
         {
-            _window.GitHubStatusText.Text       = hasPat ? "Using PAT · 5,000 req/hr" : "Not connected · 60 req/hr";
+            _window.GitHubStatusText.Text       = hasPat ? "Using PAT · 5,000 req/hr" : "未连接 · 60 请求/小时";
             _window.GitHubStatusText.Foreground = hasPat ? UIFactory.Brush(ResourceKeys.AccentGreenBrush) : UIFactory.Brush(ResourceKeys.TextTertiaryBrush);
-            _window.GitHubConnectBtn.Content    = "Connect GitHub";
+            _window.GitHubConnectBtn.Content    = "连接 GitHub";
             _window.GitHubDisconnectRow.Visibility = Microsoft.UI.Xaml.Visibility.Collapsed;
         }
 
@@ -2707,8 +2707,8 @@ public class SettingsHandler
         var http    = App.Services.GetRequiredService<HttpClient>();
 
         _window.GitHubConnectBtn.IsEnabled = false;
-        _window.GitHubConnectBtn.Content   = "Connecting...";
-        _window.GitHubStatusText.Text      = "Requesting device code...";
+        _window.GitHubConnectBtn.Content   = "正在连接…";
+        _window.GitHubStatusText.Text      = "正在请求设备代码…";
         _window.GitHubStatusText.Foreground = UIFactory.Brush(ResourceKeys.TextTertiaryBrush);
         _window.GitHubDeviceCodePanel.Visibility = Microsoft.UI.Xaml.Visibility.Collapsed;
 
@@ -2721,10 +2721,10 @@ public class SettingsHandler
         {
             _window.DispatcherQueue?.TryEnqueue(() =>
             {
-                _window.GitHubStatusText.Text      = "Failed to start authorisation. Check your connection and try again.";
+                _window.GitHubStatusText.Text      = "无法开始授权。请检查网络连接后重试。";
                 _window.GitHubStatusText.Foreground = UIFactory.Brush(ResourceKeys.AccentRedBrush);
                 _window.GitHubConnectBtn.IsEnabled  = true;
-                _window.GitHubConnectBtn.Content    = "Connect GitHub";
+                _window.GitHubConnectBtn.Content    = "连接 GitHub";
             });
             return;
         }
@@ -2736,7 +2736,7 @@ public class SettingsHandler
             _window.GitHubVerificationLink.NavigateUri = new Uri(deviceCode.VerificationUri);
             _window.GitHubVerificationLink.Content     = deviceCode.VerificationUri;
             _window.GitHubDeviceCodePanel.Visibility   = Microsoft.UI.Xaml.Visibility.Visible;
-            _window.GitHubStatusText.Text       = "Enter the code above at the link — waiting for authorisation...";
+            _window.GitHubStatusText.Text       = "请在上方链接中输入代码 — 正在等待授权…";
             _window.GitHubStatusText.Foreground = UIFactory.Brush(ResourceKeys.TextTertiaryBrush);
         });
 
@@ -2754,11 +2754,11 @@ public class SettingsHandler
         {
             _window.DispatcherQueue?.TryEnqueue(() =>
             {
-                _window.GitHubStatusText.Text       = "Authorisation timed out or was cancelled.";
+                _window.GitHubStatusText.Text       = "授权已超时或被取消。";
                 _window.GitHubStatusText.Foreground = UIFactory.Brush(ResourceKeys.AccentRedBrush);
                 _window.GitHubDeviceCodePanel.Visibility = Microsoft.UI.Xaml.Visibility.Collapsed;
                 _window.GitHubConnectBtn.IsEnabled  = true;
-                _window.GitHubConnectBtn.Content    = "Connect GitHub";
+                _window.GitHubConnectBtn.Content    = "连接 GitHub";
             });
             return;
         }
@@ -2804,7 +2804,7 @@ public class SettingsHandler
         var pat = _window.GitHubPatBox.Text?.Trim() ?? "";
         if (string.IsNullOrEmpty(pat))
         {
-            _window.GitHubPatStatusText.Text = "Please enter a token first.";
+            _window.GitHubPatStatusText.Text = "请先输入令牌。";
             _window.GitHubPatStatusText.Foreground = UIFactory.Brush(ResourceKeys.AccentRedBrush);
             _window.GitHubPatStatusText.Visibility = Microsoft.UI.Xaml.Visibility.Visible;
             return;
@@ -2814,13 +2814,13 @@ public class SettingsHandler
         if (!pat.StartsWith("ghp_", StringComparison.OrdinalIgnoreCase) &&
             !pat.StartsWith("github_pat_", StringComparison.OrdinalIgnoreCase))
         {
-            _window.GitHubPatStatusText.Text = "Token should start with ghp_ or github_pat_";
+            _window.GitHubPatStatusText.Text = "令牌应以 ghp_ 或 github_pat_ 开头";
             _window.GitHubPatStatusText.Foreground = UIFactory.Brush(ResourceKeys.AccentAmberDimBrush);
             _window.GitHubPatStatusText.Visibility = Microsoft.UI.Xaml.Visibility.Visible;
         }
 
         _window.GitHubPatSaveBtn.IsEnabled = false;
-        _window.GitHubPatSaveBtn.Content = "Validating...";
+        _window.GitHubPatSaveBtn.Content = "正在验证...";
 
         // Validate the token
         bool valid = false;
@@ -2845,11 +2845,11 @@ public class SettingsHandler
         catch { valid = false; }
 
         _window.GitHubPatSaveBtn.IsEnabled = true;
-        _window.GitHubPatSaveBtn.Content = "Save";
+        _window.GitHubPatSaveBtn.Content = "保存";
 
         if (!valid)
         {
-            _window.GitHubPatStatusText.Text = "Token validation failed — check the token and try again.";
+            _window.GitHubPatStatusText.Text = "令牌验证失败，请检查后重试。";
             _window.GitHubPatStatusText.Foreground = UIFactory.Brush(ResourceKeys.AccentRedBrush);
             _window.GitHubPatStatusText.Visibility = Microsoft.UI.Xaml.Visibility.Visible;
             return;
@@ -2866,7 +2866,7 @@ public class SettingsHandler
         }
         catch (Exception ex)
         {
-            _window.GitHubPatStatusText.Text = $"Failed to save: {ex.Message}";
+            _window.GitHubPatStatusText.Text = $"保存失败：{ex.Message}";
             _window.GitHubPatStatusText.Foreground = UIFactory.Brush(ResourceKeys.AccentRedBrush);
             _window.GitHubPatStatusText.Visibility = Microsoft.UI.Xaml.Visibility.Visible;
             return;
@@ -2900,7 +2900,7 @@ public class SettingsHandler
         }
         catch (Exception ex)
         {
-            _window.GitHubPatStatusText.Text = $"Failed to clear: {ex.Message}";
+            _window.GitHubPatStatusText.Text = $"清除失败：{ex.Message}";
             _window.GitHubPatStatusText.Foreground = UIFactory.Brush(ResourceKeys.AccentRedBrush);
             _window.GitHubPatStatusText.Visibility = Microsoft.UI.Xaml.Visibility.Visible;
             return;
@@ -2913,7 +2913,7 @@ public class SettingsHandler
         GitHubAuthService.ApplyTokenToHttpClient(http, string.IsNullOrEmpty(oauthToken) ? null : oauthToken);
 
         _window.GitHubPatBox.Text = "";
-        _window.GitHubPatStatusText.Text = "PAT cleared.";
+        _window.GitHubPatStatusText.Text = "PAT 已清除。";
         _window.GitHubPatStatusText.Foreground = UIFactory.Brush(ResourceKeys.TextTertiaryBrush);
         _window.GitHubPatStatusText.Visibility = Microsoft.UI.Xaml.Visibility.Visible;
 

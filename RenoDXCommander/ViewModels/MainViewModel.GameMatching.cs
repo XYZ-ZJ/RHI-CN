@@ -1,4 +1,4 @@
-﻿// MainViewModel.GameMatching.cs -- Manifest application, engine/API detection, game matching, and card overrides.
+// MainViewModel.GameMatching.cs -- Manifest application, engine/API detection, game matching, and card overrides.
 
 using System.Collections.Concurrent;
 using System.Text.Json;
@@ -858,4 +858,3 @@ public partial class MainViewModel
     private static void ApplyManifestCardOverrides(RemoteManifest? manifest, List<GameCardViewModel> cards)
         => GameInitializationService.ApplyManifestCardOverrides(manifest, cards);
 }
-

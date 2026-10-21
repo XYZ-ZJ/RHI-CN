@@ -24,117 +24,117 @@ public sealed partial class MainWindow
 
         // Welcome section
         panel.Children.Add(BuildFaqSection(
-            null, "Welcome to RHI", "AccentTealBrush",
-            "RHI auto-detects your games and lets you install HDR mods, shaders, frame limiters, and manage NVIDIA driver settings — all from one place. Here's how to get started.",
+            null, "欢迎使用 RHI", "AccentTealBrush",
+            "RHI 会自动检测您的游戏，让您可以在同一个窗口中安装 HDR 模组、着色器包、帧率限制器，并管理 NVIDIA 驱动设置。以下是快速上手说明：",
             null));
 
         // Step 1: Select a Game
         panel.Children.Add(BuildFaqStep(1,
-            "Select a Game",
-            "Your games are listed in the sidebar on the left. Click any game to see its details and available actions. Use the filter chips (All Games, Installed, Unreal, etc.) and search box to find specific games.",
-            "Tip: Double-click a game to launch it directly. Drag and drop a game's .exe file onto RHI to add games not auto-detected."));
+            "选择游戏",
+            "您的游戏列在左侧侧边栏中。点击任意游戏即可查看其详情与可用操作。使用筛选标签（全部游戏、已安装、虚幻引擎等）和搜索框可快速查找具体游戏。",
+            "提示：双击游戏卡片可直接启动游戏。将游戏的 .exe 可执行文件拖放到 RHI 窗口中，可手动添加未被自动检测到的游戏。"));
 
         // Step 2: Install ReShade
         panel.Children.Add(BuildFaqStep(2,
-            "Install ReShade",
-            "ReShade is required for RenoDX HDR mods to work. Click 'Install ReShade' on the game's detail panel. RHI automatically downloads and installs the correct version with full addon support.",
-            "ReShade version can be changed per-game via the game overrides section — choose Stable, Nightly, Legacy, or a custom ReShade DLL.\nVulkan Games: Vulkan games (like Doom Eternal) require admin privileges. RHI will prompt for elevation when needed.\nDrag and drop ReShade preset files (.ini) onto a game to install them automatically."));
+            "安装 ReShade",
+            "RenoDX HDR 模组需要 ReShade 才能运行。点击游戏详情面板上的“安装 ReShade”。RHI 会自动下载并安装具备完整插件支持的合适版本。",
+            "可在游戏覆盖项中按游戏切换 ReShade 版本 — 可选 Stable（稳定版）、Nightly（每日构建版）、Legacy（旧版本）或自定义 ReShade DLL。\nVulkan 游戏：Vulkan 游戏（如《毁灭战士：永恒》）需要管理员权限。RHI 会在需要时提示进行权限提升。\n将 ReShade 预设文件 (.ini) 拖放到游戏卡片上即可自动安装。"));
 
         // Step 3a: RenoDX
         panel.Children.Add(BuildFaqSection(
             "3a", "RenoDX", "AccentTealBrush",
-            "RenoDX is RHI's primary HDR mod framework. The RenoDX row on each game shows what's available:\n\n• Named mods — game-specific HDR mods from the RenoDX wiki, made by the community.\n• UE-Extended — for Unreal Engine games without a named mod. Provides native HDR output via a generic UE addon.\n• Unity addon — same idea for Unity Engine games. Provides HDR output for Unity games without a named mod.\n• RTX HDR — if no mod is available, you can enable NVIDIA's driver-level SDR-to-HDR conversion via the RenoDX ⚙ cog.",
-            "The cog icon next to RenoDX opens advanced settings: Peak Nits, UE-Extended toggle, and RTX HDR configuration.\nEngine.ini Settings (Unreal Engine games only): toggle HDR keys and LUT update frequency written to the game's Engine.ini for accurate HDR rendering.\nFor games not on the wiki, drag and drop an .addon64 file from the RenoDX Discord directly onto the game in RHI."));
+            "RenoDX 是 RHI 的主要 HDR 模组框架。每款游戏的 RenoDX 行会显示当前可用的方案：\n\n• 专属模组 — 来自 RenoDX Wiki、由社区制作的针对具体游戏的专属 HDR 模组。\n• UE-Extended — 适用于没有专属模组的虚幻引擎游戏。通过通用虚幻插件提供原生 HDR 输出。\n• Unity 插件 — 同样适用于 Unity 引擎游戏。为尚无专属模组的 Unity 游戏提供 HDR 输出。\n• RTX HDR — 如果没有可用模组，您可以通过 RenoDX 旁的 ⚙ 齿轮图标启用 NVIDIA 驱动级的 SDR 转 HDR 转换。",
+            "RenoDX 旁的齿轮图标可打开高级设置：峰值亮度（尼特）、UE-Extended 开关以及 RTX HDR 配置。\nEngine.ini 设置（仅限虚幻引擎游戏）：切换写入游戏 Engine.ini 的 HDR 键值与 LUT 刷新频率，以确保精准的 HDR 渲染。\n对于不在 Wiki 上的游戏，可将来自 RenoDX Discord 的 .addon64 文件直接拖放到 RHI 中的游戏卡片上。"));
 
         // Step 3b: Luma
         panel.Children.Add(BuildFaqSection(
             "3b", "Luma", "AccentTealBrush",
-            "Luma is an alternative mod framework developed by Pumbo (HDR Den). Depending on the game, a Luma mod may add HDR, DLAA (Deep Learning Anti-Aliasing), game-specific rendering fixes, or a combination of these — check the Info button for details on what each mod offers.\n\n• Completed mods — named Luma mods for supported games, shown on the Luma row.\n• Generic Luma — available for all DX11 Unreal Engine games. RHI installs it automatically and applies any game-specific Engine.ini tweaks or launch arguments listed on the Luma wiki.\n\nYou can install RenoDX and Luma on the same game — but there's no guarantee they'll work together on every title. RHI will warn you the first time you try to install both.",
-            "Luma requires ReShade — it will be greyed out until ReShade is installed.\nThe Luma ⚙ cog lets you toggle TAA Engine.ini settings for games that need them.\nIf a game needs a specific launch argument (e.g. -dx11), RHI sets it automatically on install and removes it on uninstall. Launch arguments only apply when the game is launched through RHI.\nCheck the Info button on the Luma row for game-specific notes — completed mods often include details on what the mod adds or any in-game settings required."));
+            "Luma 是由 Pumbo (HDR Den) 开发的备用模组框架。根据游戏的不同，Luma 模组可能会添加 HDR、DLAA（深度学习抗锯齿）、游戏专属渲染修复或它们的组合 — 点击“信息”按钮可查看每个模组的具体特性。\n\n• 已完成模组 — 针对受支持游戏的专属 Luma 模组，显示在 Luma 行中。\n• 通用 Luma — 适用于所有 DX11 虚幻引擎游戏。RHI 会自动安装并应用 Luma Wiki 上列出的游戏专属 Engine.ini 调整或启动参数。\n\n您可以在同一款游戏上同时安装 RenoDX 和 Luma — 但无法保证它们在所有作品中都能完美共存。在您首次尝试同时安装两者时，RHI 会弹出提示。",
+            "Luma 需要依赖 ReShade — 在安装 ReShade 之前它将呈灰色禁用状态。\nLuma 旁的 ⚙ 齿轮图标允许您为需要 TAA 的游戏切换 Engine.ini 设置。\n如果某款游戏需要特定启动参数（如 -dx11），RHI 会在安装时自动配置，并在卸载时自动移除。启动参数仅在通过 RHI 启动游戏时生效。\n点击 Luma 行上的“信息”按钮可查看游戏专属说明 — 已完成的模组通常包含模组新增功能的详细信息或所需的游戏内设置要求。"));
 
         // Step 4: Choose Shaders
         panel.Children.Add(BuildFaqStep(4,
-            "Choose Shaders (Optional)",
-            "Click the 'Shaders/Addons' button in the toolbar, then 'Global Shaders' to select shader packs. Lilium's HDR shader pack is selected by default. These apply to all games with ReShade installed.\n\nExpand any pack to pick individual shaders — the pack shows a dash when only some files are selected. Use the Profiles panel on the right to save, load, rename, and share named shader selections. Export a profile as a zip to share via Discord.",
-            "Tip: Per-game shaders can be set using the Shaders button on each game's detail card (when ReShade is installed).\nTip: Use Expand All / Collapse All to browse all packs at once. Deselect All clears the whole selection. Export copies a zip of your selected shaders to the clipboard — paste directly into Discord to share."));
+            "选择着色器包（可选）",
+            "点击工具栏中的“着色器 / 插件”按钮，然后选择“全局着色器”以挑选着色器包。默认已选中 Lilium 的 HDR 着色器包。这些设置将应用于所有已安装 ReShade 的游戏。\n\n展开任意着色器包即可单独挑选单个着色器 — 仅选中部分文件时包名旁边会显示破折号。使用右侧的配置方案面板可保存、加载、重命名和分享自定义着色器组合。还可将配置方案导出为 zip 压缩包以便在 Discord 中分享。",
+            "提示：每款游戏的独立着色器可通过游戏详情卡片上的“着色器”按钮单独配置（需已安装 ReShade）。\n提示：使用“全部展开 / 全部折叠”可一次性浏览所有着色器包。“取消全选”将清空选择。“导出”会将选中的着色器打包为 zip 复制到剪贴板 — 可直接粘贴到 Discord 进行分享。"));
 
         // Step 5: DOF Fix
         panel.Children.Add(BuildFaqStep(5,
-            "DOF Fix (Recommended for UE5)",
-            "DOF Fix backports a depth-of-field rendering fix from Unreal Engine 5.7 to games running on UE 5.0–5.6. It appears in the Recommended section on the game's detail panel when supported. Install it alongside RenoDX for the best result.",
-            "DOF Fix only shows on eligible UE 5.0–5.6 games — it won't appear on UE4 or UE 5.7+ titles.\nInstall and uninstall work the same as any other component."));
+            "景深修复 (DOF Fix，推荐 UE5 游戏使用)",
+            "DOF Fix 将虚幻引擎 5.7 的景深渲染修复反向移植到了运行于 UE 5.0–5.6 的游戏中。当游戏受支持时，它会显示在游戏详情面板的“推荐组件”部分。建议配合 RenoDX 一起安装以获得最佳效果。",
+            "DOF Fix 仅在符合条件的 UE 5.0–5.6 游戏中显示 — 不会出现在 UE4 或 UE 5.7+ 游戏中。\n其安装和卸载操作与其他组件完全一致。"));
 
         // Step 6: Frame Limiters
         panel.Children.Add(BuildFaqStep(6,
-            "Frame Limiters (Optional)",
-            "ReLimiter and Display Commander are ReShade addons that provide precise frame limiting for VRR displays. Install them from the game's detail panel. ReLimiter is recommended as it's developed by the same team as RHI. Set your target FPS in Settings, per-game via the cog icon, or directly in-game.",
-            "VRR cap presets by refresh rate (leave headroom below max for smooth VRR):\n• 60Hz → 59 FPS\n• 120Hz → 116 FPS\n• 144Hz → 138 FPS\n• 165Hz → 157 FPS\n• 240Hz → 224 FPS\n• 360Hz → 324 FPS\nThese values are pre-configured in RHI's FPS dropdown menus."));
+            "帧率限制器（可选）",
+            "ReLimiter 和 Display Commander 是用于为可变刷新率 (VRR) 显示器提供精准帧率限制的 ReShade 插件。您可以在游戏详情面板中安装它们。推荐使用 ReLimiter，因为它由 RHI 同一团队开发。您可以在“设置”中配置全局目标 FPS，也可以通过齿轮图标按游戏单独设置，或在游戏内直接调整。",
+            "按刷新率预设的 VRR 帧率上限（在最大刷新率以下预留余量以确保平稳 VRR）：\n• 60Hz → 59 FPS\n• 120Hz → 116 FPS\n• 144Hz → 138 FPS\n• 165Hz → 157 FPS\n• 240Hz → 224 FPS\n• 360Hz → 324 FPS\n这些数值均已预置在 RHI 的 FPS 下拉菜单中。"));
 
         // Step 7: DLSS/Streamline
         panel.Children.Add(BuildFaqStep(7,
-            "Update DLSS / Streamline (Optional)",
-            "Games with DLSS or Streamline DLLs have a dedicated section on the detail panel showing version info. Click to update to the latest version. Using the newest versions is recommended for best performance and quality. RHI backs up originals automatically so you can restore anytime.",
-            "When new DLSS or Streamline versions release, they will appear in RHI automatically. Set your default DLSS preset in Settings. Per-game presets can be changed in the DLSS section on each game's detail panel."));
+            "更新 DLSS / Streamline（可选）",
+            "包含 DLSS 或 Streamline DLL 的游戏在详情面板中拥有独立区域并显示版本信息。点击即可更新到最新版本。建议使用最新版本以获得最佳性能与画质。RHI 会自动备份原始文件，方便您随时还原。",
+            "当新的 DLSS 或 Streamline 版本发布时，它们会自动出现在 RHI 中。可在“设置”中设置默认 DLSS 预设。每款游戏的独立预设可在游戏详情面板的 DLSS 区域中进行更改。"));
 
         // OptiScaler
         panel.Children.Add(BuildFaqSpecialSection("⚙", "AccentAmberBrush",
-            "OptiScaler (Optional)",
-            "OptiScaler replaces DLSS/XeSS with alternative upscalers (FSR, XeSS, Intel Arc) or adds/patches frame generation on any GPU. Install it from the game's detail panel when a game has OptiScaler support.\n\nThe ⚙ cog on the OptiScaler row opens per-game settings. For the Nightly build channel these include:\n• Streamline/DLSS Enabler — deploys Streamline and DLSS Enabler to the game folder for DLSS Frame Generation support.\n• Frame Generation — set FG Input, FG Output, FG Nvngx Override, and HUD Fix.\n• Additional Settings — DLSS SR/RR preset, render scale, and flip metering.\n• Presets — save and apply named setting presets across games.\n• Engine.ini Settings (Unreal Engine games) — Dilated Motion Vectors, FSR Crash Fix, FSR-FG Swapchain, Upscaler Plugin.",
-            "Switch between Stable and Nightly channels per game in the cog — Nightly adds frame generation and additional settings.\nOptiScaler and ReShade can coexist. If you see crashes with both installed, try renaming ReShade to a different DLL name using DLL Naming Overrides in the Game Overrides panel.\nGPU type and DLSS input settings (AMD/Intel only) are configured in Settings → OptiScaler Settings before installing.\nThe 'Deploy OptiScaler.ini' button in the cog redeploys your configured INI template to the game folder."));
+            "OptiScaler（可选）",
+            "OptiScaler 可将 DLSS/XeSS 替换为备选缩放器（FSR、XeSS、Intel Arc），或在任意显卡上添加/修复帧生成支持。当游戏支持 OptiScaler 时，可在游戏详情面板中安装它。\n\nOptiScaler 行旁边的 ⚙ 齿轮图标可打开游戏独立设置。对于 Nightly（每日构建）通道，设置包括：\n• Streamline/DLSS Enabler — 向游戏文件夹部署 Streamline 与 DLSS Enabler 以支持 DLSS 帧生成。\n• 帧生成 — 配置 FG 输入、FG 输出、FG Nvngx 覆盖以及 HUD 修复。\n• 附加设置 — DLSS SR/RR 预设、渲染比例与翻转配速。\n• 预设方案 — 保存并跨游戏应用已命名的设置预设。\n• Engine.ini 设置（虚幻引擎游戏）— 膨胀运动矢量、FSR 崩溃修复、FSR-FG 交换链、缩放器插件。",
+            "可在齿轮菜单中按游戏在 Stable 和 Nightly 通道之间切换 — Nightly 通道增加了帧生成和更多设置。\nOptiScaler 和 ReShade 可以共存。如果同时安装两者时遇到游戏崩溃，请尝试在“游戏覆盖项”面板中使用“DLL 命名覆盖”将 ReShade 重命名为其他 DLL 名称。\n显卡类型与 DLSS 输入设置（仅限 AMD/Intel）在安装前于“设置 → OptiScaler 设置”中配置。\n齿轮菜单中的“部署 OptiScaler.ini”按钮会将您配置的 INI 模板重新部署到游戏文件夹中。"));
 
         // Settings Overview
-        panel.Children.Add(BuildFaqInfoSection("Settings",
-            "Click 'Settings' in the toolbar to configure defaults for all games:",
+        panel.Children.Add(BuildFaqInfoSection("全局设置",
+            "点击工具栏中的“设置”以配置所有游戏的默认选项：",
             new[]
             {
-                "ReLimiter FPS: Default frame rate target",
-                "DLSS Preset: Default upscaling preset",
-                "NVIDIA Driver Settings: VSync, Low Latency, Power Mode",
-                "Peak Nits: Your display's peak brightness for HDR",
-                "ReShade Hotkeys: Customize overlay and screenshot keys"
+                "ReLimiter FPS：默认目标帧率",
+                "DLSS 预设：默认超分辨率预设",
+                "NVIDIA 驱动设置：垂直同步、低延迟、电源管理模式",
+                "峰值亮度 (Peak Nits)：显示器的 HDR 峰值亮度",
+                "ReShade 快捷键：自定义控制面板与截图按键"
             }));
 
         // NVIDIA Driver Settings
-        panel.Children.Add(BuildFaqInfoSection("NVIDIA Driver Settings",
-            "RHI can manage per-game NVIDIA driver profiles. These settings are available directly on each game's detail panel:",
+        panel.Children.Add(BuildFaqInfoSection("NVIDIA 驱动设置",
+            "RHI 可以管理按游戏设置的 NVIDIA 驱动配置文件。这些设置可直接在每款游戏的详情面板中进行配置：",
             new[]
             {
-                "VSync: On, Off, or Adaptive (Fast Sync)",
-                "Low Latency Mode: Ultra, On, or Off",
-                "Smooth Motion: Multi Frame Generation (per-game only)",
-                "ReBAR: Resizable BAR (requires admin)"
+                "垂直同步 (VSync)：开、关或自适应（快速同步）",
+                "低延迟模式：超高 (Ultra)、开或关",
+                "平滑运动 (Smooth Motion)：多帧生成（仅限按游戏设置）",
+                "ReBAR：Resizable BAR（需要管理员权限）"
             },
-            "Global defaults for VSync, Low Latency, and Power Mode are set in Settings. Per-game overrides are configured directly on each game's detail panel."));
+            "垂直同步、低延迟和电源管理模式的全局默认值在“设置”中配置。按游戏的独立覆盖设置可直接在各游戏的详情面板中调整。"));
 
         // Vulkan Games
         panel.Children.Add(BuildFaqSpecialSection("V", "AccentPurpleBrush",
-            "Vulkan Games",
-            "Vulkan games (shown with a 'Vulkan' badge) use a global ReShade layer installed to C:\\ProgramData\\ReShade. This requires administrator privileges. When you install ReShade on a Vulkan game, RHI will prompt for elevation.",
-            "All Vulkan games share the same ReShade installation. Updating ReShade on one Vulkan game updates it for all.\nPer-game RenoDX addons and shaders are still installed individually to each game folder."));
+            "Vulkan 游戏",
+            "Vulkan 游戏（带有“Vulkan”徽章）使用安装到 C:\\ProgramData\\ReShade 的全局 ReShade 隐式层。这需要管理员权限。当您在 Vulkan 游戏上安装 ReShade 时，RHI 会提示进行权限提升。",
+            "所有 Vulkan 游戏共享同一个全局 ReShade 安装。在某款 Vulkan 游戏上更新 ReShade 会同时更新所有 Vulkan 游戏。\n按游戏的 RenoDX 插件和着色器仍会单独安装到各自的游戏文件夹中。"));
 
         // Adding Games Manually
         panel.Children.Add(BuildFaqSpecialSection("+", "AccentAmberBrush",
-            "Adding Games Manually",
-            "If a game isn't auto-detected, drag and drop its .exe file directly onto the RHI window. RHI will add it to your library and detect its engine type.",
-            "You can also drag .addon64 files from the RenoDX Discord onto any game to install mods not yet on the wiki."));
+            "手动添加游戏",
+            "如果某款游戏未被自动检测到，可将其 .exe 可执行文件直接拖放到 RHI 窗口中。RHI 会将其添加到您的游戏库并检测其引擎类型。",
+            "您也可以将来自 RenoDX Discord 的 .addon64 文件拖放到任意游戏卡片上，以安装尚未收录在 Wiki 中的模组。"));
 
         // Updating Everything
         panel.Children.Add(BuildFaqSpecialSection("↑", "AccentGreenBrush",
-            "Updating Everything",
-            "Click 'Update All' in the toolbar to update all installed components across all games at once. This includes ReShade, RenoDX mods, ReLimiter, Display Commander, and more.",
-            "Games with available updates show a green dot in the sidebar. Configure which components are included in 'Update All' from Settings."));
+            "一键全部更新",
+            "点击工具栏中的“全部更新”，即可一次性更新所有游戏中已安装的全部组件。包括 ReShade、RenoDX 模组、ReLimiter、Display Commander 等等。",
+            "有可用更新的游戏在侧边栏中会显示状态圆点。您可以在“设置”中配置哪些组件参与“全部更新”。"));
 
         // Troubleshooting - Full Refresh
         panel.Children.Add(BuildFaqSpecialSection("↻", "AccentBlueBrush",
-            "Troubleshooting: Full Refresh",
-            "If games are missing, install locations have changed, or DLSS/Streamline files have been added or removed, use 'Full Refresh' in Settings to rescan your entire library from scratch.",
-            "Full Refresh clears the cached game list and re-detects everything. Use it when the normal Refresh button doesn't pick up changes."));
+            "故障排查：全量重新扫描",
+            "如果遇到游戏缺失、安装路径变更或手动增删了 DLSS/Streamline 文件，请使用“设置”中的“全量重新扫描”从头重新扫描您的整个游戏库。",
+            "“全量重新扫描”会清空缓存的游戏列表并重新检测一切。当普通的“刷新”按钮无法识别变动时请使用此功能。"));
 
         // System Tray
         panel.Children.Add(BuildFaqSpecialSection("◰", "AccentPurpleBrush",
-            "System Tray",
-            "RHI can minimize to the system tray instead of closing. Right-click the tray icon to quickly launch recent games without opening the main window.",
-            "Enable 'Close to System Tray' in Settings to keep RHI running in the background. The tray icon provides quick access to your most recently played games. RHI automatically checks for updates every 4 hours while running, so everything stays up to date."));
+            "系统托盘运行",
+            "RHI 可以最小化到系统托盘而不是直接退出。右键点击托盘图标可快速启动最近游玩的游戏，无需打开主窗口。",
+            "在“设置”中启用“关闭时最小化到系统托盘”即可让 RHI 在后台保持运行。托盘图标提供了对最近游玩游戏的快捷启动入口。RHI 在运行时每 4 小时会自动检查一次更新，确保所有组件始终保持最新。"));
 
         // Need More Help
         panel.Children.Add(BuildFaqLinksSection());
@@ -467,7 +467,7 @@ public sealed partial class MainWindow
 
         stack.Children.Add(new TextBlock
         {
-            Text = "Need More Help?",
+            Text = "需要更多帮助？",
             FontSize = 14,
             FontWeight = Microsoft.UI.Text.FontWeights.SemiBold,
             Foreground = (Brush)Application.Current.Resources["AccentTealBrush"]
@@ -475,7 +475,7 @@ public sealed partial class MainWindow
 
         stack.Children.Add(new TextBlock
         {
-            Text = "Support is available on Discord — join the community for help, mod updates, and discussion.",
+            Text = "Discord 社区提供支持，可加入社区获取帮助、模组更新和讨论。",
             TextWrapping = TextWrapping.Wrap,
             FontSize = 12,
             Foreground = (Brush)Application.Current.Resources["TextSecondaryBrush"],
@@ -491,7 +491,7 @@ public sealed partial class MainWindow
         };
         discordLink.Content = new TextBlock
         {
-            Text = "Join the Ultra+ Discord (main community)",
+            Text = "加入 Ultra+ Discord（主社区）",
             Foreground = (Brush)Application.Current.Resources["AccentBlueBrush"],
             FontSize = 12
         };
@@ -504,7 +504,7 @@ public sealed partial class MainWindow
         };
         renodxDiscordLink.Content = new TextBlock
         {
-            Text = "RenoDX Discord (mod development)",
+            Text = "RenoDX Discord（模组开发）",
             Foreground = (Brush)Application.Current.Resources["AccentBlueBrush"],
             FontSize = 12
         };
@@ -517,7 +517,7 @@ public sealed partial class MainWindow
         };
         wikiLink.Content = new TextBlock
         {
-            Text = "Browse the RenoDX Mod Wiki",
+            Text = "浏览 RenoDX 模组 Wiki",
             Foreground = (Brush)Application.Current.Resources["AccentBlueBrush"],
             FontSize = 12
         };
@@ -530,7 +530,7 @@ public sealed partial class MainWindow
         };
         githubLink.Content = new TextBlock
         {
-            Text = "RHI GitHub — Report issues or request features",
+            Text = "RHI GitHub — 报告问题或请求功能",
             Foreground = (Brush)Application.Current.Resources["AccentBlueBrush"],
             FontSize = 12
         };

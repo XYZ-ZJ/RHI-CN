@@ -130,10 +130,10 @@ public class ModInstallService : IModInstallService
             CrashReporter.Log($"[ModInstallService.InstallAsync] Cache check for '{fileName}': cacheSize={cacheSize}, remoteSize={remoteSize?.ToString() ?? "null"}, sizeOk={sizeOk}, sizeExplicitMismatch={sizeExplicitMismatch}, isPE={HasPeSignature(cachePath)}");
             if (!sizeExplicitMismatch && HasPeSignature(cachePath))
             {
-                progress?.Report(("Installing from cache...", 50));
+                progress?.Report(("正在从缓存安装…", 50));
                 File.Copy(cachePath, destPath, overwrite: true);
                 usedCache = true;
-                progress?.Report(("✅ Installed from cache!", 100));
+                progress?.Report(("✅ 已从缓存安装！", 100));
             }
             else if (!HasPeSignature(cachePath))
             {

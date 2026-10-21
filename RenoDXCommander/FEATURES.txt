@@ -1,146 +1,147 @@
-ReLimiter — Feature Reference
+ReLimiter — 功能参考
 ==================================
 
-Core Features
+核心功能
 -------------
 
-FPS Limit
-  Slider 0-500. Quick buttons: 30, 60, 120, 240, Reflex Cap.
-  Reflex Cap formula: fps = refresh - (refresh^2 / 4096), floored.
-  Example: 165 Hz -> 165 - (27225/4096) = 165 - 6.64 = 158.
+FPS 限制
+  滑块 0-500。快捷按钮：30、60、120、240、Reflex Cap。
+  Reflex Cap 公式：fps = 刷新率 - (刷新率^2 / 4096)，向下取整。
+  示例：165 Hz -> 165 - (27225/4096) = 165 - 6.64 = 158。
 
-VSync Override
-  Game (passthrough), On (SyncInterval=1), Off (SyncInterval=0 + ALLOW_TEARING).
-  Hooks IDXGISwapChain::Present. Tearing auto-detected via IDXGIFactory5.
-  Also applied in Streamline proxy Present hook.
+VSync 覆盖
+  Game（直通）、On（SyncInterval=1）、Off（SyncInterval=0 + ALLOW_TEARING）。
+  挂钩 IDXGISwapChain::Present。通过 IDXGIFactory5 自动检测撕裂支持。
+  同样应用于 Streamline 代理的 Present 挂钩中。
 
-5XXX Exclusive Pacing Optimization
-  Hooks IDXGISwapChain2::SetMaximumFrameLatency, overrides to 1.
-  Only on waitable swapchains. Game's original value captured and restored.
-  Designed for NVIDIA 50-series GPUs with flip metering support.
+5XXX 专属节奏优化
+  挂钩 IDXGISwapChain2::SetMaximumFrameLatency，强制覆盖为 1。
+  仅在可等待交换链上生效。游戏原始值会被捕获并在退出时恢复。
+  面向支持 flip metering 的 NVIDIA 50 系显卡设计。
 
-FG Mode
-  Auto-detects DLSS FG, FSR FG, Smooth Motion from loaded DLLs.
-  Manual override: Off, 2x, 3x, 4x.
-  Divides target FPS by multiplier for real render rate.
+FG 模式
+  从已加载的 DLL 自动检测 DLSS FG、FSR FG、Smooth Motion。
+  手动覆盖：Off、2x、3x、4x。
+  将目标 FPS 除以倍数得到真实渲染帧率。
 
-Boost Override
-  Game (passthrough), On (force boost), Off (force no boost).
-  Controls Reflex Low Latency Boost (GPU clock management).
+Boost 覆盖
+  Game（直通）、On（强制加速）、Off（强制不加速）。
+  控制 Reflex Low Latency Boost（GPU 频率管理）。
 
-Pacing Presets
-  Native Pacing    — SIM_START, no queue limit. Lowest latency.
-  Marker Low Lat   — Reflex markers, max 1 queued frame.
-  Balanced         — Reflex markers, max 2 queued frames.
-  Stability        — Reflex markers, max 3 queued frames.
-  SL Proxy         — Pace generated frames via Streamline proxy.
-  Custom           — Manual control of all sub-settings.
+节奏预设
+  Native Pacing    — SIM_START，无队列上限。延迟最低。
+  Marker Low Lat   — Reflex 标记，最多排队 1 帧。
+  Balanced         — Reflex 标记，最多排队 2 帧。
+  Stability        — Reflex 标记，最多排队 3 帧。
+  SL Proxy         — 通过 Streamline 代理为生成帧定节奏。
+  Custom           — 手动控制所有子设置。
 
 
-UL-Exclusive Adaptive Features
+UL 专属自适应功能
 ------------------------------
 
-These features are unique to ReLimiter. Neither Special K nor Display
-Commander implement any of them.
+以下功能为 ReLimiter 独有。Special K 和 Display Commander
+均未实现其中任何一项。
 
-1. Predictive Sleep
-   GPU-aware wake scheduling. Tracks 8-sample GPU time history with weighted
-   averaging (4x/3x/2x/1x). Detects upward trends (3+ frames rising) and
-   biases prediction upward. Adaptive safety margin: 500us start, +50us per
-   miss, -10us per 30 stable frames, clamped 200-2000us. Only active when
-   GPU-bound. Predictive interval can only tighten the base interval.
+1. 预测性睡眠
+   感知 GPU 的唤醒调度。跟踪 8 个样本的 GPU 时间历史并加权
+   平均（4x/3x/2x/1x）。检测上升趋势（连续 3+ 帧上升）并将
+   预测值上调。自适应安全边距：起点 500us，每次未命中 +50us，
+   每 30 个稳定帧 -10us，钳制在 200-2000us。仅在 GPU 瓶颈时
+   激活。预测间隔只能收紧基础间隔。
 
-2. Phase-Locked Timing Grid
-   target[k] = epoch + k * interval. No drift accumulation. Late frames snap
-   forward. Uses CREATE_WAITABLE_TIMER_HIGH_RESOLUTION + busy-wait tail.
-   ZwSetTimerResolution for max kernel timer precision.
+2. 相位锁定时序网格
+   target[k] = epoch + k * interval。无漂移累积。迟到帧向前
+   吸附。使用 CREATE_WAITABLE_TIMER_HIGH_RESOLUTION + 自旋等待
+   尾段。调用 ZwSetTimerResolution 获得最大内核定时器精度。
 
-3. Present-to-Present Feedback Loop
-   Closed-loop correction. Accumulates P2P error over 30 frames. Nudges
-   interval +/-1us per window. Dead zone +/-1us. Clamped +/-8us total.
-   Only active without FG. Resets on FPS limit change.
+3. Present 到 Present 反馈环
+   闭环校正。累计 30 帧的 P2P 误差。每个窗口微调间隔 +/-1us。
+   死区 +/-1us。总钳制 +/-8us。仅在无 FG 时激活。FPS 限制变更
+   时重置。
 
-4. Automatic Enforcement Site
-   GPU load > 85% -> SIM_START (lowest latency).
-   GPU load < 65% -> PRESENT_FINISH (best pacing).
-   65-85% hysteresis band prevents flip-flopping.
+4. 自动执行点选择
+   GPU 负载 > 85% -> SIM_START（最低延迟）。
+   GPU 负载 < 65% -> PRESENT_FINISH（最佳节奏）。
+   65-85% 迟滞带防止来回切换。
 
-5. Queue Pressure Detection
-   Monitors OS render queue time from GetLatency. If avg queue time > 1.5x
-   target interval, adds 4us to sleep interval to throttle proactively.
+5. 队列压力检测
+   通过 GetLatency 监视 OS 渲染队列时间。若平均队列时间 > 目标
+   间隔的 1.5 倍，则在睡眠间隔上增加 4us 以主动节流。
 
-6. Adaptive DLSS FG Pacing
-   Measures actual FG overhead (GPU render end to present end) via GetLatency.
-   EMA smoothed (alpha=0.1). Replaces static +24us offset. Clamped 4-60us.
+6. 自适应 DLSS FG 节奏
+   通过 GetLatency 测量实际 FG 开销（GPU 渲染结束到 present 结束）。
+   EMA 平滑（alpha=0.1）。取代静态 +24us 偏移。钳制 4-60us。
 
-7. Hybrid Queue Wait
-   Two-phase: waitable timer sleeps (~0.5ms) then busy-wait for final <1ms.
-   50ms timeout. Saves CPU vs pure spin-loop used by SK and DC.
+7. 混合队列等待
+   两阶段：可等待定时器睡眠（约 0.5ms），最后 <1ms 自旋等待。
+   50ms 超时。相比 SK 和 DC 使用的纯自旋循环更省 CPU。
 
-8. Time-Based Warmup
-   2-second wall-clock warmup from first present. Consistent across frame
-   rates (frame-count warmup is 10s at 30fps but 1.25s at 240fps).
+8. 基于时间的预热
+   从首次 present 起进行 2 秒挂钟预热。在各帧率下表现一致
+   （按帧数预热在 30fps 时需要 10 秒，而在 240fps 时只要 1.25 秒）。
 
-9. Proper Reflex Restore
-   Captures game's SetSleepMode params on hook. Restores on shutdown.
-   If game never called SetSleepMode, disables Reflex cleanly.
+9. 正确的 Reflex 恢复
+   挂钩时捕获游戏的 SetSleepMode 参数。退出时恢复。
+   若游戏从未调用 SetSleepMode，则干净地禁用 Reflex。
 
-10. VRR / GSync Awareness
-    Ceiling = 3600 * hz / (hz + 3600). 0.5% safety margin. Clamps interval
-    so limiter never exceeds VRR window. Cached 2s. Disabled when VSync off.
+10. VRR / GSync 感知
+    上限 = 3600 * hz / (hz + 3600)。0.5% 安全边距。钳制间隔，
+    使限制器永不超出 VRR 窗口。缓存 2 秒。VSync 关闭时禁用。
 
-11. Adaptive Interval Adjustment
-    GPU load < 70%: -3us (tighten). GPU load > 90%: up to +4us (buffer).
-    Driver shave: always -2us to compensate for systematic overshoot.
+11. 自适应间隔调整
+    GPU 负载 < 70%：-3us（收紧）。GPU 负载 > 90%：最多 +4us（留余量）。
+    驱动削峰：恒定 -2us，补偿系统性超调。
 
-12. Flip Metering Block
-    Hooks nvapi_QueryInterface. Blocks ordinal 0xF3148C42 (SetFlipConfig)
-    by returning nullptr. Exception: Smooth Motion (needs flip metering).
-    UL's own lookups use original QI pointer. Always active, no toggle.
+12. Flip Metering 拦截
+    挂钩 nvapi_QueryInterface。通过返回 nullptr 拦截序号
+    0xF3148C42（SetFlipConfig）。例外：Smooth Motion（需要
+    flip metering）。UL 自身的查询使用原始 QI 指针。始终启用，
+    无开关。
 
 
-Interval Computation Pipeline
+间隔计算流水线
 -----------------------------
 
-Raw interval (from fps_limit / FG divisor)
-  -> VRR floor clamp
-  -> FG offset (adaptive or +24us static)
-  -> Queue pressure (+4us if flagged)
-  -> GPU headroom adjustment (-3us to +4us)
-  -> P2P feedback correction (-8us to +8us)
-  -> Driver shave (-2us)
-  -> Predictive sleep (can only tighten)
-  = Final minimumIntervalUs sent to driver
+原始间隔（来自 fps_limit / FG 除数）
+  -> VRR 下限钳制
+  -> FG 偏移（自适应或静态 +24us）
+  -> 队列压力（触发时 +4us）
+  -> GPU 余量调整（-3us 至 +4us）
+  -> P2P 反馈校正（-8us 至 +8us）
+  -> 驱动削峰（-2us）
+  -> 预测性睡眠（只能收紧）
+  = 最终发送给驱动的 minimumIntervalUs
 
 
-Reflex Hook Summary
+Reflex 挂钩摘要
 -------------------
 
-SetSleepMode  — Swallowed. Game params captured. UL drives sleep mode.
-Sleep         — Swallowed. UL calls Sleep on its own schedule.
-SetMarker     — Intercepted. RTSS filtered. INPUT_SAMPLE reordered.
-                Timestamps in 64-slot ring buffer. Dedup per frame.
-GetLatency    — Not hooked. Called directly for adaptive features.
-QueryInterface — Hooked. Blocks flip metering (SetFlipConfig).
+SetSleepMode  — 吞掉。捕获游戏参数。由 UL 驱动睡眠模式。
+Sleep         — 吞掉。UL 按自己的调度调用 Sleep。
+SetMarker     — 拦截。过滤 RTSS。INPUT_SAMPLE 重排序。
+                时间戳存入 64 槽环形缓冲区。按帧去重。
+GetLatency    — 未挂钩。直接调用以驱动自适应功能。
+QueryInterface — 已挂钩。拦截 flip metering（SetFlipConfig）。
 
 
 Smooth Motion
 -------------
 
-Detected via NvPresent64.dll. NOT the same as DLSS Frame Generation.
-When active: Reflex Sleep bypassed, timing-only pacing, flip metering
-block disabled, OSD FPS/Native swapped.
+通过 NvPresent64.dll 检测。与 DLSS 帧生成不是一回事。
+激活时：绕过 Reflex Sleep、仅做时序定节奏、禁用 flip
+metering 拦截、交换 OSD 的 FPS/Native 显示。
 
 
-OSD Elements
+OSD 元素
 ------------
 
-FPS           White   Output frame rate (incl. generated frames)
-Native FPS    White   Real render rate from SIM_START markers
-Frame         White   Rolling avg frame time (64-frame window)
-GPU           Cyan    GPU active render time from GetLatency
-Render Lat    Cyan    Sim-start to GPU-render-end
-Present Lat   Cyan    Present start-to-end
-FG            Gold    Detected FG tech + multiplier
-Res           Gold    Render -> output resolution with scale %
-Graph         Green   128-sample frametime history, auto-scaled
+FPS           白色   输出帧率（含生成帧）
+Native FPS    白色   来自 SIM_START 标记的真实渲染帧率
+Frame         白色   滚动平均帧时间（64 帧窗口）
+GPU           青色   来自 GetLatency 的 GPU 活动渲染时间
+Render Lat    青色   采样开始到 GPU 渲染结束
+Present Lat   青色   Present 起止耗时
+FG            金色   检测到的 FG 技术 + 倍数
+Res           金色   渲染 -> 输出分辨率及缩放百分比
+Graph         绿色   128 个样本的帧时间历史，自动缩放

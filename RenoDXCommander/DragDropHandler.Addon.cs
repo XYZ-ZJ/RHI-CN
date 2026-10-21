@@ -32,9 +32,9 @@ public partial class DragDropHandler
         {
             var errDialog = new ContentDialog
             {
-                Title = "7-Zip Not Found",
-                Content = "Cannot extract archive — 7-Zip was not found. Please reinstall RDXC.",
-                CloseButtonText = "OK",
+                Title = "未找到 7-Zip",
+                Content = "无法解压归档文件，因为未找到 7-Zip。请重新安装 RDXC。",
+                CloseButtonText = "确定",
                 XamlRoot = _window.Content.XamlRoot,
                 RequestedTheme = ElementTheme.Dark,
             };
@@ -92,9 +92,9 @@ public partial class DragDropHandler
                 _crashReporter.Log($"[DragDropHandler.ProcessDroppedArchive] 7z exit code {proc.ExitCode}");
                 var failDialog = new ContentDialog
                 {
-                    Title = "Archive Extraction Failed",
-                    Content = $"Failed to extract '{archiveName}'. The file may be corrupt or in an unsupported format.",
-                    CloseButtonText = "OK",
+                    Title = "归档解压失败",
+                    Content = $"解压 '{archiveName}' 失败。文件可能已损坏或格式不受支持。",
+                    CloseButtonText = "确定",
                     XamlRoot = _window.Content.XamlRoot,
                     RequestedTheme = ElementTheme.Dark,
                 };
@@ -116,9 +116,9 @@ public partial class DragDropHandler
                 _crashReporter.Log($"[DragDropHandler.ProcessDroppedArchive] No addon files found in '{archiveName}'");
                 var noAddonDialog = new ContentDialog
                 {
-                    Title = "No Addon Found",
-                    Content = $"No .addon64, .addon32, or .addon files were found inside '{archiveName}'.",
-                    CloseButtonText = "OK",
+                    Title = "未找到插件",
+                    Content = $"在 '{archiveName}' 内未找到 .addon64、.addon32 或 .addon 文件。",
+                    CloseButtonText = "确定",
                     XamlRoot = _window.Content.XamlRoot,
                     RequestedTheme = ElementTheme.Dark,
                 };
@@ -140,7 +140,7 @@ public partial class DragDropHandler
                 var combo = new ComboBox
                 {
                     HorizontalAlignment = HorizontalAlignment.Stretch,
-                    PlaceholderText = "Select addon to install...",
+                    PlaceholderText = "选择要安装的插件...",
                 };
                 foreach (var af in addonFiles)
                     combo.Items.Add(new ComboBoxItem { Content = Path.GetFileName(af), Tag = af });
@@ -148,10 +148,10 @@ public partial class DragDropHandler
 
                 var pickDialog = new ContentDialog
                 {
-                    Title = $"Multiple Addons in '{archiveName}'",
+                    Title = $"'{archiveName}' 中包含多个插件",
                     Content = combo,
-                    PrimaryButtonText = "Install",
-                    CloseButtonText = "Cancel",
+                    PrimaryButtonText = "安装",
+                    CloseButtonText = "取消",
                     XamlRoot = _window.Content.XamlRoot,
                     RequestedTheme = ElementTheme.Dark,
                 };
@@ -184,18 +184,18 @@ public partial class DragDropHandler
                     };
                     var lumaPickDialog = new ContentDialog
                     {
-                        Title = "🌙 Install Luma Addon",
+                        Title = "🌙 安装 Luma 插件",
                         Content = new StackPanel
                         {
                             Spacing = 8,
                             Children =
                             {
-                                new TextBlock { Text = $"Install {archiveName} to:", TextWrapping = TextWrapping.Wrap, FontSize = 12 },
+                                new TextBlock { Text = $"将 {archiveName} 安装到：", TextWrapping = TextWrapping.Wrap, FontSize = 12 },
                                 lumaCombo,
                             }
                         },
-                        PrimaryButtonText = "Install",
-                        CloseButtonText = "Cancel",
+                        PrimaryButtonText = "安装",
+                        CloseButtonText = "取消",
                         XamlRoot = _window.Content.XamlRoot,
                         RequestedTheme = ElementTheme.Dark,
                     };
@@ -241,9 +241,9 @@ public partial class DragDropHandler
         {
             var noGamesDialog = new ContentDialog
             {
-                Title = "No Games Available",
-                Content = "No games are currently detected. Add a game first.",
-                CloseButtonText = "OK",
+                Title = "没有可用的游戏",
+                Content = "当前未检测到游戏，请先添加游戏。",
+                CloseButtonText = "确定",
                 XamlRoot = _window.Content.XamlRoot,
                 RequestedTheme = ElementTheme.Dark,
             };
@@ -255,7 +255,7 @@ public partial class DragDropHandler
         var combo = new ComboBox
         {
             HorizontalAlignment = HorizontalAlignment.Stretch,
-            PlaceholderText = "Select a game...",
+            PlaceholderText = "选择游戏...",
         };
 
         // Sort alphabetically and populate
@@ -309,7 +309,7 @@ public partial class DragDropHandler
         var panel = new StackPanel { Spacing = 12 };
         panel.Children.Add(new TextBlock
         {
-            Text = $"Install {addonFileName} to a game folder.",
+            Text = $"将 {addonFileName} 安装到游戏文件夹。",
             TextWrapping = TextWrapping.Wrap,
             FontSize = 13,
             Foreground = UIFactory.Brush(ResourceKeys.TextSecondaryBrush),
@@ -318,10 +318,10 @@ public partial class DragDropHandler
 
         var pickDialog = new ContentDialog
         {
-            Title = isLumaAddon ? "🌙 Install Luma Addon" : "📦 Install RenoDX Addon",
+            Title = isLumaAddon ? "🌙 安装 Luma 插件" : "📦 安装 RenoDX 插件",
             Content = panel,
-            PrimaryButtonText = "Next",
-            CloseButtonText = "Cancel",
+            PrimaryButtonText = "下一步",
+            CloseButtonText = "取消",
             XamlRoot = _window.Content.XamlRoot,
             RequestedTheme = ElementTheme.Dark,
         };
@@ -333,9 +333,9 @@ public partial class DragDropHandler
         {
             var noSelection = new ContentDialog
             {
-                Title = "No Game Selected",
-                Content = "Please select a game to install the addon to.",
-                CloseButtonText = "OK",
+                Title = "未选择游戏",
+                Content = "请选择要安装此插件的游戏。",
+                CloseButtonText = "确定",
                 XamlRoot = _window.Content.XamlRoot,
                 RequestedTheme = ElementTheme.Dark,
             };
@@ -376,26 +376,26 @@ public partial class DragDropHandler
         catch (Exception ex) { _crashReporter.Log($"[DragDropHandler.ProcessDroppedAddon] Failed to check existing addons in '{installPath}' — {ex.Message}"); }
 
         // Confirmation dialog
-        var warningText = $"Are you sure you want to install {addonFileName} for {gameName}?";
+        var warningText = $"确定要为 {addonFileName} 安装 {gameName} 吗？";
         if (!string.IsNullOrEmpty(existingAddon))
-            warningText += $"\n\nThis will replace the existing addon: {existingAddon}";
-        warningText += $"\n\nInstall path: {installPath}";
+            warningText += $"\n\n这将替换现有插件：{existingAddon}";
+        warningText += $"\n\n安装路径：{installPath}";
 
         // Control Ultimate Edition — inject mod-specific warning into the confirm dialog
-        string confirmTitle = "⚠ Confirm Addon Install";
+        string confirmTitle = "⚠ 确认安装插件";
         if (ControlUePostInstallService.IsControlAddon(addonFileName))
         {
-            confirmTitle = "⚠ Control UE — Not an HDR Mod";
-            warningText = "This is NOT an HDR mod.\n\n"
-                + "It fixes RT noise using Ray Reconstruction. Two strategies (pick one):\n"
-                + "• Turn off the in-game RT denoiser — use DLSS SR preset M or L\n"
-                + "• Use Ray Reconstruction with extra inputs from the game's shaders\n\n"
-                + "Installing will also:\n"
-                + "• Upgrade DLSS and deploy nvngx_dlssd.dll\n"
-                + "• Set renderer.ini HDR preset to the correct value\n"
-                + "• Clear the DLSS SR preset in the NVIDIA driver profile\n\n"
-                + "These changes are not reverted on uninstall.\n\n"
-                + $"Install path: {installPath}";
+            confirmTitle = "⚠ Control UE — 不是 HDR 模组";
+            warningText = "这不是 HDR 模组。\n\n"
+                + "它使用光线重建修复 RT 噪点。请选择以下一种方案：\n"
+                + "• 关闭游戏内 RT 降噪器 — 使用 DLSS SR 预设 M 或 L\n"
+                + "• 使用来自游戏着色器的额外输入启用光线重建\n\n"
+                + "安装还会：\n"
+                + "• 升级 DLSS 并部署 nvngx_dlssd.dll\n"
+                + "• 将 renderer.ini 的 HDR 预设设置为正确值\n"
+                + "• 清除 NVIDIA 驱动配置文件中的 DLSS SR 预设\n\n"
+                + "卸载时不会还原这些更改。\n\n"
+                + $"安装路径：{installPath}";
         }
 
         var confirmDialog = new ContentDialog
@@ -407,8 +407,8 @@ public partial class DragDropHandler
                 TextWrapping = TextWrapping.Wrap,
                 FontSize = 13,
             },
-            PrimaryButtonText = "Install",
-            CloseButtonText = "Cancel",
+            PrimaryButtonText = "安装",
+            CloseButtonText = "取消",
             XamlRoot = _window.Content.XamlRoot,
             RequestedTheme = ElementTheme.Dark,
         };
@@ -596,7 +596,7 @@ public partial class DragDropHandler
                     };
                     targetCard.IsExternalOnly = true;
                     targetCard.ExternalUrl    = "https://discord.gg/gF4GRJWZ2A";
-                    targetCard.ExternalLabel  = "Download from Discord";
+                    targetCard.ExternalLabel  = "从 Discord 下载";
                 }
             }
 
@@ -624,9 +624,9 @@ public partial class DragDropHandler
 
             var successDialog = new ContentDialog
             {
-                Title = "✅ Addon Installed",
-                Content = $"{addonFileName} has been installed for {gameName}.",
-                CloseButtonText = "OK",
+                Title = "✅ 插件已安装",
+                Content = $"{addonFileName} 已安装至 {gameName}.",
+                CloseButtonText = "确定",
                 XamlRoot = _window.Content.XamlRoot,
                 RequestedTheme = ElementTheme.Dark,
             };
@@ -637,9 +637,9 @@ public partial class DragDropHandler
             _crashReporter.Log($"[DragDropHandler.ProcessDroppedAddon] Install failed — {ex.Message}");
             var errDialog = new ContentDialog
             {
-                Title = "❌ Install Failed",
-                Content = $"Failed to install addon: {ex.Message}",
-                CloseButtonText = "OK",
+                Title = "❌ 安装失败",
+                Content = $"安装插件失败：{ex.Message}",
+                CloseButtonText = "确定",
                 XamlRoot = _window.Content.XamlRoot,
                 RequestedTheme = ElementTheme.Dark,
             };
@@ -661,9 +661,9 @@ public partial class DragDropHandler
             _crashReporter.Log($"[DragDropHandler.ProcessDroppedUrl] Invalid URL: {url}");
             var errDialog = new ContentDialog
             {
-                Title = "❌ Invalid URL",
-                Content = "The dropped URL could not be parsed. Please check the link and try again.",
-                CloseButtonText = "OK",
+                Title = "❌ URL 无效",
+                Content = "无法解析拖入的 URL，请检查链接后重试。",
+                CloseButtonText = "确定",
                 XamlRoot = _window.Content.XamlRoot,
                 RequestedTheme = ElementTheme.Dark,
             };
@@ -678,9 +678,9 @@ public partial class DragDropHandler
             _crashReporter.Log($"[DragDropHandler.ProcessDroppedUrl] Could not extract filename from URL: {url}");
             var errDialog = new ContentDialog
             {
-                Title = "❌ Invalid URL",
-                Content = "Could not determine a filename from the dropped URL.",
-                CloseButtonText = "OK",
+                Title = "❌ URL 无效",
+                Content = "无法从拖入的 URL 中确定文件名。",
+                CloseButtonText = "确定",
                 XamlRoot = _window.Content.XamlRoot,
                 RequestedTheme = ElementTheme.Dark,
             };
@@ -722,18 +722,18 @@ public partial class DragDropHandler
                         };
                         var pickerDialog = new ContentDialog
                         {
-                            Title = "Install Luma Mod",
+                            Title = "安装 Luma 模组",
                             Content = new StackPanel
                             {
                                 Spacing = 8,
                                 Children =
                                 {
-                                    new TextBlock { Text = $"Luma mod detected: {filename}\n\nSelect game to install to:", TextWrapping = TextWrapping.Wrap, FontSize = 12 },
+                                    new TextBlock { Text = $"检测到 Luma Mod：{filename}\n\n请选择要安装到的游戏：", TextWrapping = TextWrapping.Wrap, FontSize = 12 },
                                     combo,
                                 }
                             },
-                            PrimaryButtonText = "Install",
-                            CloseButtonText = "Cancel",
+                            PrimaryButtonText = "安装",
+                            CloseButtonText = "取消",
                             XamlRoot = _window.Content.XamlRoot,
                             RequestedTheme = ElementTheme.Dark,
                         };
@@ -770,9 +770,9 @@ public partial class DragDropHandler
             _crashReporter.Log($"[DragDropHandler.ProcessDroppedUrl] Unsupported extension '{ext}' for file '{filename}' from URL: {url}");
             var errDialog = new ContentDialog
             {
-                Title = "❌ Unsupported File Type",
-                Content = $"Only .addon64 and .addon32 files are supported.\n\nThe URL points to: {filename}",
-                CloseButtonText = "OK",
+                Title = "❌ 不支持的文件类型",
+                Content = $"仅支持 .addon64 和 .addon32 文件。\n\n该 URL 指向：{filename}",
+                CloseButtonText = "确定",
                 XamlRoot = _window.Content.XamlRoot,
                 RequestedTheme = ElementTheme.Dark,
             };
@@ -805,7 +805,7 @@ public partial class DragDropHandler
         };
         var progressDialog = new ContentDialog
         {
-            Title = "⬇ Downloading Addon",
+            Title = "⬇ 正在下载插件",
             Content = new StackPanel
             {
                 Spacing = 12,
@@ -834,9 +834,9 @@ public partial class DragDropHandler
                     await progressSession.DisposeAsync();
                     var errDialog = new ContentDialog
                     {
-                        Title = "❌ Download Failed",
-                        Content = $"The server returned HTTP {(int)response.StatusCode}.\n\nURL: {url}",
-                        CloseButtonText = "OK",
+                        Title = "❌ 下载失败",
+                        Content = $"服务器返回 HTTP {(int)response.StatusCode}。\n\nURL：{url}",
+                        CloseButtonText = "确定",
                         XamlRoot = _window.Content.XamlRoot,
                         RequestedTheme = ElementTheme.Dark,
                     };
@@ -889,9 +889,9 @@ public partial class DragDropHandler
                 await progressSession.DisposeAsync();
                 var errDialog = new ContentDialog
                 {
-                    Title = "❌ Download Failed",
-                    Content = $"A network error occurred while downloading the addon.\n\n{ex.Message}",
-                    CloseButtonText = "OK",
+                    Title = "❌ 下载失败",
+                    Content = $"下载插件时发生网络错误。\n\n{ex.Message}",
+                    CloseButtonText = "确定",
                     XamlRoot = _window.Content.XamlRoot,
                     RequestedTheme = ElementTheme.Dark,
                 };
@@ -904,9 +904,9 @@ public partial class DragDropHandler
                 await progressSession.DisposeAsync();
                 var errDialog = new ContentDialog
                 {
-                    Title = "❌ Download Timed Out",
-                    Content = "The download timed out. Please check your connection and try again.",
-                    CloseButtonText = "OK",
+                    Title = "❌ 下载超时",
+                    Content = "下载超时，请检查网络连接后重试。",
+                    CloseButtonText = "确定",
                     XamlRoot = _window.Content.XamlRoot,
                     RequestedTheme = ElementTheme.Dark,
                 };
@@ -927,9 +927,9 @@ public partial class DragDropHandler
                 await progressSession.DisposeAsync();
                 var errDialog = new ContentDialog
                 {
-                    Title = "❌ Invalid Addon File",
-                    Content = "The downloaded file is not a valid addon binary. The server may have returned an error page.",
-                    CloseButtonText = "OK",
+                    Title = "❌ 插件文件无效",
+                    Content = "下载的文件不是有效的插件二进制文件，服务器可能返回了错误页面。",
+                    CloseButtonText = "确定",
                     XamlRoot = _window.Content.XamlRoot,
                     RequestedTheme = ElementTheme.Dark,
                 };

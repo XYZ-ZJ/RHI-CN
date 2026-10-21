@@ -51,25 +51,25 @@ public partial class DlssPresetService
 
     public static readonly (string Name, uint Value)[] VSyncModeOptions =
     [
-        ("App Controlled", 0x60925292),
-        ("Force Off", 0x08416747),
-        ("Force On", 0x47814940),
-        ("Fast Sync", 0x18888888),
+        ("应用程序控制", 0x60925292),
+        ("强制关闭", 0x08416747),
+        ("强制开启", 0x47814940),
+        ("快速同步 (Fast Sync)", 0x18888888),
     ];
 
     public static readonly (string Name, uint Value)[] VSyncTearControlOptions =
     [
-        ("Standard", 0x96861077),
-        ("Adaptive", 0x99941284),
+        ("标准", 0x96861077),
+        ("自适应", 0x99941284),
     ];
 
     // ── Power / CPU option arrays ─────────────────────────────────────────────
 
     public static readonly (string Name, uint Value)[] PowerManagementOptions =
     [
-        ("Optimal Performance", 0x00000005),
-        ("Adaptive", 0x00000000),
-        ("Maximum Performance", 0x00000001),
+        ("最佳性能 (Optimal)", 0x00000005),
+        ("自适应", 0x00000000),
+        ("最高性能 (Maximum)", 0x00000001),
     ];
 
     public static readonly (string Name, uint Value)[] CpuExprModeOptions =
@@ -84,40 +84,40 @@ public partial class DlssPresetService
     /// <summary>Combined Low Latency Mode options matching NVIDIA App behavior.</summary>
     public static readonly (string Name, uint Value)[] LowLatencyModeOptions =
     [
-        ("Off", 0x00000000),
-        ("On", 0x00000001),
-        ("Ultra", 0x00000002),
+        ("关", 0x00000000),
+        ("开", 0x00000001),
+        ("超高 (Ultra)", 0x00000002),
     ];
 
     // ── Smooth Motion option arrays ───────────────────────────────────────────
 
     public static readonly (string Name, uint Value)[] SmoothMotionEnableOptions =
     [
-        ("Off", 0x00000000),
+        ("关", 0x00000000),
         ("On [40 Series+]", 0x00000001),
     ];
 
     public static readonly (string Name, uint Value)[] SmoothMotionApisOptions =
     [
-        ("None", 0x00000000),
+        ("无 (None)", 0x00000000),
         ("DX12", 0x00000001),
         ("DX11", 0x00000002),
         ("DX11/12", 0x00000003),
         ("VK", 0x00000004),
         ("DX12, VK", 0x00000005),
         ("DX11, VK", 0x00000006),
-        ("All [DX11/12, VK]", 0x00000007),
+        ("全部 [DX11/12, VK]", 0x00000007),
     ];
 
     public static readonly (string Name, uint Value)[] SmoothMotionFlipPacingFsOptions =
     [
-        ("Off [Latency]", 0x00000000),
-        ("On [Pacing]", 0xFFFFFFFF),
+        ("关 [优先延迟]", 0x00000000),
+        ("开 [优先平稳]", 0xFFFFFFFF),
     ];
 
     public static readonly (string Name, uint Value)[] SmoothMotionFlipPacingWinOptions =
     [
-        ("Off [Latency]", 0x00000000),
+        ("关 [优先延迟]", 0x00000000),
         ("On [Pacing]", 0x00000001),
         ("Force On [Pacing]", 0xFFFFFFFF),
     ];
@@ -143,7 +143,7 @@ public partial class DlssPresetService
 
     public static readonly (string Name, uint Value)[] ShaderPrecompileOptions =
     [
-        ("Off", 0x00000000),
+        ("关", 0x00000000),
         ("Low (Default)", 0x00000001),
         ("Medium", 0x00000002),
         ("High", 0x00000003),
@@ -153,7 +153,7 @@ public partial class DlssPresetService
 
     public static readonly (string Name, uint Value)[] GSyncModeOptions =
     [
-        ("Off", 0x00000000),
+        ("关", 0x00000000),
         ("Fullscreen only", 0x00000001),
         ("Fullscreen/Windowed", 0x00000002),
     ];
@@ -193,7 +193,7 @@ public partial class DlssPresetService
 
     public static readonly (string Name, uint Value)[] DmfgFrameCountOptions =
     [
-        ("Off", 0x00000000),
+        ("关", 0x00000000),
         ("3x [50 Series+]", 0x00000002),
         ("4x [50 Series+]", 0x00000003),
         ("5x [50 Series+]", 0x00000004),
@@ -202,7 +202,7 @@ public partial class DlssPresetService
 
     public static readonly (string Name, uint Value)[] DmfgTargetFpsOptions =
     [
-        ("Off", 0x00000000),
+        ("关", 0x00000000),
         ("Max Refresh Rate", 0x01000000),
         ("59 FPS (60Hz VRR Cap)", 59),
         ("73 FPS (75Hz VRR Cap)", 73),

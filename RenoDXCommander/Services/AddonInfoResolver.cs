@@ -17,28 +17,28 @@ public class AddonInfoResolver
     // ── Generic fallback text constants (Tier 3) ──────────────────────────────────
 
     public const string FallbackREFramework =
-        "RE Framework is a modding framework for RE Engine games. It enables ReShade injection and other mods by hooking into the game's rendering pipeline.";
+        "RE Framework 是用于 RE Engine 游戏的模组框架，通过挂钩游戏渲染管线来支持 ReShade 注入和其他模组。";
 
     public const string FallbackReShade =
-        "ReShade is a post-processing injector that adds visual effects to games. It is required by RenoDX to apply HDR tone mapping and color grading.";
+        "ReShade 是用于向游戏添加视觉效果的后处理注入器。RenoDX 需要它来应用 HDR 色调映射和色彩分级。";
 
     public const string FallbackRenoDX =
         "RenoDX is an HDR mod framework that upgrades SDR games to HDR using ReShade. It provides per-game tone mapping and color space conversion.";
 
     public const string FallbackNativeHdr =
-        "This game is set to use UE-Extended. It is automatically configured to use native HDR and an Engine.ini will be automatically deployed upon installation. If there is an ingame HDR option then enable that too.";
+        "此游戏使用 UE-Extended。安装时会自动配置原生 HDR 并部署 Engine.ini；如果游戏内有 HDR 选项，也请将其开启。";
 
     public const string FallbackReLimiter =
-        "ReLimiter is a frame limiter that works alongside ReShade to reduce input lag and improve frame pacing in games.";
+        "ReLimiter 是与 ReShade 协同工作的帧率限制器，可降低输入延迟并改善游戏帧时间。";
 
     public const string FallbackDisplayCommander =
-        "Display Commander is a frame limiter that works alongside ReShade to reduce input lag and improve frame pacing.";
+        "Display Commander 是与 ReShade 协同工作的帧率限制器，可降低输入延迟并改善帧时间。";
 
     public const string FallbackOptiScaler =
-        "OptiScaler is an upscaling compatibility layer that enables FSR, XeSS, or DLSS across different GPU vendors, allowing you to use any upscaler regardless of your hardware.";
+        "OptiScaler 是升频兼容层，可在不同显卡厂商之间启用 FSR、XeSS 或 DLSS，让你不受硬件限制使用任意升频技术。";
 
     public const string FallbackLuma =
-        "Luma is an alternative HDR mod framework that provides native HDR output for supported games, bypassing the need for ReShade-based injection.";
+        "Luma 是另一种 HDR 模组框架，为支持的游戏提供原生 HDR 输出，无需基于 ReShade 的注入。";
 
     /// <summary>
     /// Returns the generic fallback text for the given addon type.
@@ -169,10 +169,10 @@ public class AddonInfoResolver
         var source = GetSourceType(card, addon, manifest, osWikiData, hdrDatabase);
         return source switch
         {
-            InfoSourceType.Manifest => "Per-game notes available",
-            InfoSourceType.Wiki     => "Wiki info available",
-            InfoSourceType.Fallback => "General addon info",
-            _ => "General addon info"
+            InfoSourceType.Manifest => "有游戏专属说明",
+            InfoSourceType.Wiki     => "有 Wiki 信息",
+            InfoSourceType.Fallback => "通用组件信息",
+            _ => "通用组件信息"
         };
     }
 
@@ -405,7 +405,7 @@ public class AddonInfoResolver
         {
             var upscalers = stdEntry.Upscalers.Count > 0
                 ? string.Join(", ", stdEntry.Upscalers)
-                : "None listed";
+                : "暂无条目";
             parts.Add($"OptiScaler Compatibility: {stdEntry.Status}\nUpscalers: {upscalers}");
             if (!string.IsNullOrWhiteSpace(stdEntry.Notes))
                 parts.Add(stdEntry.Notes);
@@ -415,7 +415,7 @@ public class AddonInfoResolver
         {
             var upscalers = fsr4Entry.Upscalers.Count > 0
                 ? string.Join(", ", fsr4Entry.Upscalers)
-                : "None listed";
+                : "暂无条目";
             parts.Add($"FSR4 Compatibility: {fsr4Entry.Status}\nUpscalers: {upscalers}");
             if (!string.IsNullOrWhiteSpace(fsr4Entry.Notes))
                 parts.Add(fsr4Entry.Notes);

@@ -8,7 +8,6 @@ RenoDXCommander.Tests/bin
 RenoDXCommander.Tests/obj
 RHI.DropHelper/bin
 RHI.DropHelper/obj
-publish.bat
 OPTI/
 downloads_tidyup.md
 
@@ -35,9 +34,18 @@ todo.md
 nvidiaProfileInspector-master/
 
 docs/v2.3.3-test-checklist.md
-docs/handover-*.md
 docs/RenoDXdb*.json
 docs/ui-freeze-audit-report.md
 docs/ui-freeze-fix-tasks.md
 docs/ui-polish-fix-tasks.md
 OptiScaler-DLSSNR-v*/
+
+# Local maintenance outputs; source tools and docs stay visible.
+**/bin/
+**/obj/
+**/__pycache__/
+**/TestResults/
+/publish-zh*/
+/artifacts/
+/backups/
+**/*.pre-zh-*

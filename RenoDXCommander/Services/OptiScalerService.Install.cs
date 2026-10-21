@@ -392,7 +392,7 @@ public partial class OptiScalerService
                 }
             }
 
-            progress?.Report(("Saving install record...", 80));
+            progress?.Report(("正在保存安装记录…", 80));
 
             // ── 6. Create/update AuxInstalledRecord ──────────────────────────
             var record = new AuxInstalledRecord

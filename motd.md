@@ -1,1 +1,1 @@
-Hi everyone, RHI 2.8.6 has been released. If you have not been prompted to auto update then please download this manually from Github. Everyone should also make sure to log into Github in RHI settings using the PAT method as this does not expire and ensures you are always receiving the newest updates. Discord support will not be available from myself from 13/10 until 27/10. Thank you, Rank
+大家好，RHI 2.8.6 已经发布。如果你没有收到自动更新提示，请手动从 GitHub 下载。另外请务必在 RHI 设置中使用 PAT 方式登录 GitHub，它不会过期，可确保你始终获得最新更新。10 月 13 日至 10 月 27 日期间我本人将无法提供 Discord 支持。谢谢大家，Rank

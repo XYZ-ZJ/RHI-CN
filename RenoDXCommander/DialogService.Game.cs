@@ -20,20 +20,20 @@ public partial class DialogService
 
         var dlg = new ContentDialog
         {
-            Title               = "⚠ Unknown dxgi.dll Detected",
+            Title               = "⚠ 检测到未知 dxgi.dll",
             Content             = new TextBlock
             {
                 TextWrapping = TextWrapping.Wrap,
                 Foreground   = Brush(ResourceKeys.AccentAmberBrush),
                 FontSize     = 13,
-                Text         = $"A dxgi.dll file was found in:\n{card.InstallPath}\n\n" +
+                Text         = $"在以下路径发现已存在的 dxgi.dll 文件：\n{card.InstallPath}\n\n" +
                                $"File size: {sizeKB:N0} KB\n\n" +
-                               "RHI cannot identify this file as ReShade or Display Commander. " +
+                               "RHI 无法确认此文件是否属于 ReShade 或 Display Commander。 " +
                                "It may belong to another mod (e.g. DXVK, Special K, ENB).\n\n" +
-                               "Overwriting it may break the existing mod. Do you want to proceed?",
+                               "覆盖它可能会导致现有 Mod 失效。您确定要继续吗？",
             },
-            PrimaryButtonText   = "Overwrite",
-            CloseButtonText     = "Cancel",
+            PrimaryButtonText   = "覆盖",
+            CloseButtonText     = "取消",
             XamlRoot            = _window.Content.XamlRoot,
             Background          = Brush(ResourceKeys.SurfaceOverlayBrush),
             RequestedTheme      = ElementTheme.Dark,
@@ -50,20 +50,20 @@ public partial class DialogService
 
         var dlg = new ContentDialog
         {
-            Title               = "⚠ Unknown winmm.dll Detected",
+            Title               = "⚠ 检测到未知 winmm.dll",
             Content             = new TextBlock
             {
                 TextWrapping = TextWrapping.Wrap,
                 Foreground   = Brush(ResourceKeys.AccentAmberBrush),
                 FontSize     = 13,
-                Text         = $"A winmm.dll file was found in:\n{card.InstallPath}\n\n" +
+                Text         = $"在以下路径发现已存在的 winmm.dll 文件：\n{card.InstallPath}\n\n" +
                                $"File size: {sizeKB:N0} KB\n\n" +
-                               "RHI cannot identify this file as Display Commander. " +
+                               "RHI 无法确认此文件是否属于 Display Commander。 " +
                                "It may belong to another mod or DLL injector.\n\n" +
-                               "Overwriting it may break the existing mod. Do you want to proceed?",
+                               "覆盖它可能会导致现有 Mod 失效。您确定要继续吗？",
             },
-            PrimaryButtonText   = "Overwrite",
-            CloseButtonText     = "Cancel",
+            PrimaryButtonText   = "覆盖",
+            CloseButtonText     = "取消",
             XamlRoot            = _window.Content.XamlRoot,
             Background          = Brush(ResourceKeys.SurfaceOverlayBrush),
             RequestedTheme      = ElementTheme.Dark,
@@ -192,7 +192,7 @@ public partial class DialogService
             {
                 Title           = $"{addonName} — {card.GameName}",
                 Content         = scrollContent,
-                CloseButtonText = "Close",
+                CloseButtonText = "关闭",
                 XamlRoot        = _window.Content.XamlRoot,
                 Background      = Brush(ResourceKeys.SurfaceToolbarBrush),
                 RequestedTheme  = ElementTheme.Dark,
@@ -248,7 +248,7 @@ public partial class DialogService
                 BorderThickness     = new Thickness(1),
                 Child = new TextBlock
                 {
-                    Text       = "RTX HDR Enabled",
+                    Text       = "RTX HDR 已启用",
                     FontSize   = 12,
                     Foreground = Brush(ResourceKeys.AccentGreenBrush),
                 }
@@ -257,7 +257,7 @@ public partial class DialogService
 
             panel.Children.Add(new TextBlock
             {
-                Text = "RTX HDR uses NVIDIA's driver-level HDR injection to upgrade SDR games to HDR. " +
+                Text = "RTX HDR 通过 NVIDIA 驱动级 HDR 注入，将 SDR 游戏升级为 HDR。" +
                        "It works at the GPU level without injecting DLLs into the game, making it compatible with anti-cheat systems.\n\n" +
                        "Requires: NVIDIA App installed, Game Filter/Freestyle enabled, RTX GPU, driver 550+.",
                 TextWrapping = TextWrapping.Wrap,
@@ -339,7 +339,7 @@ public partial class DialogService
         {
             panel.Children.Add(new TextBlock
             {
-                Text       = "No additional RenoDX notes for this game.",
+                Text       = "此游戏没有额外的 RenCDX 说明。",
                 Foreground = dimColour,
                 FontSize   = 13,
             });
@@ -493,7 +493,7 @@ public partial class DialogService
             {
                 panel.Children.Add(new TextBlock
                 {
-                    Text       = "No additional Luma notes for this game.",
+                    Text       = "此游戏没有额外的 Luma 说明。",
                     Foreground = dimColour,
                     FontSize   = 13,
                 });
@@ -564,7 +564,7 @@ public partial class DialogService
         {
             panel.Children.Add(new TextBlock
             {
-                Text       = "No OptiScaler compatibility data available for this game.",
+                Text       = "此游戏没有可用的 OptiScaler 兼容性数据。",
                 Foreground = dimColour,
                 FontSize   = 13,
             });
@@ -584,7 +584,7 @@ public partial class DialogService
     {
         var upscalers = entry.Upscalers.Count > 0
             ? string.Join(", ", entry.Upscalers)
-            : "None listed";
+            : "暂无条目";
 
         // Section header with status
         panel.Children.Add(new TextBlock
@@ -630,7 +630,7 @@ public partial class DialogService
             };
             link.Inlines.Add(new Microsoft.UI.Xaml.Documents.Run
             {
-                Text     = "View details",
+                Text     = "查看详情",
                 FontSize = 13,
             });
             var para = new Microsoft.UI.Xaml.Documents.Paragraph();
@@ -855,20 +855,20 @@ public partial class DialogService
 
             var dlg = new ContentDialog
             {
-                Title               = "⚠ UE-Extended Compatibility Warning",
+                Title               = "⚠ UE-Extended 兼容性警告",
                 Content             = new TextBlock
                 {
                     TextWrapping = TextWrapping.Wrap,
                     FontSize     = 13,
-                    Text         = "Not all Unreal Engine games are compatible with UE-Extended.\n\n" +
-                                   "UE-Extended uses a generic injection method that works with most " +
-                                   "Unreal Engine games but may cause crashes or visual issues with others. " +
-                                   "If the game has a named RenoDX mod, that mod is specifically tailored " +
-                                   "for the game and may provide better results." +
+                    Text         = "并非所有 Unreal Engine 游戏都兼容 UE-Extended。\n\n" +
+                                   "UE-Extended 使用适用于大多数 " +
+                                   "Unreal Engine 游戏的通用注入方式，但可能导致其他游戏崩溃或出现画面问题。" +
+                                   "如果游戏有对应的 RenCDX 专用模组，该模组针对该游戏进行了适配，" +
+                                   "可能提供更好的效果。" +
                                    notesHint,
                 },
-                PrimaryButtonText   = "OK, I understand",
-                SecondaryButtonText = "Don't show again",
+                PrimaryButtonText   = "确定，我知道了",
+                SecondaryButtonText = "不再显示",
                 XamlRoot            = _window.Content.XamlRoot,
                 Background          = Brush(ResourceKeys.SurfaceOverlayBrush),
                 RequestedTheme      = ElementTheme.Dark,
@@ -899,19 +899,19 @@ public partial class DialogService
 
             var dlg = new ContentDialog
             {
-                Title = "Administrator Privileges Required",
+                Title = "需要管理员权限",
                 Content = new TextBlock
                 {
                     TextWrapping = TextWrapping.Wrap,
                     FontSize = 13,
-                    Text = "Installing the Vulkan ReShade layer requires writing to C:\\ProgramData\\ReShade\\ " +
-                           "and modifying system registry keys, which needs administrator privileges.\n\n" +
-                           "Enable Admin Mode — RHI will always launch elevated (no UAC prompt after setup).\n\n" +
-                           "Restart as Admin — one-time elevated restart to complete this install.",
+                    Text = "安装 Vulkan ReShade 层需要写入 C:\\PrCgramData\\ReShade\\ " +
+                           "并修改系统注册表项，这需要管理员权限。\n\n" +
+                           "启用管理员模式 — RHI 将始终以管理员权限启动（设置完成后不再弹出 UAC 提示）。\n\n" +
+                           "以管理员身份重启 — 仅本次以提升权限重启以完成安装。",
                 },
-                PrimaryButtonText = "Enable Admin Mode",
-                SecondaryButtonText = "Restart as Admin",
-                CloseButtonText = "Cancel",
+                PrimaryButtonText = "启用管理员模式",
+                SecondaryButtonText = "以管理员身份重启",
+                CloseButtonText = "取消",
                 XamlRoot = _window.Content.XamlRoot,
                 Background = Brush(ResourceKeys.SurfaceOverlayBrush),
                 RequestedTheme = ElementTheme.Dark,

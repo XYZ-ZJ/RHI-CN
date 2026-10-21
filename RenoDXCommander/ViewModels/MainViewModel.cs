@@ -89,7 +89,7 @@ public partial class MainViewModel : ObservableObject
         set => _settingsViewModel.LastSeenVersion = value;
     }
 
-    public string UpdateButtonTooltip => "Update ReShade, RenoDX, ReLimiter, Display Commander, and RE Framework for all games";
+    public string UpdateButtonTooltip => "更新全部游戏的 ReShade、RenoDX、ReLimiter、Display Commander 和 RE Framework";
 
     /// <summary>
     /// The global shader picker button is disabled while custom shaders are active.
@@ -536,6 +536,23 @@ public partial class MainViewModel : ObservableObject
     {
         var dict = new Dictionary<string, HdrModEntry>(StringComparer.OrdinalIgnoreCase);
 
+        // Display-only Simplified Chinese names. The dictionary key remains the original
+        // English name so download links, matching, and installation logic are unchanged.
+        static string DisplayHdrName(string name) => name switch
+        {
+            "7 Days to Die" => "七日杀",
+            "A Plague Tale: Innocence" => "瘟疫传说：无罪",
+            "A Plague Tale: Requiem" => "瘟疫传说：安魂曲",
+            "A Way Out" => "逃出生天",
+            "Abiotic Factor" => "非生物因素",
+            "Absolum" => "Absolum",
+            "60 Parsecs!" => "60秒！",
+            "9 Years of Shadows" => "九年阴影",
+            "A Difficult Game About Climbing" => "攀岩困难游戏",
+            "1000xRESIST" => "1000xRESIST",
+            _ => name,
+        };
+
         // RenoDX named mods (from DB / wiki)
         foreach (var mod in _allMods)
         {
@@ -543,7 +560,7 @@ public partial class MainViewModel : ObservableObject
             var rdxUrl    = mod.SnapshotUrl ?? mod.NexusUrl ?? mod.DiscordUrl;
             var rdxStatus = mod.Status == "🚧" ? "WIP" : "Done";
             dict[mod.Name] = new HdrModEntry(
-                Name:        mod.Name,
+                Name:        DisplayHdrName(mod.Name),
                 RenoDXStatus: rdxStatus,
                 RenoDXUrl:   rdxUrl,
                 LumaStatus:  null,
@@ -559,7 +576,7 @@ public partial class MainViewModel : ObservableObject
             if (!dict.ContainsKey(kv.Key))
             {
                 dict[kv.Key] = new HdrModEntry(
-                    Name:        kv.Value.Name,
+                    Name:        DisplayHdrName(kv.Value.Name),
                     RenoDXStatus: ueStatus,
                     RenoDXUrl:   null,
                     LumaStatus:  null,
@@ -576,7 +593,7 @@ public partial class MainViewModel : ObservableObject
             var unityStatus = string.Equals(kv.Value.Status, "WIP", StringComparison.OrdinalIgnoreCase)
                 ? "WIP" : "Done";
             dict[kv.Key] = new HdrModEntry(
-                Name:        kv.Value.Name,
+                Name:        DisplayHdrName(kv.Value.Name),
                 RenoDXStatus: unityStatus,
                 RenoDXUrl:   null,
                 LumaStatus:  null,
@@ -596,7 +613,7 @@ public partial class MainViewModel : ObservableObject
             else
             {
                 dict[luma.Name] = new HdrModEntry(
-                    Name:        luma.Name,
+                    Name:        DisplayHdrName(luma.Name),
                     RenoDXStatus: null,
                     RenoDXUrl:   null,
                     LumaStatus:  lumaStatus,
@@ -643,7 +660,7 @@ public partial class MainViewModel : ObservableObject
 
     // Settings file I/O delegated to SettingsViewModel
 
-    [ObservableProperty] private string _statusText = "Loading...";
+    [ObservableProperty] private string _statusText = "正在加载…";
     [ObservableProperty] private string _subStatusText = "";
     [ObservableProperty] private bool _isLoading = true;
     [ObservableProperty] private bool _isBackgroundScanning;

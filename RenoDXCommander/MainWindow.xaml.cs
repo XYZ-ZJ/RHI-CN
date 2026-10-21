@@ -598,7 +598,7 @@ public sealed partial class MainWindow : Window
                 };
                 var pickerDialog = new ContentDialog
                 {
-                    Title = "🌙 Install Luma Addon",
+                    Title = "🌙 安装 Luma 插件",
                     Content = new StackPanel
                     {
                         Spacing = 8,
@@ -608,8 +608,8 @@ public sealed partial class MainWindow : Window
                             combo,
                         }
                     },
-                    PrimaryButtonText = "Install",
-                    CloseButtonText = "Cancel",
+                    PrimaryButtonText = "安装",
+                    CloseButtonText = "取消",
                     XamlRoot = Content.XamlRoot,
                     RequestedTheme = Microsoft.UI.Xaml.ElementTheme.Dark,
                 };

@@ -53,9 +53,9 @@ Type: filesandordirs; Name: "{localappdata}\RHI"
 
 [Run]
 ; Download Windows App Runtime 2.5.1 if not already installed (only runs if missing)
-Filename: "powershell.exe"; Parameters: "-NoProfile -NonInteractive -WindowStyle Hidden -Command ""Invoke-WebRequest -Uri 'https://aka.ms/windowsappsdk/2.5/latest/windowsappruntimeinstall-x64.exe' -OutFile '{tmp}\windowsappruntimeinstall-x64.exe' -UseBasicParsing"""; StatusMsg: "Downloading Windows App Runtime 2.5.1..."; Flags: waituntilterminated; Check: NeedsWindowsAppRuntime
+Filename: "powershell.exe"; Parameters: "-NoProfile -NonInteractive -WindowStyle Hidden -Command ""Invoke-WebRequest -Uri 'https://aka.ms/windowsappsdk/2.5/latest/windowsappruntimeinstall-x64.exe' -OutFile '{tmp}\windowsappruntimeinstall-x64.exe' -UseBasicParsing"""; StatusMsg: "正在下载 Windows App Runtime 2.5.1..."; Flags: waituntilterminated; Check: NeedsWindowsAppRuntime
 ; Install Windows App Runtime 2.5.1 if not already installed
-Filename: "{tmp}\windowsappruntimeinstall-x64.exe"; Parameters: "--quiet"; StatusMsg: "Installing Windows App Runtime 2.5.1..."; Flags: waituntilterminated; Check: NeedsWindowsAppRuntime
+Filename: "{tmp}\windowsappruntimeinstall-x64.exe"; Parameters: "--quiet"; StatusMsg: "正在安装 Windows App Runtime 2.5.1..."; Flags: waituntilterminated; Check: NeedsWindowsAppRuntime
 Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent; BeforeInstall: BeginForegroundHandoff; AfterInstall: CompleteForegroundHandoff
 
 [Code]
@@ -131,8 +131,8 @@ end;
 
 procedure BeginForegroundHandoff;
 begin
-  ForegroundProgress := CreateOutputProgressPage('Starting RHI', 'Waiting for the application window...');
-  ForegroundProgress.SetText('Starting RHI (including Admin Mode, if enabled)...', '');
+  ForegroundProgress := CreateOutputProgressPage('正在启动 RHI', '正在等待应用程序窗口...');
+  ForegroundProgress.SetText('正在启动 RHI（如已启用管理员模式，则包含该模式）...', '');
   ForegroundProgress.Show;
 end;
 

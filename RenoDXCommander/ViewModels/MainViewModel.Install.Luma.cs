@@ -159,7 +159,7 @@ public partial class MainViewModel
                 card.RsInstalledFile    = record.InstalledAs;
                 card.RsInstalledVersion = AuxInstallService.ReadInstalledVersion(record.InstallPath, record.InstalledAs);
                 card.RsStatus           = GameStatus.Installed;
-                card.RsActionMessage    = "✅ ReShade installed!";
+                card.RsActionMessage    = "✅ ReShade 已安装！";
                 card.NotifyAll();
                 card.FadeMessage(m => card.RsActionMessage = m, card.RsActionMessage);
                 _filterViewModel.UpdateCounts();
@@ -207,7 +207,7 @@ public partial class MainViewModel
                 {
                     card.RsInstalledVersion = vulkanVersion;
                     card.RsStatus        = GameStatus.Installed;
-                    card.RsActionMessage = "✅ Vulkan ReShade installed!";
+                    card.RsActionMessage = "✅ Vulkan ReShade 已安装！";
                     card.NotifyAll();
                     card.FadeMessage(m => card.RsActionMessage = m, card.RsActionMessage);
                     _filterViewModel.UpdateCounts();
@@ -1012,7 +1012,7 @@ public partial class MainViewModel
             {
                 card.LumaRecord = record;
                 card.LumaStatus = GameStatus.Installed;
-                card.LumaActionMessage = "Luma installed!";
+                card.LumaActionMessage = "Luma 已安装！";
                 card.FadeMessage(m => card.LumaActionMessage = m, card.LumaActionMessage);
                 // Rebuild the detail panel so the addon label and author badge update immediately
                 RequestDetailPanelRebuild?.Invoke(card);
@@ -1073,7 +1073,7 @@ public partial class MainViewModel
         // Luma's bundled ReShade DLL was excluded from the zip — RHI manages ReShade.
         // When dgVoodoo2 is being deployed: force ReShade to dxgi.dll so it hooks dgVoodoo's
         // DX11 output rather than competing with dgVoodoo2 for the d3d9.dll slot.
-        DispatcherQueue?.TryEnqueue(() => card.LumaActionMessage = "Installing ReShade...");
+        DispatcherQueue?.TryEnqueue(() => card.LumaActionMessage = "正在安装 ReShade…");
         await InstallReShadeInternalAsync(card, needsDgVoodoo ? "dxgi.dll" : null);
 
         // ── dgVoodoo2 (DX9→DX11 translation layer — required for some legacy games) ────
@@ -1175,7 +1175,7 @@ public partial class MainViewModel
         }
 
         // Clear the action message — drag-drop path has no subsequent step to overwrite it
-        card.FadeMessage(m => card.LumaActionMessage = m, "✅ Luma installed!");
+        card.FadeMessage(m => card.LumaActionMessage = m, "✅ Luma 已安装！");
     }
 
     [RelayCommand]
@@ -1404,8 +1404,8 @@ public partial class MainViewModel
             {
                 Title = $"⚠ Install Note — {gameName}",
                 Content = dialogContent,
-                PrimaryButtonText = "Continue",
-                CloseButtonText = "Cancel",
+                PrimaryButtonText = "继续",
+                CloseButtonText = "取消",
                 DefaultButton = Microsoft.UI.Xaml.Controls.ContentDialogButton.Primary,
                 XamlRoot = xamlRoot,
             };

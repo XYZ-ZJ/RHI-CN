@@ -29,14 +29,14 @@ public static class AddonManagerDialog
         {
             var emptyDlg = new ContentDialog
             {
-                Title = "ReShade Addon Manager",
+                Title = "ReShade 插件管理器",
                 Content = new TextBlock
                 {
-                    Text = "No addons available. Try refreshing.",
+                    Text = "暂无可用插件。请尝试刷新。",
                     FontSize = 13,
                     Foreground = Brush(ResourceKeys.TextPrimaryBrush),
                 },
-                CloseButtonText = "Close",
+                CloseButtonText = "关闭",
                 XamlRoot = xamlRoot,
                 Background = Brush(ResourceKeys.SurfaceOverlayBrush),
                 MinWidth = 750,
@@ -54,7 +54,7 @@ public static class AddonManagerDialog
             "RHI", "Custom", "Addons");
         var folderLink = new HyperlinkButton
         {
-            Content = "Place custom .addon64/.addon32 files here",
+            Content = "将自定义 .addon64/.addon32 文件放置于此",
             FontSize = 11,
             Foreground = Brush(ResourceKeys.AccentBlueBrush),
             Padding = new Thickness(0),
@@ -87,7 +87,7 @@ public static class AddonManagerDialog
         {
             panel.Children.Add(new TextBlock
             {
-                Text = "Custom Addons",
+                Text = "自定义插件",
                 FontSize = 12,
                 FontWeight = Microsoft.UI.Text.FontWeights.SemiBold,
                 Foreground = Brush(ResourceKeys.TextPrimaryBrush),
@@ -111,9 +111,9 @@ public static class AddonManagerDialog
 
         var dlg = new ContentDialog
         {
-            Title = "ReShade Addon Manager",
+            Title = "ReShade 插件管理器",
             Content = scrollViewer,
-            CloseButtonText = "Close",
+            CloseButtonText = "关闭",
             XamlRoot = xamlRoot,
             Background = Brush(ResourceKeys.SurfaceOverlayBrush),
             MinWidth = 750,
@@ -210,7 +210,7 @@ public static class AddonManagerDialog
         {
             textPanel.Children.Add(new HyperlinkButton
             {
-                Content = "How to use",
+                Content = "使用说明",
                 NavigateUri = new Uri(entry.RepositoryUrl),
                 FontSize = 11,
                 Foreground = Brush(ResourceKeys.AccentBlueBrush),
@@ -228,8 +228,8 @@ public static class AddonManagerDialog
             var toggle = new ToggleSwitch
             {
                 IsOn = isEnabled,
-                OnContent = "On",
-                OffContent = "Off",
+                OnContent = "开",
+                OffContent = "关",
                 VerticalAlignment = VerticalAlignment.Center,
             };
 
@@ -300,7 +300,7 @@ public static class AddonManagerDialog
         {
             rightElement = new HyperlinkButton
             {
-                Content = "Repository",
+                Content = "仓库",
                 NavigateUri = new Uri(entry.RepositoryUrl!),
                 FontSize = 11,
                 Foreground = Brush(ResourceKeys.AccentBlueBrush),

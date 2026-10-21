@@ -13,7 +13,7 @@ public partial class GameCardViewModel
 
     // ── REF computed properties ───────────────────────────────────────────────────
 
-    public string RefActionLabel => RefIsInstalling ? "Installing..."
+    public string RefActionLabel => RefIsInstalling ? "正在安装..."
         : RefStatus == GameStatus.UpdateAvailable ? "⬆  Update RE Framework"
         : RefStatus == GameStatus.Installed ? "↺  Reinstall RE Framework"
         : "⬇  Install RE Framework";
@@ -26,10 +26,10 @@ public partial class GameCardViewModel
     public Visibility RefMessageVisibility  => string.IsNullOrEmpty(RefActionMessage) ? Visibility.Collapsed : Visibility.Visible;
     public Visibility RefDeleteVisibility   => RefStatus == GameStatus.Installed || RefStatus == GameStatus.UpdateAvailable ? Visibility.Visible : Visibility.Collapsed;
 
-    public string RefStatusText => RefIsInstalling ? "Installing…"
-        : RefStatus == GameStatus.UpdateAvailable ? "Update"
-        : RefStatus == GameStatus.Installed ? (RefInstalledVersion ?? "Installed")
-        : "Ready";
+    public string RefStatusText => RefIsInstalling ? "正在安装…"
+        : RefStatus == GameStatus.UpdateAvailable ? "更新"
+        : RefStatus == GameStatus.Installed ? (RefInstalledVersion ?? "已安装")
+        : "就绪";
     public string RefStatusColor => RefIsInstalling ? "#D4A856"
         : RefStatus == GameStatus.UpdateAvailable ? "#B898E8"
         : RefStatus == GameStatus.Installed ? "#5ECB7D"

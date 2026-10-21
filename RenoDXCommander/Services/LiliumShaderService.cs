@@ -62,7 +62,7 @@ public class LiliumShaderService : ILiliumShaderService
     {
         try
         {
-            progress?.Report("Checking Lilium HDR shaders...");
+            progress?.Report("正在检查 Lilium HDR 着色器…");
 
             // ── 1. Fetch latest release metadata ─────────────────────────────────
             string? json;
@@ -117,7 +117,7 @@ public class LiliumShaderService : ILiliumShaderService
                 && ShadersAvailable)
             {
                 CrashReporter.Log($"[LiliumShaderService.EnsureLatestAsync] Already up to date ({assetName})");
-                progress?.Report($"Lilium shaders up to date ({assetName})");
+                progress?.Report($"Lilium 着色器已是最新 ({assetName})");
                 return;
             }
 
@@ -151,7 +151,7 @@ public class LiliumShaderService : ILiliumShaderService
                         await file.WriteAsync(buf.AsMemory(0, read));
                         downloaded += read;
                         if (total > 0)
-                            progress?.Report($"Downloading Lilium shaders... {downloaded / 1024} KB / {total / 1024} KB");
+                            progress?.Report($"正在下载 Lilium 着色器… {downloaded / 1024} KB / {total / 1024} KB");
                     }
                 }
 
@@ -166,7 +166,7 @@ public class LiliumShaderService : ILiliumShaderService
             }
 
             // ── 5. Extract Shaders/ and Textures/ from the .7z ──────────────────
-            progress?.Report("Extracting Lilium shaders...");
+            progress?.Report("正在解压 Lilium 着色器…");
             try
             {
                 Directory.CreateDirectory(ShadersDir);
@@ -230,7 +230,7 @@ public class LiliumShaderService : ILiliumShaderService
 
             // ── 6. Store the version so we skip next time ─────────────────────────
             SaveStoredVersion(assetName);
-            progress?.Report($"Lilium shaders updated ({assetName})");
+            progress?.Report($"Lilium 着色器已更新 ({assetName})");
             CrashReporter.Log($"[LiliumShaderService.EnsureLatestAsync] Done. Version saved as {assetName}");
         }
         catch (Exception ex)

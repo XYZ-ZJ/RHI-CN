@@ -37,7 +37,7 @@ public class LumaService : ILumaService
     /// </summary>
     public async Task<List<LumaMod>> FetchCompletedModsAsync(IProgress<string>? progress = null)
     {
-        progress?.Report("Fetching Luma wiki...");
+        progress?.Report("正在获取 Luma Wiki…");
         var html = await _http.GetStringAsync(WikiUrl);
         var doc = new HtmlDocument();
         doc.LoadHtml(html);
@@ -171,7 +171,7 @@ public class LumaService : ILumaService
                 mods[i].FeatureNotes = ExtractAnchorSection(doc, anchor, allAnchors);
         }
 
-        progress?.Report($"Found {mods.Count} Luma mods");
+        progress?.Report($"找到 {mods.Count} 个 Luma 模组");
         return mods;
     }
 
@@ -182,7 +182,7 @@ public class LumaService : ILumaService
     /// </summary>
     public async Task<Dictionary<string, LumaGenericGameEntry>> FetchGenericUeTableAsync(IProgress<string>? progress = null)
     {
-        progress?.Report("Fetching Luma UE wiki...");
+        progress?.Report("正在获取 Luma UE Wiki…");
         var result = new Dictionary<string, LumaGenericGameEntry>(StringComparer.OrdinalIgnoreCase);
 
         try
@@ -637,7 +637,7 @@ public class LumaService : ILumaService
         }
         catch (Exception ex)
         {
-            throw new HttpRequestException($"Failed to download Luma mod: {ex.Message}");
+            throw new HttpRequestException($"下载 Luma 模组失败： {ex.Message}");
         }
         finally
         {
@@ -652,7 +652,7 @@ public class LumaService : ILumaService
         // ── Deploy reshade.ini FIRST ──────────────────────────────────────────────
         // Must happen before zip extraction so that the AddonPath setting in
         // reshade.ini is available when resolving where .addon files should go.
-        progress?.Report(("Deploying ReShade config...", 75));
+        progress?.Report(("正在部署 ReShade 配置…", 75));
         try
         {
             _auxFileService.EnsureInisDir();
@@ -720,7 +720,7 @@ public class LumaService : ILumaService
         }
 
         // ── Deploy shaders (same as normal ReShade — respects global/per-game selection) ──
-        progress?.Report(("Deploying shaders...", 95));
+        progress?.Report(("正在部署着色器…", 95));
         try
         {
             var exclLuma1 = selectedShaderPacks == null ? null : await Task.Run(() =>
@@ -755,7 +755,7 @@ public class LumaService : ILumaService
             InstalledBuildNumber = await GetLatestBuildNumberAsync().ConfigureAwait(false),
         };
         SaveRecord(record);
-        progress?.Report(("Luma installed!", 100));
+        progress?.Report(("Luma 已安装！", 100));
         return record;
     }
 

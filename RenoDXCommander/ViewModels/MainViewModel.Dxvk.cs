@@ -30,7 +30,7 @@ public partial class MainViewModel
         {
             var dontShowAgain = new CheckBox
             {
-                Content = "Don't show this warning again",
+                Content = "不再显示此警告",
                 Foreground = UIFactory.Brush(ResourceKeys.TextSecondaryBrush),
                 Margin = new Microsoft.UI.Xaml.Thickness(0, 8, 0, 0),
             };
@@ -62,8 +62,8 @@ public partial class MainViewModel
             {
                 Title = "⚠ DXVK Warning",
                 Content = contentPanel,
-                PrimaryButtonText = "Continue",
-                CloseButtonText = "Cancel",
+                PrimaryButtonText = "继续",
+                CloseButtonText = "取消",
                 XamlRoot = xamlRoot,
                 RequestedTheme = Microsoft.UI.Xaml.ElementTheme.Dark,
             };
@@ -104,7 +104,7 @@ public partial class MainViewModel
                 overlayHotkey: _settingsViewModel.OverlayHotkey,
                 screenshotHotkey: _settingsViewModel.ScreenshotHotkey);
 
-            card.DxvkActionMessage = "✅ DXVK installed!";
+            card.DxvkActionMessage = "✅ DXVK 已安装！";
             card.DxvkEnabled = true; // must be set so RequiresVulkanInstall returns true for DX11
             card.NotifyAll();
             card.FadeMessage(m => card.DxvkActionMessage = m, card.DxvkActionMessage);
@@ -239,7 +239,7 @@ public partial class MainViewModel
 
             _dxvkService.SelectedVariant = savedVariant;
 
-            card.DxvkActionMessage = "✅ DXVK updated!";
+            card.DxvkActionMessage = "✅ DXVK 已更新！";
             card.DxvkStatus = GameStatus.Installed;
             card.NotifyAll();
             card.FadeMessage(m => card.DxvkActionMessage = m, card.DxvkActionMessage);

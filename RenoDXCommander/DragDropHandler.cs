@@ -213,7 +213,7 @@ public partial class DragDropHandler
                                 };
                                 var pickerDialog = new Microsoft.UI.Xaml.Controls.ContentDialog
                                 {
-                                    Title = "🌙 Install Luma Addon",
+                                    Title = "🌙 安装 Luma 插件",
                                     Content = new Microsoft.UI.Xaml.Controls.StackPanel
                                     {
                                         Spacing = 8,
@@ -223,8 +223,8 @@ public partial class DragDropHandler
                                             combo,
                                         }
                                     },
-                                    PrimaryButtonText = "Install",
-                                    CloseButtonText = "Cancel",
+                                    PrimaryButtonText = "安装",
+                                    CloseButtonText = "取消",
                                     XamlRoot = _window.Content.XamlRoot,
                                     RequestedTheme = Microsoft.UI.Xaml.ElementTheme.Dark,
                                 };
@@ -283,18 +283,18 @@ public partial class DragDropHandler
                                 };
                                 var pickerDialog = new Microsoft.UI.Xaml.Controls.ContentDialog
                                 {
-                                    Title = "Install Luma Mod",
+                                    Title = "安装 Luma 模组",
                                     Content = new Microsoft.UI.Xaml.Controls.StackPanel
                                     {
                                         Spacing = 8,
                                         Children =
                                         {
-                                            new Microsoft.UI.Xaml.Controls.TextBlock { Text = $"Luma mod detected: {Path.GetFileName(file.Path)}\n\nSelect game to install to:", TextWrapping = Microsoft.UI.Xaml.TextWrapping.Wrap, FontSize = 12 },
+                                            new Microsoft.UI.Xaml.Controls.TextBlock { Text = $"检测到 Luma Mod：{Path.GetFileName(file.Path)}\n\n请选择要安装到的游戏：", TextWrapping = Microsoft.UI.Xaml.TextWrapping.Wrap, FontSize = 12 },
                                             combo,
                                         }
                                     },
-                                    PrimaryButtonText = "Install",
-                                    CloseButtonText = "Cancel",
+                                    PrimaryButtonText = "安装",
+                                    CloseButtonText = "取消",
                                     XamlRoot = _window.Content.XamlRoot,
                                     RequestedTheme = Microsoft.UI.Xaml.ElementTheme.Dark,
                                 };

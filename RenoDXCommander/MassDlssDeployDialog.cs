@@ -43,9 +43,9 @@ public class MassDlssDeployDialog
         {
             var emptyDialog = new ContentDialog
             {
-                Title = "No DLSS/Streamline Games",
-                Content = "No games with DLSS or Streamline DLLs were detected.\nRun a Full Refresh to scan for them.",
-                CloseButtonText = "OK",
+                Title = "未找到 DLSS/Streamline 游戏",
+                Content = "未检测到包含 DLSS 或 Streamline DLL 的游戏。\n请执行“全面刷新”进行扫描。",
+                CloseButtonText = "确定",
                 XamlRoot = _xamlRoot,
                 RequestedTheme = ElementTheme.Dark,
             };
@@ -70,14 +70,14 @@ public class MassDlssDeployDialog
                     : Windows.UI.Color.FromArgb(255, 220, 220, 220)),
             };
             if (isV1)
-                ToolTipService.SetToolTip(cb, "Skipped — v1.x DLSS/Streamline not compatible with newer versions");
+                ToolTipService.SetToolTip(cb, "已跳过 — v1.x DLSS/Streamline 与较新版本不兼容");
             checkBoxes.Add(cb);
             gameListPanel.Children.Add(cb);
         }
 
         var selectAllBtn = new Button
         {
-            Content = "Select All", FontSize = 11, Padding = new Thickness(8, 4, 8, 4),
+            Content = "全选", FontSize = 11, Padding = new Thickness(8, 4, 8, 4),
             Background = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 30, 40, 60)),
             Foreground = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 180, 190, 220)),
             CornerRadius = new CornerRadius(6),
@@ -86,7 +86,7 @@ public class MassDlssDeployDialog
 
         var deselectAllBtn = new Button
         {
-            Content = "Deselect All", FontSize = 11, Padding = new Thickness(8, 4, 8, 4),
+            Content = "全不选", FontSize = 11, Padding = new Thickness(8, 4, 8, 4),
             Background = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 30, 40, 60)),
             Foreground = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 180, 190, 220)),
             CornerRadius = new CornerRadius(6),
@@ -152,7 +152,7 @@ public class MassDlssDeployDialog
         // Auto-create profiles checkbox — lives outside the scroll so it's always visible
         var autoCreateCheck = new CheckBox
         {
-            Content = "Auto-create NVIDIA profiles",
+            Content = "自动创建 NVIDIA 配置文件",
             IsChecked = true,
             FontSize = 11,
             Foreground = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 180, 190, 220)),
@@ -196,11 +196,11 @@ public class MassDlssDeployDialog
         // ── Dialog ──
         var dialog = new ContentDialog
         {
-            Title = "Batch DLSS & Streamline Deploy",
+            Title = "批量部署 DLSS 与 Streamline",
             Content = mainGrid,
-            PrimaryButtonText = "Deploy",
-            SecondaryButtonText = "Restore",
-            CloseButtonText = "Cancel",
+            PrimaryButtonText = "部署",
+            SecondaryButtonText = "还原",
+            CloseButtonText = "取消",
             XamlRoot = _xamlRoot,
             RequestedTheme = ElementTheme.Dark,
         };
@@ -258,7 +258,7 @@ public class MassDlssDeployDialog
         // Show progress
         var progressText = new TextBlock
         {
-            Text = "Deploying to selected games...",
+            Text = "正在向所选游戏部署...",
             FontSize = 12,
             Foreground = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 200, 200, 200)),
             TextWrapping = TextWrapping.Wrap,
@@ -287,7 +287,7 @@ public class MassDlssDeployDialog
 
         var progressDialog = new ContentDialog
         {
-            Title = "Deploying...",
+            Title = "正在部署...",
             Content = progressContainer,
             XamlRoot = _xamlRoot,
             RequestedTheme = ElementTheme.Dark,
@@ -486,9 +486,9 @@ public class MassDlssDeployDialog
 
         var resultDialog = new ContentDialog
         {
-            Title = "Batch Deploy Complete",
+            Title = "批量部署完成",
             Content = new TextBlock { Text = report.ToString().TrimEnd(), TextWrapping = TextWrapping.Wrap, FontSize = 12 },
-            CloseButtonText = "OK",
+            CloseButtonText = "确定",
             XamlRoot = _xamlRoot,
             RequestedTheme = ElementTheme.Dark,
         };
@@ -505,7 +505,7 @@ public class MassDlssDeployDialog
         // Show progress
         var progressText = new TextBlock
         {
-            Text = "Restoring selected games...",
+            Text = "正在还原所选游戏...",
             FontSize = 12,
             Foreground = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 200, 200, 200)),
             TextWrapping = TextWrapping.Wrap,
@@ -526,7 +526,7 @@ public class MassDlssDeployDialog
 
         var progressDialog = new ContentDialog
         {
-            Title = "Restoring...",
+            Title = "正在还原...",
             Content = progressContainer,
             XamlRoot = _xamlRoot,
             RequestedTheme = ElementTheme.Dark,
@@ -575,14 +575,14 @@ public class MassDlssDeployDialog
 
         var resultDialog = new ContentDialog
         {
-            Title = "Restore Complete",
+            Title = "还原完成",
             Content = new TextBlock
             {
                 Text = reportText.ToString().TrimEnd(),
                 TextWrapping = TextWrapping.Wrap,
                 FontSize = 12,
             },
-            CloseButtonText = "OK",
+            CloseButtonText = "确定",
             XamlRoot = _xamlRoot,
             RequestedTheme = ElementTheme.Dark,
         };

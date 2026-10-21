@@ -34,16 +34,16 @@ public static class ShaderPopupHelper
         {
             var emptyDlg = new ContentDialog
             {
-                Title             = "Select Shader Packs",
+                Title             = "选择着色器包",
                 Content           = new TextBlock
                 {
-                    Text       = "No shader packs available.",
+                    Text       = "没有可用的着色器包。",
                     FontSize   = 13,
                     Foreground = Brush(ResourceKeys.TextPrimaryBrush),
                 },
                 PrimaryButtonText      = primaryButtonText,
                 IsPrimaryButtonEnabled = false,
-                CloseButtonText        = "Cancel",
+                CloseButtonText        = "取消",
                 XamlRoot               = xamlRoot,
                 Background             = Brush(ResourceKeys.SurfaceOverlayBrush),
                 RequestedTheme         = ElementTheme.Dark,
@@ -102,14 +102,14 @@ public static class ShaderPopupHelper
         bool allExpanded = false;
         var expandAllBtn = new Button
         {
-            Content             = "Expand All",
+            Content             = "全部展开",
             FontSize            = 12,
             Padding             = new Thickness(8, 4, 8, 4),
             HorizontalAlignment = HorizontalAlignment.Left,
         };
         var deselectAllBtn = new Button
         {
-            Content             = "Deselect All",
+            Content             = "全部取消选择",
             FontSize            = 12,
             Padding             = new Thickness(8, 4, 8, 4),
             HorizontalAlignment = HorizontalAlignment.Left,
@@ -143,7 +143,7 @@ public static class ShaderPopupHelper
                         eb.Content = "▶";
                 }
                 allExpanded = false;
-                expandAllBtn.Content = "Expand All";
+                expandAllBtn.Content = "全部展开";
             }
             finally { profileLoading = false; }
         };
@@ -159,7 +159,7 @@ public static class ShaderPopupHelper
         // ── Search box (right of Deselect All) ───────────────────────────────
         var searchBox = new TextBox
         {
-            PlaceholderText = "Search packs or shaders...",
+            PlaceholderText = "搜索着色器包或着色器...",
             FontSize        = 12,
             MinWidth        = 220,
             Background      = Brush(ResourceKeys.SurfaceInputBrush),
@@ -206,7 +206,7 @@ public static class ShaderPopupHelper
             // ── "Custom Shaders" plain section header (no checkbox, no expand) ──
             panel.Children.Add(new TextBlock
             {
-                Text       = "Custom Shaders",
+                Text       = "自定义着色器",
                 FontSize   = 14,
                 FontWeight = Microsoft.UI.Text.FontWeights.SemiBold,
                 Foreground = Brush(ResourceKeys.TextPrimaryBrush),
@@ -714,7 +714,7 @@ public static class ShaderPopupHelper
         // Header
         profilePanel.Children.Add(new TextBlock
         {
-            Text       = "Profiles",
+            Text       = "配置文件",
             FontSize   = 13,
             FontWeight = Microsoft.UI.Text.FontWeights.SemiBold,
             Foreground = Brush(ResourceKeys.TextPrimaryBrush),
@@ -734,7 +734,7 @@ public static class ShaderPopupHelper
         // Inline rename TextBox for new profile (hidden until "New" is clicked)
         var newProfileBox = new TextBox
         {
-            PlaceholderText = "Profile name",
+            PlaceholderText = "配置文件名称",
             FontSize        = 12,
             Margin          = new Thickness(0, 2, 0, 2),
             Visibility      = Visibility.Collapsed,
@@ -993,7 +993,7 @@ public static class ShaderPopupHelper
             // Save button
             var saveBtn = new Button
             {
-                Content  = "Save",
+                Content  = "保存",
                 FontSize = 12,
                 Padding  = new Thickness(8, 4, 8, 4),
                 Margin   = new Thickness(0, 6, 0, 2),
@@ -1032,10 +1032,10 @@ public static class ShaderPopupHelper
                 rebuildProfileList!();
             };
             profilePanel.Children.Add(saveBtn);
-            ToolTipService.SetToolTip(saveBtn, "Save the current shader selection into the highlighted profile. If no profile is selected, a new one is created automatically.");
+            ToolTipService.SetToolTip(saveBtn, "将当前着色器选择保存到高亮配置。未选择配置时会自动创建新配置。");
             var newBtn = new Button
             {
-                Content  = "New",
+                Content  = "新建",
                 FontSize = 12,
                 Padding  = new Thickness(8, 4, 8, 4),
                 Margin   = new Thickness(0, 2, 0, 2),
@@ -1053,7 +1053,7 @@ public static class ShaderPopupHelper
                 newProfileBox.SelectAll();
             };
             profilePanel.Children.Add(newBtn);
-            ToolTipService.SetToolTip(newBtn, "Create a new profile from the current shader selection. You'll be prompted to enter a name.");
+            ToolTipService.SetToolTip(newBtn, "根据当前着色器选择创建新配置，随后会提示输入名称。");
             profilePanel.Children.Add(newProfileBox);
 
             // Confirm new profile on Enter or focus lost
@@ -1100,7 +1100,7 @@ public static class ShaderPopupHelper
             // Export button
             var exportBtn = new Button
             {
-                Content  = "Export",
+                Content  = "导出",
                 FontSize = 12,
                 Padding  = new Thickness(8, 4, 8, 4),
                 HorizontalAlignment = HorizontalAlignment.Stretch,
@@ -1135,7 +1135,7 @@ public static class ShaderPopupHelper
 
                     CrashReporter.Log($"[ShaderPopupHelper.ShowAsync] Exported shaders zip to clipboard: {zipPath}");
 
-                    exportStatusLabel.Text       = "Copied to clipboard";
+                    exportStatusLabel.Text       = "已复制到剪贴板";
                     exportStatusLabel.Visibility = Visibility.Visible;
 
                     // Clear after 3 seconds
@@ -1157,19 +1157,19 @@ public static class ShaderPopupHelper
                 }
             };
             profilePanel.Children.Add(exportBtn);
-            ToolTipService.SetToolTip(exportBtn, "Zip the currently selected shader files and copy the archive to your clipboard. Paste directly into Discord to share.");
+            ToolTipService.SetToolTip(exportBtn, "将当前选中的着色器文件压缩并复制到剪贴板，可直接粘贴到 Discord 分享。");
             profilePanel.Children.Add(exportStatusLabel);
 
             // Import button
             var importBtn = new Button
             {
-                Content  = "Import",
+                Content  = "导入",
                 FontSize = 12,
                 Padding  = new Thickness(8, 4, 8, 4),
                 Margin   = new Thickness(0, 2, 0, 0),
                 HorizontalAlignment = HorizontalAlignment.Stretch,
             };
-            ToolTipService.SetToolTip(importBtn, "Import a shader profile from a .zip archive exported by RHI.");
+            ToolTipService.SetToolTip(importBtn, "从 RHI 导出的 .zip 压缩包导入着色器配置。");
 
             var importStatusLabel = new TextBlock
             {
@@ -1196,14 +1196,14 @@ public static class ShaderPopupHelper
                         ofn.filter     = "ZIP Archives (*.zip)\0*.zip\0All Files (*.*)\0*.*\0";
                         ofn.file       = new string(new char[260]);
                         ofn.maxFile    = ofn.file.Length;
-                        ofn.title      = "Import Shader Profile";
+                        ofn.title      = "导入着色器配置文件";
                         ofn.flags      = 0x00080000 | 0x00001000; // OFN_FILEMUSTEXIST | OFN_PATHMUSTEXIST
                         return NativeInterop.GetOpenFileName(ref ofn) ? ofn.file.TrimEnd('\0') : null;
                     });
                     if (string.IsNullOrEmpty(zipPath)) return;
 
                     importBtn.IsEnabled = false;
-                    importStatusLabel.Text       = "Importing...";
+                    importStatusLabel.Text       = "正在导入...";
                     importStatusLabel.Foreground = Brush(ResourceKeys.AccentGreenBrush);
                     importStatusLabel.Visibility = Visibility.Visible;
 
@@ -1211,7 +1211,7 @@ public static class ShaderPopupHelper
 
                     if (result == null)
                     {
-                        importStatusLabel.Text       = "Invalid archive — not an RHI shader profile.";
+                        importStatusLabel.Text       = "归档无效，不是 RHI 着色器配置文件。";
                         importStatusLabel.Foreground = Brush(ResourceKeys.AccentRedBrush);
                         importStatusLabel.Visibility = Visibility.Visible;
                     }
@@ -1265,12 +1265,12 @@ public static class ShaderPopupHelper
             profilePanel.Children.Add(new Border { Height = 1, Background = Brush(ResourceKeys.BorderDefaultBrush), Margin = new Thickness(0, 10, 0, 10) });
             var openCustomBtn = new Button
             {
-                Content             = "Open Custom Folder",
+                Content             = "打开自定义文件夹",
                 FontSize            = 12,
                 Padding             = new Thickness(8, 4, 8, 4),
                 HorizontalAlignment = HorizontalAlignment.Stretch,
             };
-            ToolTipService.SetToolTip(openCustomBtn, "Open your Custom shader folder — place .fx files in Shaders\\ and textures in Textures\\ to add them to the picker above.");
+            ToolTipService.SetToolTip(openCustomBtn, "打开自定义着色器文件夹 — 将 .fx 文件放入 Shaders\\，将纹理放入 Textures\\，即可添加到上方选择器。");
             openCustomBtn.Click += async (s, ev) =>
             {
                 try
@@ -1313,10 +1313,10 @@ public static class ShaderPopupHelper
 
         var dlg = new ContentDialog
         {
-            Title             = "Select Shader Packs",
+            Title             = "选择着色器包",
             Content           = contentGrid,
             PrimaryButtonText = primaryButtonText,
-            CloseButtonText   = "Cancel",
+            CloseButtonText   = "取消",
             XamlRoot          = xamlRoot,
             Background        = Brush(ResourceKeys.SurfaceOverlayBrush),
             RequestedTheme    = ElementTheme.Dark,

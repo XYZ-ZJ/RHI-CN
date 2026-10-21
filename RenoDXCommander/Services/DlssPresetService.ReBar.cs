@@ -64,15 +64,15 @@ public partial class DlssPresetService
     /// <summary>ReBAR mode options. Standard = Mode 0, Optimized = Mode 2.</summary>
     public static readonly (string Name, uint Value)[] ReBarModes =
     [
-        ("Standard", 0x00000000),
-        ("Optimized", 0x00000002),
+        ("标准", 0x00000000),
+        ("优化 (Optimized)", 0x00000002),
     ];
 
     /// <summary>ReBAR size limit options. Value is the size in bytes as a 64-bit integer.</summary>
     public static readonly (string Name, ulong Value)[] ReBarSizeLimits =
     [
         ("512MB", 0x0000000020000000),
-        ("1GB (Default)", 0x0000000040000000),
+        ("1GB（默认）", 0x0000000040000000),
         ("1.5GB", 0x0000000060000000),
         ("2GB", 0x0000000080000000),
         ("4GB", 0x0000000100000000),

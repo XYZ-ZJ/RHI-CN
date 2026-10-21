@@ -28,9 +28,9 @@ public class MassDeployHandler
         var confirmDialog = new ContentDialog
         {
             Title = "Confirm Mass Deployment",
-            Content = $"This will deploy ReShade.ini to {eligible.Count} game(s) with ReShade installed.\n\nCustom hotkey and screenshot path settings are preserved.\n\nContinue?",
+            Content = $"这将向安装了 ReShade 的 {eligible.Count} 款游戏部署 ReShade.ini。\n\n自定义快捷键和截图路径设置将予以保留。\n\n是否继续？",
             PrimaryButtonText = "Deploy",
-            CloseButtonText = "Cancel",
+            CloseButtonText = "取消",
             XamlRoot = _window.Content.XamlRoot,
             RequestedTheme = ElementTheme.Dark,
         };
@@ -72,9 +72,9 @@ public class MassDeployHandler
         var confirmDialog = new ContentDialog
         {
             Title = "Confirm Mass Deployment",
-            Content = $"This will deploy relimiter.ini to {eligible.Count} game(s) with ReLimiter installed.\n\nContinue?",
+            Content = $"这将向安装了 ReLimiter 的 {eligible.Count} 款游戏部署 relimiter.ini。\n\n是否继续？",
             PrimaryButtonText = "Deploy",
-            CloseButtonText = "Cancel",
+            CloseButtonText = "取消",
             XamlRoot = _window.Content.XamlRoot,
             RequestedTheme = ElementTheme.Dark,
         };
@@ -106,9 +106,9 @@ public class MassDeployHandler
         var confirmDialog = new ContentDialog
         {
             Title = "Confirm Mass Deployment",
-            Content = $"This will deploy DisplayCommander.ini to {eligible.Count} game(s) with Display Commander installed.\n\nContinue?",
+            Content = $"这将向安装了 Display Commander 的 {eligible.Count} 款游戏部署 DisplayCommander.ini。\n\n是否继续？",
             PrimaryButtonText = "Deploy",
-            CloseButtonText = "Cancel",
+            CloseButtonText = "取消",
             XamlRoot = _window.Content.XamlRoot,
             RequestedTheme = ElementTheme.Dark,
         };
@@ -149,9 +149,9 @@ public class MassDeployHandler
         var confirmDialog = new ContentDialog
         {
             Title = "Confirm Mass Deployment",
-            Content = $"This will deploy OptiScaler.ini to {eligible.Count} game(s) with OptiScaler installed.\n\nContinue?",
+            Content = $"这将向安装了 OptiScaler 的 {eligible.Count} 款游戏部署 OptiScaler.ini。\n\n是否继续？",
             PrimaryButtonText = "Deploy",
-            CloseButtonText = "Cancel",
+            CloseButtonText = "取消",
             XamlRoot = _window.Content.XamlRoot,
             RequestedTheme = ElementTheme.Dark,
         };
@@ -210,7 +210,7 @@ public class MassDeployHandler
             var noGamesDialog = new ContentDialog
             {
                 Title = "No Games Available",
-                Content = "No games with ReShade installed were found. Install ReShade on at least one game first.",
+                Content = "未找到安装了 ReShade 的游戏。请先在至少一款游戏中安装 ReShade。",
                 CloseButtonText = "OK",
                 XamlRoot = xamlRoot,
                 RequestedTheme = ElementTheme.Dark,
@@ -272,7 +272,7 @@ public class MassDeployHandler
             Content = gameScrollViewer,
             PrimaryButtonText = "Deploy",
             IsPrimaryButtonEnabled = false,
-            CloseButtonText = "Cancel",
+            CloseButtonText = "取消",
             XamlRoot = xamlRoot,
             RequestedTheme = ElementTheme.Dark,
             MinWidth = 500,
@@ -318,7 +318,7 @@ public class MassDeployHandler
         var shaderDialog = new ContentDialog
         {
             Title = "🔧 Install Shaders?",
-            Content = $"Presets deployed to {selectedGames.Count} game(s).\n\nAlso install the required shader packs for these games?",
+            Content = $"预设已部署至 {selectedGames.Count} 款游戏。\n\n是否同时为这些游戏安装所需的着色器包？",
             PrimaryButtonText = "Yes",
             CloseButtonText = "No",
             XamlRoot = xamlRoot,

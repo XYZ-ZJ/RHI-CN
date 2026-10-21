@@ -94,7 +94,7 @@ public class DlssEnablerService
         }
 
         Directory.CreateDirectory(_stagingDir);
-        progress?.Report(("Downloading DLSS Enabler...", 10));
+        progress?.Report(("正在下载 DLSS Enabler…", 10));
 
         var (version, downloadUrl) = await FetchLatestReleaseInfoAsync().ConfigureAwait(false);
         if (string.IsNullOrEmpty(version) || string.IsNullOrEmpty(downloadUrl))
@@ -103,7 +103,7 @@ public class DlssEnablerService
             return;
         }
 
-        progress?.Report(("Downloading DLSS Enabler...", 30));
+        progress?.Report(("正在下载 DLSS Enabler…", 30));
 
         try
         {
@@ -148,7 +148,7 @@ public class DlssEnablerService
             return;
         }
 
-        progress?.Report(("DLSS Enabler ready", 90));
+        progress?.Report(("DLSS Enabler 已就绪", 90));
 
         // ── Auto-deploy to all games where DLSS Enabler is enabled ────────────
         try
@@ -185,7 +185,7 @@ public class DlssEnablerService
             _crashReporter.Log($"[DlssEnablerService.EnsureStagingAsync] Auto-deploy loop failed — {ex.Message}");
         }
 
-        progress?.Report(("DLSS Enabler ready", 100));
+        progress?.Report(("DLSS Enabler 已就绪", 100));
     }
 
     // ── Install / Uninstall / Detection ───────────────────────────────────────

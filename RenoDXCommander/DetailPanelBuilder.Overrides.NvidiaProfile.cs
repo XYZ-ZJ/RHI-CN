@@ -311,7 +311,7 @@ public partial class DetailPanelBuilder
             fgCol.Children.Add(new TextBlock { Text = " ", FontSize = 10, Margin = new Thickness(0, 2, 0, 0) });
             var mfgBtn = new Button
             {
-                Content = "Multi Frame Gen",
+                Content = "多帧生成",
                 FontSize = 11,
                 Height = 32,
                 HorizontalAlignment = HorizontalAlignment.Stretch,
@@ -323,7 +323,7 @@ public partial class DetailPanelBuilder
                 IsEnabled = fgEnabled && presetService.IsSupported,
                 Opacity = (fgEnabled && presetService.IsSupported) ? 1.0 : 0.4,
             };
-            ToolTipService.SetToolTip(mfgBtn, "Configure NVIDIA Multi Frame Generation: mode, frame count multiplier, and dynamic target frame rate. Requires 50 Series GPU.");
+            ToolTipService.SetToolTip(mfgBtn, "配置 NVIDIA 多帧生成：模式、帧数倍数和动态目标帧率。需要 50 系列显卡。");
             mfgBtn.Click += async (s, ev) =>
             {
                 var xamlRoot = (s as FrameworkElement)?.XamlRoot ?? _window.Content.XamlRoot;
@@ -424,8 +424,8 @@ public partial class DetailPanelBuilder
                 // When NR is not installed the placeholder is invisible but still takes space.
                 if (!hasDlssnr)
                 {
-                    var presetPlaceholderLabel = new TextBlock { Text = "Preset", FontSize = 10, Foreground = UIFactory.Brush(ResourceKeys.TextTertiaryBrush), Margin = new Thickness(0, 2, 0, 0), Opacity = 0 };
-                    var presetPlaceholderCombo = new ComboBox { ItemsSource = new[] { "Default" }, SelectedIndex = 0, FontSize = 11, HorizontalAlignment = HorizontalAlignment.Stretch, IsEnabled = false, Opacity = 0, MaxDropDownHeight = 300 };
+                    var presetPlaceholderLabel = new TextBlock { Text = "预设", FontSize = 10, Foreground = UIFactory.Brush(ResourceKeys.TextTertiaryBrush), Margin = new Thickness(0, 2, 0, 0), Opacity = 0 };
+                    var presetPlaceholderCombo = new ComboBox { ItemsSource = new[] { "默认" }, SelectedIndex = 0, FontSize = 11, HorizontalAlignment = HorizontalAlignment.Stretch, IsEnabled = false, Opacity = 0, MaxDropDownHeight = 300 };
                     nrCol.Children.Add(presetPlaceholderLabel);
                     nrCol.Children.Add(presetPlaceholderCombo);
                 }
@@ -436,7 +436,7 @@ public partial class DetailPanelBuilder
 
                 var deployNrBtn = new Button
                 {
-                    Content = "Deploy DLL",
+                    Content = "部署 DLL",
                     FontSize = 11,
                     Height = 32,
                     HorizontalAlignment = HorizontalAlignment.Stretch,
@@ -446,7 +446,7 @@ public partial class DetailPanelBuilder
                     BorderThickness = new Thickness(1),
                     CornerRadius = new CornerRadius(8),
                 };
-                ToolTipService.SetToolTip(deployNrBtn, "Download and copy nvngx_dlssnr.dll to the game folder. Supports RTX 40 and 50 Series GPUs. Can also be deployed automatically via the RenoDX DLSS5 addon in the Addons picker.");
+                ToolTipService.SetToolTip(deployNrBtn, "下载并复制 nvngx_dlssnr.dll 到游戏文件夹。支持 RTX 40 和 50 系列显卡，也可通过组件选择器中的 RenoDX DLSS5 组件自动部署。");
 
                 var deleteNrBtn = new Button
                 {
@@ -463,7 +463,7 @@ public partial class DetailPanelBuilder
                     IsHitTestVisible = hasDlssnr,
                     Content = new TextBlock { Text = "✕", FontSize = 12, HorizontalAlignment = HorizontalAlignment.Center, Foreground = UIFactory.Brush(ResourceKeys.AccentRedBrush) },
                 };
-                ToolTipService.SetToolTip(deleteNrBtn, "Delete nvngx_dlssnr.dll from the game folder.");
+                ToolTipService.SetToolTip(deleteNrBtn, "从游戏文件夹删除 nvngx_dlssnr.dll。");
 
                 deployNrBtn.Click += async (s, ev) =>
                 {
@@ -471,7 +471,7 @@ public partial class DetailPanelBuilder
                     if (tc == null || string.IsNullOrEmpty(tc.InstallPath)) return;
 
                     deployNrBtn.IsEnabled = false;
-                    deployNrBtn.Content = "Downloading...";
+                    deployNrBtn.Content = "正在下载...";
 
                     try
                     {
@@ -496,7 +496,7 @@ public partial class DetailPanelBuilder
                                     "RHI", "Custom", "DLSS", "nvngx_dlssnr.dll");
                                 if (!File.Exists(customSrc))
                                 {
-                                    _window.DispatcherQueue?.TryEnqueue(() => { deployNrBtn.Content = "Not in Custom/DLSS"; deployNrBtn.IsEnabled = true; });
+                                    _window.DispatcherQueue?.TryEnqueue(() => { deployNrBtn.Content = "不适用于自定义/DLSS"; deployNrBtn.IsEnabled = true; });
                                     return;
                                 }
                                 File.Copy(customSrc, destPath, overwrite: true);
@@ -527,7 +527,7 @@ public partial class DetailPanelBuilder
                             }
                             else if (cachedPath == null)
                             {
-                                _window.DispatcherQueue?.TryEnqueue(() => { deployNrBtn.Content = "Not available"; deployNrBtn.IsEnabled = true; });
+                                _window.DispatcherQueue?.TryEnqueue(() => { deployNrBtn.Content = "不可用"; deployNrBtn.IsEnabled = true; });
                                 return;
                             }
                             else if (isDefault)
@@ -578,7 +578,7 @@ public partial class DetailPanelBuilder
                     catch (Exception ex)
                     {
                         CrashReporter.Log($"[NrDeployBtn] Failed — {ex.Message}");
-                        _window.DispatcherQueue?.TryEnqueue(() => { deployNrBtn.Content = "Deploy DLL"; deployNrBtn.IsEnabled = true; });
+                        _window.DispatcherQueue?.TryEnqueue(() => { deployNrBtn.Content = "部署 DLL"; deployNrBtn.IsEnabled = true; });
                     }
                 };
 
@@ -674,7 +674,7 @@ public partial class DetailPanelBuilder
             bool restoreEnabled = card.HasAnyDlssBackup || hasNonDefaultPreset;
             var dlssRestoreBtn = new Button
             {
-                Content = "Restore DLSS/SL",
+                Content = "还原 DLSS/SL",
                 FontSize = 11,
                 Height = 32,
                 HorizontalAlignment = HorizontalAlignment.Stretch,
@@ -737,7 +737,7 @@ public partial class DetailPanelBuilder
 
             var applyBtn = new Button
             {
-                Content = "Quick Apply",
+                Content = "快速应用",
                 FontSize = 11,
                 Height = 32,
                 HorizontalAlignment = HorizontalAlignment.Stretch,
@@ -748,7 +748,7 @@ public partial class DetailPanelBuilder
                 CornerRadius = new CornerRadius(8),
                 IsEnabled = hasDefaults && card.HasAnyDlssStreamline,
             };
-            ToolTipService.SetToolTip(applyBtn, "Apply your configured DLSS/Streamline default versions, presets, and render scales to this game. Downloads versions on-demand if not cached.");
+            ToolTipService.SetToolTip(applyBtn, "将已配置的 DLSS/Streamline 默认版本、预设和渲染缩放应用到此游戏。未缓存的版本会按需下载。");
             applyBtn.Click += async (s, ev) =>
             {
                 var targetCard = _window.ViewModel.AllCards.FirstOrDefault(c =>
@@ -860,7 +860,7 @@ public partial class DetailPanelBuilder
                         child.Opacity = 0.4;
                 }
             }
-            ToolTipService.SetToolTip(dlssRestoreBtn, "Restore all DLSS and Streamline DLLs to their original game versions and reset presets to Default.");
+            ToolTipService.SetToolTip(dlssRestoreBtn, "将所有 DLSS 和 Streamline DLL 恢复为游戏原始版本，并将预设重置为默认值。");
 
             Grid.SetColumn(slCol, slColumn);
             dlssRowGrid.Children.Add(slCol);

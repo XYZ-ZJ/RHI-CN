@@ -315,7 +315,7 @@ public class DldsrService : IDldsrService
     public async Task<bool> ApplyStateAsync(string label, IProgress<string>? progress = null, int? smoothnessOverride = null)
     {
         CrashReporter.Log($"[DldsrService.ApplyStateAsync] Applying state '{label}'" + (smoothnessOverride.HasValue ? $" with smoothness override {smoothnessOverride}%" : ""));
-        progress?.Report("Loading capture...");
+        progress?.Report("正在加载配置快照…");
         var captures = LoadCaptures();
         var capture = captures.FirstOrDefault(c => c.Label.Equals(label, StringComparison.OrdinalIgnoreCase));
         if (capture == null)
@@ -334,7 +334,7 @@ public class DldsrService : IDldsrService
         }
 
         // Write capture to ProgramData for SYSTEM-accessible path (user temp is inaccessible to SYSTEM)
-        progress?.Report("Preparing DLDSR configuration...");
+        progress?.Report("正在准备 DLDSR 配置…");
         Directory.CreateDirectory(ProgramDataDir);
         var stateFile = Path.Combine(ProgramDataDir, "dldsr-state.json");
         try
@@ -382,7 +382,7 @@ public class DldsrService : IDldsrService
         }
 
         // Execute registry writes via scheduled task (SYSTEM privilege)
-        progress?.Report("Writing DLDSR configuration...");
+        progress?.Report("正在写入 DLDSR 配置…");
         if (!await ExecuteAsSystemAsync(stateFile))
         {
             CrashReporter.Log("[DldsrService.ApplyStateAsync] Failed to execute registry writes");
@@ -390,7 +390,7 @@ public class DldsrService : IDldsrService
         }
 
         // Restart GPU adapter
-        progress?.Report("Restarting GPU adapter...");
+        progress?.Report("正在重启 GPU 适配器…");
         if (!await RestartGpuAdapterAsync())
         {
             CrashReporter.Log("[DldsrService.ApplyStateAsync] Failed to restart GPU adapter");
@@ -398,7 +398,7 @@ public class DldsrService : IDldsrService
         }
 
         // Wait for displays to come back
-        progress?.Report("Waiting for displays...");
+        progress?.Report("正在等待显示器…");
         await Task.Delay(12000);
 
         CrashReporter.Log($"[DldsrService.ApplyStateAsync] Successfully applied '{label}'");
@@ -888,14 +888,14 @@ try {
             // GPU restart required — the driver reads DisplayDatabase at adapter startup only,
             // not live. nvcontainer.exe updates smoothness live via a privileged IPC channel
             // that is not available to third-party apps.
-            progress?.Report("Restarting GPU adapter...");
+            progress?.Report("正在重启 GPU 适配器…");
             if (!await RestartGpuAdapterAsync())
             {
                 CrashReporter.Log("[DldsrService.SetSmoothnessAsync] Failed to restart GPU adapter");
                 return false;
             }
 
-            progress?.Report("Waiting for displays...");
+            progress?.Report("正在等待显示器…");
             await Task.Delay(12000);
 
             CrashReporter.Log($"[DldsrService.SetSmoothnessAsync] Successfully set smoothness to {smoothness}%");

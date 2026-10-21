@@ -142,8 +142,8 @@ public sealed partial class MainWindow
                 case nameof(ViewModel.IsBackgroundScanning):
                     HdrModsListBtn.IsEnabled = !ViewModel.IsBackgroundScanning;
                     ToolTipService.SetToolTip(HdrModsListBtn, ViewModel.IsBackgroundScanning
-                        ? "Loading mod data, please wait..."
-                        : "Browse all games with available HDR mods");
+                        ? "正在加载 Mod 数据，请稍候..."
+                        : "浏览所有具备可用 HDR Mod 的游戏");
                     break;
                 case nameof(ViewModel.CurrentPage):
                     UpdatePageVisibility();

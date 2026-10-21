@@ -13,18 +13,18 @@ public partial class GameCardViewModel
     {
         get
         {
-            if (IsInstalling) return "Installing...";
-            if (IsRtxHdrEnabled) return "Configure RTX HDR";
-            if (IsAutoHdrEnabled) return "Configure Auto HDR";
+            if (IsInstalling) return "正在安装...";
+            if (IsRtxHdrEnabled) return "配置 RTX HDR";
+            if (IsAutoHdrEnabled) return "配置 Auto HDR";
             if (!IsRsInstalled && !ExcludeFromUpdateAllReShade && Mod?.SnapshotUrl != null && !IsExternalOnly)
-                return "⚠  ReShade required";
+                return "⚠  需要 ReShade";
             // No mod available and nothing manually installed
             if (Mod?.SnapshotUrl == null && !IsExternalOnly && string.IsNullOrEmpty(InstalledAddonFileName))
-                return "No RenoDX mod available";
+                return "无可用 RenoDX 模组";
             var name = UseUeExtended ? "UE-Extended" : "RenoDX";
-            return Status == GameStatus.UpdateAvailable ? $"⬆  Update {name}"
-                 : Status == GameStatus.Installed       ? $"↺  Reinstall {name}"
-                 : $"⬇  Install {name}";
+            return Status == GameStatus.UpdateAvailable ? $"⬆  更新 {name}"
+                 : Status == GameStatus.Installed       ? $"↺  重新安装 {name}"
+                 : $"⬇  安装 {name}";
         }
     }
 
@@ -70,17 +70,17 @@ public partial class GameCardViewModel
     {
         get
         {
-            if (AnyInstalling) return "Installing…";
+            if (AnyInstalling) return "正在安装…";
             if (IsExternalOnly)
             {
                 // External-only: no RenoDX to install, only ReShade
-                if (RsStatus == GameStatus.UpdateAvailable) return "⬆  Update ReShade";
-                if (RsStatus == GameStatus.Installed) return "↺  Reinstall ReShade";
-                return "⬇  Install ReShade";
+                if (RsStatus == GameStatus.UpdateAvailable) return "⬆  更新 ReShade";
+                if (RsStatus == GameStatus.Installed) return "↺  重新安装 ReShade";
+                return "⬇  安装 ReShade";
             }
-            if (AnyUpdateAvailable) return "⬆  Update All";
-            if (Status == GameStatus.Installed) return "↺  Reinstall All";
-            return "⬇  Install All";
+            if (AnyUpdateAvailable) return "⬆  全部更新";
+            if (Status == GameStatus.Installed) return "↺  全部重新安装";
+            return "⬇  全部安装";
         }
     }
 
@@ -106,10 +106,10 @@ public partial class GameCardViewModel
     public string ChevronBorderThickness => ReinstallRowVisibility == Visibility.Visible ? "1,1,0,1" : "1";
 
     // ── Component table: RDX short status text + short action labels ─────────────
-    public string RdxStatusText => IsInstalling ? "Installing…"
-        : Status == GameStatus.UpdateAvailable ? (RdxInstalledVersion ?? "Update")
-        : Status == GameStatus.Installed       ? (RdxInstalledVersion ?? "Installed")
-        : Mod?.SnapshotUrl != null             ? "Ready" : "—";
+    public string RdxStatusText => IsInstalling ? "正在安装…"
+        : Status == GameStatus.UpdateAvailable ? (RdxInstalledVersion ?? "更新")
+        : Status == GameStatus.Installed       ? (RdxInstalledVersion ?? "已安装")
+        : Mod?.SnapshotUrl != null             ? "就绪" : "—";
     public string RdxStatusColor => IsInstalling ? "#D4A856"
         : Status == GameStatus.UpdateAvailable ? "#B898E8"
         : Status == GameStatus.Installed       ? "#5ECB7D"
@@ -143,12 +143,12 @@ public partial class GameCardViewModel
     // ── Per-component installed state (card install flyout uninstall visibility) ──
     public bool IsRdxInstalled  => Status is GameStatus.Installed or GameStatus.UpdateAvailable;
 
-    // ── External link label: "Update" when Nexus update available, "Redownload" when installed ──
+    // ── External link label: "更新" when Nexus update available, "Redownload" when installed ──
     public string ExternalDisplayLabel =>
         Status == GameStatus.UpdateAvailable && IsRdxInstalled
             ? "⬆  Update RenoDX"
             : IsRdxInstalled && !string.IsNullOrEmpty(ExternalLabel)
-                ? "↺  " + ExternalLabel.Replace("Download", "Redownload")
+                ? "↺  " + ExternalLabel.Replace("下载", "Redownload")
                 : "⬇  " + ExternalLabel;
 
     // Compact list item highlight — purple when any component has an update available

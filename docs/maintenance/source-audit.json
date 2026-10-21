@@ -1,0 +1,60 @@
+{
+  "verified_on": "2026-10-21",
+  "sdk": "8.0.426",
+  "checked_tracked_cs_files": 320,
+  "syntax_errors": [],
+  "changed_cs_files": 80,
+  "files_with_non_text_token_changes": [
+    {
+      "file": "RenoDXCommander/DetailPanelBuilder.NeuralRendering.cs",
+      "old_tokens": 20176,
+      "new_tokens": 20284
+    },
+    {
+      "file": "RenoDXCommander/DetailPanelBuilder.Overrides.Dlss.cs",
+      "old_tokens": 1672,
+      "new_tokens": 1738
+    },
+    {
+      "file": "RenoDXCommander/DetailPanelBuilder.Overrides.DriverSettings.cs",
+      "old_tokens": 6063,
+      "new_tokens": 6070
+    },
+    {
+      "file": "RenoDXCommander/DetailPanelBuilder.Overrides.cs",
+      "old_tokens": 7951,
+      "new_tokens": 7955
+    },
+    {
+      "file": "RenoDXCommander/DetailPanelBuilder.cs",
+      "old_tokens": 6817,
+      "new_tokens": 6823
+    },
+    {
+      "file": "RenoDXCommander/DlssDefaultsDialog.cs",
+      "old_tokens": 2655,
+      "new_tokens": 2659
+    },
+    {
+      "file": "RenoDXCommander/MainWindow.Events.Settings.cs",
+      "old_tokens": 14896,
+      "new_tokens": 14868
+    },
+    {
+      "file": "RenoDXCommander/MainWindow.Events.cs",
+      "old_tokens": 7505,
+      "new_tokens": 7517
+    },
+    {
+      "file": "RenoDXCommander/SettingsHandler.cs",
+      "old_tokens": 17677,
+      "new_tokens": 17593
+    },
+    {
+      "file": "RenoDXCommander/ViewModels/MainViewModel.cs",
+      "old_tokens": 4641,
+      "new_tokens": 4710
+    }
+  ],
+  "limits": "Syntax parsing and token comparison only; not a build, type check, runtime test, or proof that all string keys are preserved."
+}
